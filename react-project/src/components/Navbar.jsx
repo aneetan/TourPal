@@ -1,5 +1,5 @@
 import React from 'react'
-import { Tabs,  Col, Row, Menu  } from 'antd';
+import { Tabs,  Col, Row, Menu, Button  } from 'antd';
 import MenuItems from './MenuItems';
 
 const Navbar = () => {
@@ -32,19 +32,26 @@ const Navbar = () => {
 
     return (
         <>
-            <Row>
-            <MenuItems/>
- 
-                {/* <Col span={8}>
-                    <h1> logo </h1>
-                </Col>
-                <Col span={14}>
-                    <MenuItems/>
-                </Col>
-                <Col span={2}>
-                    <h1> btn </h1>
-                </Col> */}
-            </Row>
+                        <MenuItems/>
+
+            {/* <div className='nav-header'>
+                <Row> 
+                    <div className="logo-header">
+                        <Col span={10}>
+                                Logo
+                        </Col>
+                     </div>
+
+                    <Col span={12}>
+                    </Col>
+                    <div className="logo-btn">
+                        <Col span={2}>
+                            <Button> Login </Button>
+                        </Col>
+                    </div>
+                </Row>
+            </div> */}
+            
         </>
     )
 }

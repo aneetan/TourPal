@@ -21,24 +21,75 @@
     padding: 1rem;
 }
 .menuHeader{
-    background-color: "#7BBcb0";
-    color: "white";
-    font-size: 24px;
-    border: "none";
+    background: #7bbcb0 !important;
+    width: 60vw;
+    font-size: 18px;    
+    border: none;
+    color: #e3ecea !important;
 }
 
 .headerMenu{
-    background-color: aquamarine;
+    color: #7bbcb0;
+    background-color: #7bbcb0;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 2rem;
+}
+
+.navbar-responsive{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.nav-Logo img{
+    width: 150px;
+    margin-left: 1rem;
+}
+
+.nav-header{
+    width: 100vw;
+}
+
+.btn{
+    background-color: #e3ecea;
+    padding: 1rem 2rem;
+    border: none;
+}
+
+.btn:hover{
+    background-color: #7bbcb0 !important;
+    color: white !important;
+    transition: 2ms linear;
 }
 
 @media (max-width:500px){
     .headerMenu{
         display: none;  
     }
+    .logo-header{
+        display: none;
+    }
+    .logo-btn{
+        display: none;
+    }
+    .menuHeader{
+        background: none !important;
+    }
+    .nav-Logo img{
+        width: 120px;
+        margin-left: 1rem;
+    }
 }
 
 @media (min-width:500px){
-    .menuIcon{
+    .navbar-responsive{
         display: none;  
+    }
+    .headerMenu{
+        display: flex;
     }
 }
