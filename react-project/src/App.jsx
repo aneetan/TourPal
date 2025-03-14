@@ -2,7 +2,9 @@ import React from 'react'
 import {Layout } from 'antd';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
-const { Header, Footer, Content } = Layout;
+import Destinations from './components/Destinations';
+import About from './components/About';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -10,6 +12,9 @@ function App() {
     <>
       <Navbar/>
       <HeroSection/>
+      <Destinations/>
+      <About/>
+      <Footer/>
     </>
   )
 }

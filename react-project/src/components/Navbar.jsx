@@ -12,7 +12,7 @@ const Navbar = () => {
 
   	return (
 	<>
-		<nav className='py-5 bg-white sticky top-0 border-b border-gray-100'>
+		<nav className='py-5 sticky top-0 border-b border-gray-100 bg-[#F9FAFC]'>
 			<div className="container md:px-12 md:flex md:items-center md:justify-between">
 				<div className="flex items-center justify-between">
 					<a href='#' className='flex items-center'>
@@ -26,32 +26,31 @@ const Navbar = () => {
 					</span>
 				</div>
 
-				<ul className={`p-5 z-10 absolute bg-white/80 backdrop-blur w-full left-0 py-4 opacity-0
+				<ul className={`p-5 z-10 absolute backdrop-blur w-full left-0 py-4 opacity-0
 				top-[-400px] transition-all ease-in duration-500 md:p-0 md:flex md:items-center
 				md:space-x-8 md:static md:w-auto ${isMenuOpen ? 'top-[80px] opacity-100' : 'top-[-400px] opacity-0 md:opacity-100'}`}>
 					<li className='md:my-0'>
-						<a href='#home' className='font-medium duration-500 text-gray-900 hover:text-indigo-600'> Home</a>
+						<a href='#home' className='font-medium duration-500 text-gray-900 hover:text-[#f15d30]'> Home</a>
 					</li>
 					<li className='my-6 md:my-0'>
-						<a href='#home' className='font-medium duration-500 text-gray-900 hover:text-indigo-600'> About</a>
+						<a href='#home' className='font-medium duration-500 text-gray-900 hover:text-[#f15d30]'> About</a>
 					</li>
 					<li className='my-6 md:my-0'>
-						<a href='#home' className='font-medium duration-500 text-gray-900 hover:text-indigo-600'> Services </a>
+						<a href='#home' className='font-medium duration-500 text-gray-900 hover:text-[#f15d30]'> Destinations </a>
 					</li>
 					<li className='my-6 md:my-0'>
-						<a href='#home' className='font-medium duration-500 text-gray-900 hover:text-indigo-600'> Contact </a>
+						<a href='#home' className='font-medium duration-500 text-gray-900 hover:text-[#f15d30]'> Guide </a>
 					</li>
-					<div className="mt-6 md:mt-0 md:ml-8">
-					<a href='#'>
+					<div className="mt-6 md:mt-0 md:ml-8 md:flex">
+
 						<button
-						type='button'
-						className={`w-full md:w-auto text-white bg-indigo-600 font-medium rounded-lg px-3.5 py-3
-							text-center hover:bg-indigo-500 hover:drop-shadow-md transition duration-300 ease-in-out
-							${isMenuOpen ? 'ms:opacity-100' : 'opacity-0'} block md:hidden`}
+							type='button'
+							className={`w-full md:w-auto text-white bg-indigo-600 font-medium rounded-lg px-3.5 py-3
+								text-center hover:bg-indigo-500 hover:drop-shadow-md transition duration-300 ease-in-out
+								${isMenuOpen ? 'ms:opacity-100' : 'opacity-0'} block md:hidden`}
 						>
-						Login
-						</button>
-					</a>
+							Login
+							</button>
 					</div>
 				</ul>
 
@@ -59,7 +58,7 @@ const Navbar = () => {
 				<a href='#'>
 				<button
 					type='button'
-					className='text-white bg-indigo-600 font-medium rounded-lg px-3.5 py-3 text-center hover:bg-indigo-500 hover:drop-shadow-md transition duration-300 ease-in-out'
+					className='text-white bg-[#f15d30] font-medium rounded-lg px-3.5 py-3 text-center hover:bg-indigo-500 hover:drop-shadow-md transition duration-300 ease-in-out'
 				>
 					Login
 				</button>
