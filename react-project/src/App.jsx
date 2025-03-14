@@ -6,19 +6,7 @@ const { Header, Footer, Content } = Layout;
 function App() {
 
   return (
-    <Layout>
-        <Navbar/> 
-
-      {/* <Content>
-        This is content
-
-      </Content> */}
-
-      {/* <Footer>
-        This is footer
-
-      </Footer> */}
-    </Layout>
+    <Navbar/>
   )
 }
 
