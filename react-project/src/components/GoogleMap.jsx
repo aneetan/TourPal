@@ -1,15 +1,13 @@
 import React from 'react';
 
-const GoogleMap = ({ src, width, height, title }) => {
+const GoogleMap = ({ src }) => {
   return (
     <div>
       <iframe
-        title={title}
         src={src}
-        width={width}
-        height={height}
         style={{ border: 0 }}
         allowFullScreen
+        className='ml-auto w-[80%] h-[16rem] m-[3rem]'
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
       ></iframe>

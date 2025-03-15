@@ -7,11 +7,11 @@ const Destinations = () => {
   
     return (
     <>
-        <section id='destinations' className='py-5'>
+        <section id='destinations' className='py-5 my-10'>
             <div className='container flex flex-wrap items-center justify-center mx-auto mt-10 md:px-12 md:flex-row'>
                 <div className='lg:w-1/2'>
                     {/* <img className='ml-auto w-[80%] m-[4rem]' src={Image}/> */}
-                    <GoogleMap src={mapSrc} width={500} height={350}  />
+                    <GoogleMap src={mapSrc} />
                 </div>
                 <div className='mb-14 lg:mb-0 lg:w-1/2'>
                     <h1 className='max-w-xl text-[2.5rem] leading-none text-gray-900 font-extrabold font-sans text-center

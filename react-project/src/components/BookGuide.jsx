@@ -24,7 +24,7 @@ const BookGuide = () => {
                 </div>
 
                 <div className='lg:w-1/2'>
-                    <img className='ml-auto w-[80%] m-[4rem]' src="https://www.traveleast.in/wp-content/uploads/2022/08/Nepal-2-1024x683.jpg"/>
+                    <img className='ml-auto w-[80%] m-[3rem]' src="https://www.traveleast.in/wp-content/uploads/2022/08/Nepal-2-1024x683.jpg"/>
                 </div>
                 
             </div>

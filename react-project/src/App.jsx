@@ -6,17 +6,13 @@ import Destinations from './components/Destinations';
 import About from './components/About';
 import Footer from './components/Footer';
 import BookGuide from './components/BookGuide';
+import CustomMap from './components/CustomMap';
 
 function App() {
 
   return (
     <>
-      <Navbar/>
-      <HeroSection/>
-      <Destinations/>
-      <BookGuide/>
-      <About/>
-      <Footer/>
+      <CustomMap/>
     </>
   )
 }
