@@ -1,13 +1,17 @@
 import React from 'react'
 import Image from '../assets/images/image.png'
+import GoogleMap from './GoogleMap';
 
 const Destinations = () => {
-  return (
+    const mapSrc ='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3086.087452149963!2d85.31643212601386!3d27.672566664897197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19cb05097d61%3A0x66d083a187176a11!2sVIRINCHI%20COLLEGE!5e0!3m2!1sen!2snp!4v1742028665421!5m2!1sen!2snp';
+  
+    return (
     <>
         <section id='destinations' className='py-5'>
             <div className='container flex flex-wrap items-center justify-center mx-auto mt-10 md:px-12 md:flex-row'>
                 <div className='lg:w-1/2'>
-                    <img className='ml-auto w-[80%] m-[4rem]' src={Image}/>
+                    {/* <img className='ml-auto w-[80%] m-[4rem]' src={Image}/> */}
+                    <GoogleMap src={mapSrc} width={500} height={350}  />
                 </div>
                 <div className='mb-14 lg:mb-0 lg:w-1/2'>
                     <h1 className='max-w-xl text-[2.5rem] leading-none text-gray-900 font-extrabold font-sans text-center
