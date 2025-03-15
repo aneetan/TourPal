@@ -1,18 +1,40 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Logo from '../assets/images/tourguidelogo.png'
-import { MenuOutlined, CloseOutlined} from '@ant-design/icons';
+import { MenuOutlined, CloseOutlined, FlagFilled} from '@ant-design/icons';
+import HeroSection from './HeroSection';
 
 
 const Navbar = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const [isScrolled, setIsScrolled] = useState(false);
 
 	const handleMenu = () => {
 		setIsMenuOpen(!isMenuOpen);
 	  };
+	
+
+	useEffect(() => {
+		const handleScroll = () => {
+			if(window.scrollY > 100) {
+				setIsScrolled(!isScrolled);
+			} else {
+				setIsScrolled(isScrolled);
+			}
+		};
+
+		window.addEventListener("scroll", handleScroll);
+
+		return() => {
+			window.removeEventListener("scroll", handleScroll)
+		}
+
+	},[]);
 
   	return (
 	<>
-		<nav className='py-5 sticky top-0 border-b border-gray-100 bg-[#F9FAFC]'>
+		<nav className={`py-5 sticky z-50 top-0 transition-colors duration-500 
+			${isScrolled? "bg-[#f9fafc] shadow-md border-b border-gray-100" : "bg-transparent border-transparent"}`}>
+
 			<div className="container md:px-12 md:flex md:items-center md:justify-between">
 				<div className="flex items-center justify-between">
 					<a href='#' className='flex items-center'>
@@ -26,9 +48,10 @@ const Navbar = () => {
 					</span>
 				</div>
 
-				<ul className={`p-5 z-10 absolute backdrop-blur w-full left-0 py-4 opacity-0
+				<ul className={`p-5 z-10 absolute w-full left-0 py-4 opacity-0
 				top-[-400px] transition-all ease-in duration-500 md:p-0 md:flex md:items-center
-				md:space-x-8 md:static md:w-auto ${isMenuOpen ? 'top-[80px] opacity-100' : 'top-[-400px] opacity-0 md:opacity-100'}`}>
+				md:space-x-8 md:static md:w-auto ${isMenuOpen ? 'top-[80px] opacity-100' : 'top-[-400px] opacity-0 md:opacity-100'}
+				bg-white md:bg-transparent`}>
 					<li className='md:my-0'>
 						<a href='#home' className='font-medium duration-500 text-gray-900 hover:text-[#f15d30]'> Home</a>
 					</li>
