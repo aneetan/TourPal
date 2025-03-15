@@ -1,0 +1,38 @@
+[
+    {
+      "Place": "Patan Durbar Square",
+      "lat": 27.6736,
+      "lon": 85.3251
+    },
+    {
+      "Place": "Godawari Botanical Garden",
+      "lat": 27.5885,
+      "lon": 85.3908
+    },
+    {
+      "Place": "Karya Vinayak Temple",
+      "lat": 27.6415,
+      "lon": 85.3037
+    },
+    {
+      "Place": "Bhakundebesi Viewpoint",
+      "lat": 27.6379,
+      "lon": 85.3931
+    },
+    {
+      "Place": "Bungamati Village",
+      "lat": 27.6430,
+      "lon": 85.3078
+    },
+    {
+        "Place": "Maya Devi Temple (Lumbini)",
+        "lat": 27.4670,
+        "lon": 83.2750
+    },
+    {
+        "Place": "Bageshwori Temple (Nepalgunj)",
+        "lat": 28.0535,
+        "lon": 81.6200
+    }
+  ]
+  
