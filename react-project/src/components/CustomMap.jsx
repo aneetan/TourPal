@@ -3,6 +3,7 @@ import {MapContainer, Marker, Popup, TileLayer, useMap} from "react-leaflet"
 import osmProviders from './osm-providers'
 import L, { icon } from "leaflet"
 import 'leaflet/dist/leaflet.css'
+import 'leaflet-routing-machine';
 import cities from "./cities.json"
 import useGeoLocation from '../hooks/useGeoLocation'
 import { Button } from 'antd'
@@ -38,10 +39,29 @@ const FlyToLocation = ({ location, zoomLevel }) => {
 };
 
 
+// Haversine formula to calculate distance between two coordinates
+const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 6371; // Radius of the Earth in km
+    const dLat = (lat2 - lat1) * (Math.PI / 180);
+    const dLon = (lon2 - lon1) * (Math.PI / 180);
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * (Math.PI / 180)) *
+        Math.cos(lat2 * (Math.PI / 180)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c; 
+};
+
+
 const CustomMap = () => {
     const [focus, setFocus] = useState({lat:27.64256108005826, lng: 85.32555398598879})
-    const ZOOM_LEVEL = 14;
-    const mapRef = useRef()
+    const [nearbyLocations, setNearbyLocations] = useState([]);
+    const [selectedLocations, setSelectedLocations] = useState(null);
+
+    const ZOOM_LEVEL = 12;
+    const mapRef = useRef();
+    const routingControlRef = useRef();
     const location = useGeoLocation();
 
     const zoomToUserLocation = () => {
@@ -55,6 +75,45 @@ const CustomMap = () => {
             alert(location.error ? location.error.message : 'Location not available');
         }
     };
+
+    // Filter nearby locations within a radius (e.g., 10 km)
+    useEffect(() => {
+        if (location.loaded && !location.error) {
+            const userLat = location.coordinates.lat;
+            const userLon = location.coordinates.lon;
+            const radius = 10; // km
+
+            const nearby = cities.filter(city => {
+                const distance = calculateDistance(userLat, userLon, city.lat, city.lon);
+                return distance <= radius;
+            });
+
+            setNearbyLocations(nearby);
+        }
+    }, [location]);
+
+     // Add routing between user location and nearby locations
+     useEffect(() => {
+        if (location.loaded && !location.error && selectedLocations && mapRef.current) {
+            const userLatLng = L.latLng(location.coordinates.lat, location.coordinates.lon);
+            const selectedLatLng = L.latLng(selectedLocations.lat, selectedLocations.lon);
+
+            // Clear previous routing control
+            if (routingControlRef.current) {
+                routingControlRef.current.remove();
+            }
+
+            // Add routing for the selected location
+            routingControlRef.current = L.Routing.control({
+                waypoints: [userLatLng, selectedLatLng],
+                routeWhileDragging: false,
+                show: false, 
+                addWaypoints: false, 
+                draggableWaypoints: false, 
+                createMarker: () => null,
+            }).addTo(mapRef.current);
+        }
+    }, [location, selectedLocations]);
 
     return (
         <>
@@ -73,15 +132,17 @@ const CustomMap = () => {
                                     position={[location.coordinates.lat, location.coordinates.lon]}
                                     icon={UserLocationIcon}
                                 >
-
                                 </Marker>
                             )}
                             <FlyToLocation location={location} zoomLevel={ZOOM_LEVEL}/>
                             
-                            {cities.map((city, index) => (
+                            {nearbyLocations.map((city, index) => (
                                 <Marker position={[city.lat, city.lon]}
                                     icon={MarkerIcon}
                                     key={index}
+                                    eventHandlers={{
+                                        click: () => setSelectedLocations(city),
+                                    }}
                                 >
                                     <Popup>
                                         <b> {city.Place}</b>

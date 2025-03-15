@@ -23,6 +23,16 @@
       "Place": "Bungamati Village",
       "lat": 27.6430,
       "lon": 85.3078
+    },
+    {
+        "Place": "Maya Devi Temple (Lumbini)",
+        "lat": 27.4670,
+        "lon": 83.2750
+    },
+    {
+        "Place": "Bageshwori Temple (Nepalgunj)",
+        "lat": 28.0535,
+        "lon": 81.6200
     }
   ]
   
