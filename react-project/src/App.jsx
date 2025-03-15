@@ -5,6 +5,7 @@ import HeroSection from './components/HeroSection';
 import Destinations from './components/Destinations';
 import About from './components/About';
 import Footer from './components/Footer';
+import BookGuide from './components/BookGuide';
 
 function App() {
 
@@ -12,8 +13,9 @@ function App() {
     <>
       <Navbar/>
       <HeroSection/>
-      <About/>
       <Destinations/>
+      <BookGuide/>
+      <About/>
       <Footer/>
     </>
   )

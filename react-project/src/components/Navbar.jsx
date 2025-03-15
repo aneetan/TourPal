@@ -7,10 +7,15 @@ import HeroSection from './HeroSection';
 const Navbar = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
+	const [activeLink, setActiveLink] = useState(false);
 
 	const handleMenu = () => {
 		setIsMenuOpen(!isMenuOpen);
 	  };
+	
+	const handleActiveLink = (link) => {
+		setActiveLink(link);
+	}
 	
 
 	useEffect(() => {
@@ -53,23 +58,31 @@ const Navbar = () => {
 				md:space-x-8 md:static md:w-auto ${isMenuOpen ? 'top-[80px] opacity-100' : 'top-[-400px] opacity-0 md:opacity-100'}
 				bg-white md:bg-transparent`}>
 					<li className='md:my-0'>
-						<a href='#home' className='font-medium duration-500 text-gray-900 hover:text-[#f15d30]'> Home</a>
+						<a href='#home' className={`font-medium duration-500 hover:text-[#f15d30]
+						${activeLink === 'home' ? 'text-[#f15d30]' : 'text-gray-900'}`}
+						onClick={() => handleActiveLink('home')}> Home</a>
 					</li>
 					<li className='my-6 md:my-0'>
-						<a href='#home' className='font-medium duration-500 text-gray-900 hover:text-[#f15d30]'> About</a>
+						<a href='#destinations' className={`font-medium duration-500 hover:text-[#f15d30]
+						${activeLink === 'destinations' ? 'text-[#f15d30]' : 'text-gray-900'}`}
+						onClick={() => handleActiveLink('destinations')}> Destinations</a>
 					</li>
 					<li className='my-6 md:my-0'>
-						<a href='#home' className='font-medium duration-500 text-gray-900 hover:text-[#f15d30]'> Destinations </a>
+						<a href='#guide' className={`font-medium duration-500 hover:text-[#f15d30]
+						${activeLink === 'guide' ? 'text-[#f15d30]' : 'text-gray-900'}`}
+						onClick={() => handleActiveLink('guide')}> Guide </a>
 					</li>
 					<li className='my-6 md:my-0'>
-						<a href='#home' className='font-medium duration-500 text-gray-900 hover:text-[#f15d30]'> Guide </a>
+						<a href='#about' className={`font-medium duration-500 hover:text-[#f15d30]
+						${activeLink === 'about' ? 'text-[#f15d30]' : 'text-gray-900'}`}
+						onClick={() => handleActiveLink('about')}> About </a>
 					</li>
 					<div className="mt-6 md:mt-0 md:ml-8 md:flex">
 
 						<button
 							type='button'
-							className={`w-full md:w-auto text-white bg-indigo-600 font-medium rounded-lg px-3.5 py-3
-								text-center hover:bg-indigo-500 hover:drop-shadow-md transition duration-300 ease-in-out
+							className={`w-full md:w-auto text-white bg-[#F15d30] font-medium rounded-lg px-3.5 py-3
+								text-center hover:bg-[#f15d30] hover:drop-shadow-md transition cursor-pointer duration-300 ease-in-out
 								${isMenuOpen ? 'ms:opacity-100' : 'opacity-0'} block md:hidden`}
 						>
 							Login
@@ -81,7 +94,8 @@ const Navbar = () => {
 				<a href='#'>
 				<button
 					type='button'
-					className='text-white bg-[#f15d30] font-medium rounded-lg px-3.5 py-3 text-center hover:bg-indigo-500 hover:drop-shadow-md transition duration-300 ease-in-out'
+					className='text-white bg-[#f15d30] cursor-pointer font-medium rounded-lg px-6 py-3 text-center hover:bg-[#f15d30]
+					hover:scale-101 hover:drop-shadow-md transition duration-300 ease-in-out'
 				>
 					Login
 				</button>
