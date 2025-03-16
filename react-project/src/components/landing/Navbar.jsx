@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Logo from '../assets/images/tourguidelogo.png'
+import Logo from '../../assets/images/tourguidelogo.png'
 import { MenuOutlined, CloseOutlined, FlagFilled} from '@ant-design/icons';
 import HeroSection from './HeroSection';
 
@@ -16,7 +16,6 @@ const Navbar = () => {
 	const handleActiveLink = (link) => {
 		setActiveLink(link);
 	}
-	
 
 	useEffect(() => {
 		const handleScroll = () => {

@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from '../assets/images/tra.png'
 
 const HeroSection = () => {
   return (

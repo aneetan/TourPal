@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from '../assets/images/image.png'
-import GoogleMap from './GoogleMap';
+import GoogleMap from '../map/GoogleMap';
 
 const Destinations = () => {
     const mapSrc ='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3086.087452149963!2d85.31643212601386!3d27.672566664897197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19cb05097d61%3A0x66d083a187176a11!2sVIRINCHI%20COLLEGE!5e0!3m2!1sen!2snp!4v1742028665421!5m2!1sen!2snp';

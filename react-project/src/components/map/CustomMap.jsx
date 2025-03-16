@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 import {MapContainer, Marker, Popup, TileLayer, useMap} from "react-leaflet"
-import osmProviders from './osm-providers'
+import osmProviders from '../map/osm-providers'
 import L, { icon } from "leaflet"
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-routing-machine';
-import cities from "./cities.json"
-import useGeoLocation from '../hooks/useGeoLocation'
+import cities from "../map/cities.json"
+import useGeoLocation from '../../hooks/useGeoLocation'
 import { Button } from 'antd'
+import Navbar from '../landing/Navbar'
+import Footer from '../landing/Footer'
 
 //icon for added geolocations
 const MarkerIcon = new L.Icon({
@@ -56,12 +58,12 @@ const calculateDistance = (lat1, lon1, lat2, lon2) => {
 };
 
 
-const CustomMap = () => {
+const CustomMap = () => {    
     const [focus, setFocus] = useState({lat:27.64256108005826, lng: 85.32555398598879})
     const [nearbyLocations, setNearbyLocations] = useState([]);
     const [selectedLocations, setSelectedLocations] = useState(null);
 
-    const ZOOM_LEVEL = 12;
+    const ZOOM_LEVEL = 14;
     const mapRef = useRef();
     const routingControlRef = useRef();
     const location = useGeoLocation();
@@ -109,12 +111,14 @@ const CustomMap = () => {
             // Add routing for the selected location
             routingControlRef.current = L.Routing.control({
                 waypoints: [userLatLng, selectedLatLng],
+                show: true, 
                 routeWhileDragging: false,
-                show: false, 
                 addWaypoints: false, 
                 draggableWaypoints: false, 
+                fitSelectedRoutes: true,
                 createMarker: () => null,
             }).addTo(mapRef.current);
+
         }
     }, [location, selectedLocations]);
 
@@ -125,11 +129,13 @@ const CustomMap = () => {
 
     return (
         <>
+        <Navbar/>
+
             <div className='row'> 
                 <div className='col text-center'>
-                    <h1> Loading maps</h1>
+                    {/* <h1> Loading maps</h1>
 
-                    <Button onClick={zoomToUserLocation}> Load </Button>
+                    <Button onClick={zoomToUserLocation}> Load </Button> */}
 
                     <div className='col'>
 
@@ -146,7 +152,7 @@ const CustomMap = () => {
                                 </Marker>
                             )}
 
-                            {/* <FlyToLocation location={location} zoomLevel={ZOOM_LEVEL}/> */}
+                            <FlyToLocation location={location} zoomLevel={ZOOM_LEVEL}/>
                             
                             {nearbyLocations.map((city, index) => (
                                 <Marker position={[city.lat, city.lon]}
@@ -162,7 +168,7 @@ const CustomMap = () => {
                                         {selectedLocations && selectedLocations.Place === city.Place &&(
                                             <button onClick={() => handleBookGuide(city)}
                                             style={{ marginTop: '10px', padding: '5px 10px', cursor: 'pointer' }}
-                                            > Book Guide </button>
+                                            > See More </button>
                                         )}
                                         
                                     </Popup>
@@ -172,6 +178,7 @@ const CustomMap = () => {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </>
     )
 }
