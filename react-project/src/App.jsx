@@ -1,18 +1,29 @@
 import React from 'react'
-import {Layout } from 'antd';
-import Navbar from './components/Navbar';
-import HeroSection from './components/HeroSection';
-import Destinations from './components/Destinations';
-import About from './components/About';
-import Footer from './components/Footer';
-import BookGuide from './components/BookGuide';
-import CustomMap from './components/CustomMap';
+import CustomMap from './pages/user/CustomMap';
+import SeeDestinations from './pages/user/SeeDestinations';
+import { BrowserRouter, Routes, Route } from "react-router";
+import LandingPage from './pages/LandingPage';
+import CustomLayout from './pages/CustomLayout';
+import Signin from './pages/authenticate/Signin';
+
 
 function App() {
 
   return (
     <>
-      <CustomMap/>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<CustomLayout/>}>
+            <Route path="/" element={<LandingPage />} />
+            <Route path='/seeDestination' element={<CustomMap/>}/>
+            <Route path='/seeMore' element={<SeeDestinations/>}/>
+          </Route>
+          <Route path='/login' element={<Signin/>}/>
+
+        </Routes>
+
+      </BrowserRouter>
+      {/* <CustomMap/> */}
     </>
   )
 }
