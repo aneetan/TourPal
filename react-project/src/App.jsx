@@ -1,11 +1,13 @@
 import React from 'react'
 import CustomMap from './components/map/CustomMap';
+import SeeDestinations from './pages/SeeDestinations';
 
 function App() {
 
   return (
     <>
-      <CustomMap/>
+      {/* <CustomMap/> */}
+      <SeeDestinations/>
     </>
   )
 }

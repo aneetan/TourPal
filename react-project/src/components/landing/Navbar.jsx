@@ -77,7 +77,6 @@ const Navbar = () => {
 						onClick={() => handleActiveLink('about')}> About </a>
 					</li>
 					<div className="mt-6 md:mt-0 md:ml-8 md:flex">
-
 						<button
 							type='button'
 							className={`w-full md:w-auto text-white bg-[#F15d30] font-medium rounded-lg px-3.5 py-3

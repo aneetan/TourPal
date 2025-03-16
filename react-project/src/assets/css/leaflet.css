@@ -4,8 +4,13 @@
     z-index: 20;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
     .leaflet-right{
         display: none;
+    }
+
+    .carousel-container {
+        width: 80vw;
+        height: 40vh;
     }
 }
