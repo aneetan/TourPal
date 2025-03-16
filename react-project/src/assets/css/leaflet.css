@@ -9,9 +9,16 @@
     .leaflet-right{
         display: none;
     }
-
+    
+    /* Image carousel in seeMore */
     .carousel-container {
         width: 80vw;
         height: 40vh;
     }
+}
+
+/* stroke color in Destination */
+.text-stroke-white {
+    -webkit-text-stroke: 0.8px rgb(84, 22, 9); 
+    color: #f15d30; 
 }

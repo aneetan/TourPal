@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Logo from '../../assets/images/tourguidelogo.png'
 import { MenuOutlined, CloseOutlined, FlagFilled} from '@ant-design/icons';
 import HeroSection from './HeroSection';
+import { useNavigate } from 'react-router';
 
 
 const Navbar = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
 	const [activeLink, setActiveLink] = useState(false);
+	const navigate = useNavigate()
 
 	const handleMenu = () => {
 		setIsMenuOpen(!isMenuOpen);
@@ -15,6 +17,10 @@ const Navbar = () => {
 	
 	const handleActiveLink = (link) => {
 		setActiveLink(link);
+	}
+
+	const handleLogin = () => {
+		navigate('/login')
 	}
 
 	useEffect(() => {
@@ -79,6 +85,7 @@ const Navbar = () => {
 					<div className="mt-6 md:mt-0 md:ml-8 md:flex">
 						<button
 							type='button'
+							onClick={handleLogin}
 							className={`w-full md:w-auto text-white bg-[#F15d30] font-medium rounded-lg px-3.5 py-3
 								text-center hover:bg-[#f15d30] hover:drop-shadow-md transition cursor-pointer duration-300 ease-in-out
 								${isMenuOpen ? 'ms:opacity-100' : 'opacity-0'} block md:hidden`}
@@ -92,6 +99,7 @@ const Navbar = () => {
 				<a href='#'>
 				<button
 					type='button'
+					onClick={handleLogin}
 					className='text-white bg-[#f15d30] cursor-pointer font-medium rounded-lg px-6 py-3 text-center hover:bg-[#f15d30]
 					hover:scale-101 hover:drop-shadow-md transition duration-300 ease-in-out'
 				>

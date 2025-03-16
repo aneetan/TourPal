@@ -17,7 +17,7 @@ const HeroSection = () => {
                 <div className='mb-14 lg:mb-0 lg:w-1/2'>
                     <h1 className='max-w-xl text-[2.9rem] leading-none text-gray-900 font-extrabold font-sans text-center
                     lg:text-left lg:leading-tight mb-5'>
-                        Find exciting <span className='text-[#f15d30] text-[3.2rem]'> Destinations </span> <br/> near you with ease!
+                        Find exciting <span className='text-[#f15d30] text-[3.2rem] text-stroke-white'> Destinations </span> <br/> near you with ease!
 
                     </h1>
                     <div className='flex justify-center mt-5 lg:justify-start'>

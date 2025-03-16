@@ -1,7 +1,7 @@
 import React from 'react'
-import Navbar from '../components/landing/Navbar'
-import Footer from '../components/landing/Footer'
-import Carousel from '../components/Carousel'
+import Navbar from '../../components/landing/Navbar'
+import Footer from '../../components/landing/Footer'
+import Carousel from '../../components/Carousel'
 import { useParams } from 'react-router'
 
 const SeeDestinations = () => {

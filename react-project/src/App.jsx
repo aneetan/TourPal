@@ -1,9 +1,10 @@
 import React from 'react'
-import CustomMap from './pages/CustomMap';
-import SeeDestinations from './pages/SeeDestinations';
+import CustomMap from './pages/user/CustomMap';
+import SeeDestinations from './pages/user/SeeDestinations';
 import { BrowserRouter, Routes, Route } from "react-router";
 import LandingPage from './pages/LandingPage';
 import CustomLayout from './pages/CustomLayout';
+import Signin from './pages/authenticate/Signin';
 
 
 function App() {
@@ -17,6 +18,8 @@ function App() {
             <Route path='/seeDestination' element={<CustomMap/>}/>
             <Route path='/seeMore' element={<SeeDestinations/>}/>
           </Route>
+          <Route path='/login' element={<Signin/>}/>
+
         </Routes>
 
       </BrowserRouter>

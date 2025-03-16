@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 import {MapContainer, Marker, Popup, TileLayer, useMap} from "react-leaflet"
-import osmProviders from '../components/map/osm-providers'
+import osmProviders from '../../components/map/osm-providers'
 import L, { icon } from "leaflet"
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-routing-machine';
-import cities from "../components/map/cities.json"
-import useGeoLocation from '../hooks/useGeoLocation'
+import cities from "../../components/map/cities.json"
+import useGeoLocation from '../../hooks/useGeoLocation'
 import { Button } from 'antd'
-import Navbar from '../components/landing/Navbar'
-import Footer from '../components/landing/Footer'
+import Navbar from '../../components/landing/Navbar'
+import Footer from '../../components/landing/Footer'
 import { useNavigate } from 'react-router'
 
 //icon for added geolocations
