@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
 import {MapContainer, Marker, Popup, TileLayer, useMap} from "react-leaflet"
-import osmProviders from '../map/osm-providers'
+import osmProviders from '../components/map/osm-providers'
 import L, { icon } from "leaflet"
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-routing-machine';
-import cities from "../map/cities.json"
-import useGeoLocation from '../../hooks/useGeoLocation'
+import cities from "../components/map/cities.json"
+import useGeoLocation from '../hooks/useGeoLocation'
 import { Button } from 'antd'
-import Navbar from '../landing/Navbar'
-import Footer from '../landing/Footer'
+import Navbar from '../components/landing/Navbar'
+import Footer from '../components/landing/Footer'
+import { useNavigate } from 'react-router'
 
 //icon for added geolocations
 const MarkerIcon = new L.Icon({
@@ -63,10 +64,11 @@ const CustomMap = () => {
     const [nearbyLocations, setNearbyLocations] = useState([]);
     const [selectedLocations, setSelectedLocations] = useState(null);
 
-    const ZOOM_LEVEL = 14;
+    const ZOOM_LEVEL = 13;
     const mapRef = useRef();
     const routingControlRef = useRef();
     const location = useGeoLocation();
+    const navigate = useNavigate();
 
     //zoom in to user location
     const zoomToUserLocation = () => {
@@ -125,12 +127,12 @@ const CustomMap = () => {
     //Book Guide button function
     const handleBookGuide = (city) => {
         console.log("Booking guide for:", city.Place);
+        navigate("/seeMore")
+        
     }
 
     return (
         <>
-        <Navbar/>
-
             <div className='row'> 
                 <div className='col text-center'>
                     {/* <h1> Loading maps</h1>
@@ -167,7 +169,7 @@ const CustomMap = () => {
                                         <br/>
                                         {selectedLocations && selectedLocations.Place === city.Place &&(
                                             <button onClick={() => handleBookGuide(city)}
-                                            style={{ marginTop: '10px', padding: '5px 10px', cursor: 'pointer' }}
+                                            className='m-1 p-1 underline cursor-pointer'
                                             > See More </button>
                                         )}
                                         
@@ -178,7 +180,6 @@ const CustomMap = () => {
                     </div>
                 </div>
             </div>
-            <Footer/>
         </>
     )
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '../components/landing/Navbar'
 import Footer from '../components/landing/Footer'
 import Carousel from '../components/Carousel'
+import { useParams } from 'react-router'
 
 const SeeDestinations = () => {
     const images = [
@@ -13,7 +14,6 @@ const SeeDestinations = () => {
 
   return (
     <>
-        <Navbar/>
             {/* Text Section */}
             <div className="bg-white z-10 text-center">
                     <h2 className="text-3xl mt-10 font-semibold text-[#f15d30]">
@@ -49,7 +49,7 @@ const SeeDestinations = () => {
                         <p className='max-x-xl text-[1.1rem] text-center text-gray-500 lg:text-left lg:max-w-md'>
                         A tranquil paradise known for its rich biodiversity and serene environment.
                         <ul>
-                            <span>🌳 Lush Greenery & Diverse Flora </span>
+                            <li>🌳 Lush Greenery & Diverse Flora </li>
                             <li> 🦋 Bird Watching & Wildlife Spotting </li>
                             <li> 🚶‍♂️ Nature Trails & Hiking </li>
                             <li> 🌼 Picnic & Relaxation Spots </li>
@@ -67,13 +67,6 @@ const SeeDestinations = () => {
                     
                 </div>
             </section>
-
-            
-            
-
-
-
-      <Footer/>
     </>
   )
 }
