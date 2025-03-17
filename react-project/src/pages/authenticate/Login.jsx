@@ -78,6 +78,7 @@ const Login = () => {
                         type="primary"
                         className='rounded-lg w-full px-5 py-2.5 text-center float-left'
                         htmlType="submit"
+                       
                     >
                         Submit
                     </Button>

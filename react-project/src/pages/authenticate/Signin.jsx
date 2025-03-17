@@ -1,9 +1,29 @@
 import { Button,Form,Input, Typography } from "antd";
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 const { Text, Link } = Typography;
 
 const Signin = () => {
   const [isFocused, setIsFocused] = useState(false);
+  const navigate = useNavigate();
+
+  const handleUserLogin = (values) => {
+    if(values.email === "admin@gmail.com" && values.password === "admin"){
+      localStorage.setItem("is_user", 1)
+      navigate("/admin")
+
+    } else if(values.email === "user@gmail.com" && values.password === "user"){
+      localStorage.setItem("is_user", 2)
+      navigate("/")
+
+    } else if(values.email === "guide@gmail.com" && values.password === "guide"){
+      localStorage.setItem("is_user", 3)
+      navigate("/admin")
+
+    } else {
+        localStorage.setItem("is_user", 0)
+    }
+  }
   
   return (
     <section className="overflow-x-hidden py-5 h-[100vh] absolute inset-0 bg-cover bg-center"
@@ -31,7 +51,7 @@ const Signin = () => {
                 </a>
               </div>
 
-              <Form>
+              <Form onFinish={handleUserLogin}>
                 <Form.Item
                   name="email"
                   rules={[
@@ -77,23 +97,22 @@ const Signin = () => {
               >
                 Forgot Password?
               </a>
-
-
-
+              
                 <div className="mb-3">
                 <Button type="primary" htmlType="submit"
-                        className="w-full hover:drop-shadow-md hover:scale-102 transition
-                        cursor-pointer duration-300 ease-in-out font-bold"
-                        style={{padding:"20px", fontSize:"18px", backgroundColor:"#FF8B1A"}}>
-                        Submit
+                  // onClick={handleUserLogin}
+                  className="w-full hover:drop-shadow-md hover:scale-102 transition
+                  cursor-pointer duration-300 ease-in-out font-bold"
+                  style={{padding:"20px", fontSize:"18px", backgroundColor:"#FF8B1A"}}>
+                  Login
                 </Button>
                 </div>
               </Form>
 
               <div className="flex justify-center">
-                <hr class="w-[30%] h-px mx-4 my-8 bg-gray-200 border-0 dark:bg-gray-400"/>
+                <hr className="w-[30%] h-px mx-4 my-8 bg-gray-200 border-0 dark:bg-gray-400"/>
                 <span className="my-5"> Or </span>
-                <hr class="w-[30%] h-px mx-4 my-8 bg-gray-200 border-0 dark:bg-gray-400"/>
+                <hr className="w-[30%] h-px mx-4 my-8 bg-gray-200 border-0 dark:bg-gray-400"/>
               </div>
               
               <div className="-mx-2 mb-12 flex justify-between">
