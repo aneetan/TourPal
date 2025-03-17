@@ -1,5 +1,6 @@
-import { Button,Input } from "antd";
+import { Button,Form,Input, Typography } from "antd";
 import React from "react";
+const { Text, Link } = Typography;
 
 const Signin = () => {
   return (
@@ -13,26 +14,47 @@ const Signin = () => {
                   href="/#"
                   className="mx-auto inline-block max-w-[160px]"
                 >
-                  <img
+                  Logo here
+                  {/* <img
                     src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-primary.svg"
                     alt="logo"
-                  />
+                  /> */}
                 </a>
               </div>
 
-              <form>
-                {/* <InputBox type="email" name="email" placeholder="Email" /> */}
-                <Input style={{margin:"2rem 0", padding:"10px"}} placeholder="Email" />
-                <Input.Password style={{margin:"0 0 2rem 0", padding:"10px"}} placeholder="input password" />
-                {/* <InputBox
-                  type="password"
+              <Form>
+                <Form.Item
+                  name="email"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your email!',
+                    },
+                  ]}
+                >
+                  <Input style={{marginTop:"4rem",padding:"10px"}} placeholder="Enter Email" />
+                </Form.Item>
+
+                <Form.Item
                   name="password"
-                  placeholder="Password"
-                /> */}
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your password!',
+                    },
+                  ]}
+                >
+                  <Input.Password style={{padding:"10px"}} placeholder="Enter password" />
+                </Form.Item>
+
+
+
                 <div className="mb-3">
-                <Button type="primary" style={{padding:"20px", }} className="w-full"> Submit</Button>
+                <Button type="primary" htmlType="submit" className="w-full"
+                 style={{padding:"20px", fontWeight:"400", fontSize:"18px", backgroundColor:"#FF8B1A"}}> Submit</Button>
                 </div>
-              </form>
+              </Form>
+
               <p className=" mb-3 text-base text-secondary-color dark:text-dark-7">
                 Or
               </p>
@@ -40,7 +62,7 @@ const Signin = () => {
                 <li className="w-full px-2">
                   <a
                     href="/#"
-                    className="flex h-11 items-center justify-evenly rounded-md bg-[#D64937] hover:bg-opacity-90"
+                    className="flex h-10 items-center text-white text-semibold justify-evenly rounded-md bg-[#6A6A6A] hover:bg-opacity-90"
                   >
                     <svg
                       width="18"
@@ -60,13 +82,15 @@ const Signin = () => {
               </ul>
               <a
                 href="/#"
-                className="mb-2 inline-block text-base text-dark hover:text-primary hover:underline dark:text-white"
+                className="mb-2 inline-block text-base text-dark hover:text-primary hover:underline"
               >
                 Forget Password?
               </a>
               <p className="text-base text-body-color dark:text-dark-6">
-                <span className="pr-0.5">Not a member yet?</span>
-                <a> Signup </a>
+                <span className="pr-2">Not a member yet?</span>
+                <Link href="/register"  target="_blank" style={{textDecoration:"underline", fontFamily:"Poppins", fontSize:"16px"}}>
+                  SignUp 
+                </Link>
               </p>
 
             </div>
@@ -79,15 +103,3 @@ const Signin = () => {
 
 export default Signin;
 
-const InputBox = ({ type, placeholder, name }) => {
-  return (
-    <div className="mb-6">
-      <input
-        type={type}
-        placeholder={placeholder}
-        name={name}
-        className="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-body-color outline-none focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-white"
-      />
-    </div>
-  );
-};
