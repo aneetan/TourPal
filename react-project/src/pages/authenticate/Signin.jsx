@@ -6,7 +6,14 @@ const Signin = () => {
   const [isFocused, setIsFocused] = useState(false);
   
   return (
-    <section className="bg-[#F15D30] overflow-x-hidden py-5 h-[100vh]">
+    <section className="overflow-x-hidden py-5 h-[100vh] absolute inset-0 bg-cover bg-center"
+      style={{
+      backgroundColor: '#FFFFFF',
+      backgroundImage: 'url(https://res.klook.com/image/upload/q_85/c_fill,w_750/v1595073504/blog/dmida4bcnbnrejsq7lyw.jpg)', 
+      zIndex: 2,
+      backgroundBlendMode: 'multiply'
+      }}
+    >
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
@@ -35,7 +42,7 @@ const Signin = () => {
                   ]}
                 >
                   <Input
-                    style={{marginTop:"4rem",padding:"10px", outline: "none", border:"none"}}
+                    style={{marginTop:"4rem",padding:"10px", outline: "none"}}
                     placeholder="Enter Email"
                     onFocus={(e) => e.target.style.border = "1px solid #f15d30"}
                     onBlur={(e) => e.target.style.border = "1px solid #E7E7E7"}
@@ -65,7 +72,8 @@ const Signin = () => {
 
                 <a
                 href="/#"
-                className="hover:underline mb-2 float-right inline-block text-[0.8rem]"
+                style={{textDecoration:"underline"}}
+                className="mb-2 float-right inline-block text-[0.8rem]"
               >
                 Forgot Password?
               </a>

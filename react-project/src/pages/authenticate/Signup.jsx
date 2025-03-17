@@ -1,20 +1,24 @@
 import React, { useState } from 'react'
-import { Button,Form,Input, Typography, Checkbox } from "antd";
+import { Button,Form,Input, Typography, Tooltip  } from "antd";
 const { Text, Link } = Typography;
 
 const Signup = () => {
     const [isFocused, setIsFocused] = useState(false);
     const [isFormFocused, setIsFormFocused] = useState(false);
 
-    
-    const onChange = (e) => {
-        console.log(`checked = ${e.target.checked}`);
-    };
+    const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
   return (
     <>
-        <section className="bg-[#F15D30] overflow-x-hidden py-5 h-[100vh]">
-            <div className="container mx-auto">
+        <section className="overflow-x-hidden py-5 h-[100vh] absolute inset-0 bg-cover bg-center"
+            style={{
+            backgroundColor: '#FFFFFF',
+            backgroundImage: 'url(https://res.klook.com/image/upload/q_85/c_fill,w_750/v1595073504/blog/dmida4bcnbnrejsq7lyw.jpg)', 
+            zIndex: 2,
+            backgroundBlendMode: 'multiply'
+            }}
+        >
+            <div className="container mx-auto" style={{zIndex:5}}>
                 <div className="-mx-4 flex flex-wrap">
                     <div className="w-full px-4">
                         <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white px-10 py-16 text-center dark:bg-dark-2 sm:px-12 md:px-[60px]">
@@ -33,6 +37,23 @@ const Signup = () => {
 
                         <Form>
                             <Form.Item
+                                name="name"
+                                rules={[
+                                    {
+                                    required: true,
+                                    message: 'Please input your name',
+                                    }
+                                ]}
+                            >
+                                <Input
+                                style={{marginTop:"4rem",padding:"10px", outline: "none"}}
+                                placeholder="Enter Your Name"
+                                onFocus={(e) => e.target.style.border = "1px solid #f15d30"}
+                                onBlur={(e) => e.target.style.border = "1px solid #E7E7E7"}
+                                />
+                            </Form.Item>
+
+                            <Form.Item
                             name="email"
                             rules={[
                                 {
@@ -46,8 +67,33 @@ const Signup = () => {
                             ]}
                             >
                                 <Input
-                                style={{marginTop:"4rem",padding:"10px", outline: "none", border:"none"}}
+                                style={{padding:"10px", outline: "none"}}
                                 placeholder="Enter Email"
+                                onFocus={(e) => e.target.style.border = "1px solid #f15d30"}
+                                onBlur={(e) => e.target.style.border = "1px solid #E7E7E7"}
+                                />
+                            </Form.Item>
+
+                            <Form.Item
+                            name="phone"
+                            rules={[
+                                {
+                                required: true,
+                                message: 'Please input your number!',
+                                },
+                                ({ getFieldValue }) => ({
+                                    validator(_, value) {
+                                      if (!value || /^\d{10}$/.test(value)) {
+                                        return Promise.resolve();
+                                      }
+                                      return Promise.reject(new Error('Please enter a valid 10-digit number!'));
+                                    },
+                                }),
+                            ]}
+                            >
+                                <Input
+                                style={{padding:"10px", outline: "none"}}
+                                placeholder="Enter number"
                                 onFocus={(e) => e.target.style.border = "1px solid #f15d30"}
                                 onBlur={(e) => e.target.style.border = "1px solid #E7E7E7"}
                                 />
@@ -60,12 +106,23 @@ const Signup = () => {
                                 required: true,
                                 message: 'Please input your password!',
                                 },
+                                {
+                                    validator(_, value) {
+                                        if (!value || strongPasswordRegex.test(value)) {
+                                        return Promise.resolve();
+                                        }
+                                        return Promise.reject(
+                                        'Please enter at least 8 chars with number, symbol and capital letter'
+                                        );
+                                    },                                  
+                                },
                             ]}
                             style={{
                                 border: isFocused ? '1px solid #f15d30' : '1px solid #E7E7E7', 
                                 borderRadius: '4px', 
                               }}
                             >
+
                             <Input.Password
                             style={{padding:"10px", outline:"none", border:"none"}}
                             placeholder="Enter password"
@@ -76,11 +133,20 @@ const Signup = () => {
 
                             <Form.Item
                             name="confirmPassword"
+                            dependencies={['password']}
                             rules={[
                                 {
                                 required: true,
                                 message: 'Please input your password!',
                                 },
+                                ({ getFieldValue }) => ({
+                                    validator(_, value) {
+                                      if (!value || getFieldValue('password') === value) {
+                                        return Promise.resolve();
+                                      }
+                                      return Promise.reject('Password do not match!');
+                                    },
+                                  }),
                             ]}
                             style={{
                                 border: isFormFocused ? '1px solid #f15d30' : '1px solid #E7E7E7', 
@@ -115,7 +181,7 @@ const Signup = () => {
                                 className="w-full hover:drop-shadow-md hover:scale-102 transition
                                 cursor-pointer duration-300 ease-in-out font-bold"
                                 style={{padding:"20px", fontSize:"18px", backgroundColor:"#FF8B1A"}}>
-                                Submit
+                                Register
                             </Button>
                             </div>
                         </Form>
@@ -142,7 +208,7 @@ const Signup = () => {
 
                         <p className="text-base text-body-color">
                             <span className="pr-2">Already Registered?</span>
-                            <Link href="/register"  target="_blank" style={{textDecoration:"underline", fontFamily:"Poppins", fontSize:"16px"}}>
+                            <Link href="/login"  target="_blank" style={{textDecoration:"underline", fontFamily:"Poppins", fontSize:"16px"}}>
                             Login
                             </Link>
                         </p>
