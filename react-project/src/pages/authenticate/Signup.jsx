@@ -1,8 +1,16 @@
-import React from 'react'
-import { Button,Form,Input, Typography } from "antd";
+import React, { useState } from 'react'
+import { Button,Form,Input, Typography, Checkbox } from "antd";
 const { Text, Link } = Typography;
 
 const Signup = () => {
+    const [isFocused, setIsFocused] = useState(false);
+    const [isFormFocused, setIsFormFocused] = useState(false);
+
+    
+    const onChange = (e) => {
+        console.log(`checked = ${e.target.checked}`);
+    };
+
   return (
     <>
         <section className="bg-[#F15D30] overflow-x-hidden py-5 h-[100vh]">
@@ -37,7 +45,12 @@ const Signup = () => {
                                 },
                             ]}
                             >
-                            <Input style={{marginTop:"4rem",padding:"10px"}} placeholder="Enter Email" />
+                                <Input
+                                style={{marginTop:"4rem",padding:"10px", outline: "none", border:"none"}}
+                                placeholder="Enter Email"
+                                onFocus={(e) => e.target.style.border = "1px solid #f15d30"}
+                                onBlur={(e) => e.target.style.border = "1px solid #E7E7E7"}
+                                />
                             </Form.Item>
 
                             <Form.Item
@@ -48,8 +61,17 @@ const Signup = () => {
                                 message: 'Please input your password!',
                                 },
                             ]}
+                            style={{
+                                border: isFocused ? '1px solid #f15d30' : '1px solid #E7E7E7', 
+                                borderRadius: '4px', 
+                              }}
                             >
-                            <Input.Password style={{padding:"10px"}} placeholder="Confirm password" />
+                            <Input.Password
+                            style={{padding:"10px", outline:"none", border:"none"}}
+                            placeholder="Enter password"
+                            onFocus={() => setIsFocused(true)} 
+                            onBlur={() => setIsFocused(false)}
+                            />
                             </Form.Item>
 
                             <Form.Item
@@ -60,61 +82,68 @@ const Signup = () => {
                                 message: 'Please input your password!',
                                 },
                             ]}
+                            style={{
+                                border: isFormFocused ? '1px solid #f15d30' : '1px solid #E7E7E7', 
+                                borderRadius: '4px', 
+                              }}
                             >
-                            <Input.Password style={{padding:"10px"}} placeholder="Enter password" />
+                            <Input.Password
+                            style={{padding:"10px", outline:"none", border:"none"}}
+                            placeholder="Confirm password"
+                            onFocus={() => setIsFormFocused(true)} 
+                            onBlur={() => setIsFormFocused(false)}
+                            />
                             </Form.Item>
 
-                            <div className="flex items-start">
-                                <div className="flex items-center h-5">
-                                    <input id="terms" aria-describedby="terms" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required=""/>
-                                </div>
-                                <div className="ml-3 text-sm">
-                                    <label for="terms" className="font-light text-gray-500 dark:text-gray-300">I accept the <a class="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Terms and Conditions</a></label>
-                                </div>
+                             
+
+                            <div className="float-left mb-3 items-start">
+                                    <div className="text-sm">
+                                        <label for="terms" className="font-light text-[0.8rem] float-left text-gray-600">
+                                            By proceeding, you agree to our
+                                            <a class="font-medium text-primary-600 ml-1 hover:underline dark:text-primary-500" href="#">
+                                                Terms and Conditions
+                                            </a>
+                                        </label>
+                                    </div>
                             </div>
 
 
                             <div className="mb-3">
-                            <Button type="primary" htmlType="submit" className="w-full"
-                            style={{padding:"20px", fontWeight:"400", fontSize:"18px", backgroundColor:"#FF8B1A"}}> Submit</Button>
+                             <Button type="primary"
+                                htmlType="submit"
+                                className="w-full hover:drop-shadow-md hover:scale-102 transition
+                                cursor-pointer duration-300 ease-in-out font-bold"
+                                style={{padding:"20px", fontSize:"18px", backgroundColor:"#FF8B1A"}}>
+                                Submit
+                            </Button>
                             </div>
                         </Form>
 
-                        <p className=" mb-3 text-base text-secondary-color dark:text-dark-7">
-                            Or
-                        </p>
-                        <ul className="-mx-2 mb-12 flex justify-between">
-                            <li className="w-full px-2">
+                        <div className="flex justify-center">
+                            <hr class="w-[30%] h-px mx-4 my-8 bg-gray-200 border-0 dark:bg-gray-400"/>
+                            <span className="my-5"> Or </span>
+                            <hr class="w-[30%] h-px mx-4 my-8 bg-gray-200 border-0 dark:bg-gray-400"/>
+                        </div>
+                        
+                        <div className="-mx-2 mb-12 flex justify-between">
+                            <div className="w-full px-2">
                             <a
                                 href="/#"
-                                className="flex h-10 items-center text-white text-semibold justify-evenly rounded-md bg-[#6A6A6A] hover:bg-opacity-90"
+                                className="flex h-10 items-center justify-center py-6 text-black border-1 inset-shadow-2xs
+                                border-gray-300 text-semibold rounded-md hover:drop-shadow-md hover:scale-102
+                                transition cursor-pointer duration-300 ease-in-out"
                             >
-                                <svg
-                                width="18"
-                                height="18"
-                                viewBox="0 0 18 18"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                >
-                                <path
-                                    d="M17.8477 8.17132H9.29628V10.643H15.4342C15.1065 14.0743 12.2461 15.5574 9.47506 15.5574C5.95916 15.5574 2.8306 12.8821 2.8306 9.01461C2.8306 5.29251 5.81018 2.47185 9.47506 2.47185C12.2759 2.47185 13.9742 4.24567 13.9742 4.24567L15.7024 2.47185C15.7024 2.47185 13.3783 0.000145544 9.35587 0.000145544C4.05223 -0.0289334 0 4.30383 0 8.98553C0 13.5218 3.81386 18 9.44526 18C14.4212 18 17.9967 14.7141 17.9967 9.79974C18.0264 8.78198 17.8477 8.17132 17.8477 8.17132Z"
-                                    fill="white"
-                                />
-                                </svg>
-                                Continue with Google
+                                <img className="w-10 h-10" src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png" alt="#"/>
+                                Login with Google
                             </a>
-                            </li>
-                        </ul>
-                        <a
-                            href="/#"
-                            className="mb-2 inline-block text-base text-dark hover:text-primary hover:underline"
-                        >
-                            Forget Password?
-                        </a>
-                        <p className="text-base text-body-color dark:text-dark-6">
-                            <span className="pr-2">Not a member yet?</span>
+                            </div>
+                        </div>
+
+                        <p className="text-base text-body-color">
+                            <span className="pr-2">Already Registered?</span>
                             <Link href="/register"  target="_blank" style={{textDecoration:"underline", fontFamily:"Poppins", fontSize:"16px"}}>
-                            SignUp 
+                            Login
                             </Link>
                         </p>
 
