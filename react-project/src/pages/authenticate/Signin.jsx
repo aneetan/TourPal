@@ -50,7 +50,7 @@ const Signin = () => {
     //check for guide
     const guide = guides.find((g) => g.email === email && g.password === password);
     if(guide){
-      localStorage.setItem("is_guide", 3)
+      localStorage.setItem("is_user", 3)
       navigate("/admin")
       return
     }

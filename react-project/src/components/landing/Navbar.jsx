@@ -20,6 +20,11 @@ const Navbar = () => {
 	}
 
 	const handleLogin = () => {
+		if (localStorage.getItem("is_user") === "2" ){
+			localStorage.setItem("is_user", 0)
+			navigate('/')
+			return
+		}
 		navigate('/login')
 	}
 
@@ -90,7 +95,7 @@ const Navbar = () => {
 								text-center hover:bg-[#f15d30] hover:drop-shadow-md transition cursor-pointer duration-300 ease-in-out
 								${isMenuOpen ? 'ms:opacity-100' : 'opacity-0'} block md:hidden`}
 						>
-							Login
+							{localStorage.getItem("is_user") === "2" ? "Logout" : "Login"}
 							</button>
 					</div>
 				</ul>
@@ -103,7 +108,8 @@ const Navbar = () => {
 					className='text-white bg-[#f15d30] cursor-pointer font-medium rounded-lg px-6 py-3 text-center hover:bg-[#f15d30]
 					hover:scale-101 hover:drop-shadow-md transition duration-300 ease-in-out'
 				>
-					Login
+					{localStorage.getItem("is_user") === "2" ? "Logout" : "Login"}
+
 				</button>
 				</a>
 			</div>
