@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import GuideCard from '../../components/cards/GuideCard';
 import { Button, Input } from 'antd';
 import { FilterOutlined, SearchOutlined } from '@ant-design/icons';
-import { motion } from 'framer-motion';
 import Search from 'antd/es/input/Search';
+import RequestPop from './SendBookingRequest';
 
 const GuideSection = () => {
     const [searchTerm, setSearchTerm] = useState('');

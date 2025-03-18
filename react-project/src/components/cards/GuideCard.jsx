@@ -1,14 +1,21 @@
 import React from 'react'
-import {Button} from "antd"
-import { CalendarFilled, CalendarOutlined, FireOutlined, StarFilled, StarOutlined, ZhihuOutlined } from "@ant-design/icons"
+import { Button, Popover, Form, Input, Select } from 'antd';
+import { SendOutlined } from '@ant-design/icons';
+import { CalendarOutlined, StarFilled, ZhihuOutlined } from "@ant-design/icons"
+import { useNavigate } from 'react-router';
 
 const GuideCard = ({avatar, name, rating, reviews, bio, languages, experience, specialty}) => {
     const stars = Array(5).fill(0);
+    const navigate = useNavigate();
+
+    const handleBookUser = () => {
+        navigate('/bookGuides')
+    }
+
   return (
     <>
         <div 
         className="guide-card relative overflow-hidden rounded-xl bg-white p-10 shadow-sm animate-fadeIn"
-        style={{}}
         >
         <div className="flex items-start gap-4">
             <div className="relative">
@@ -68,9 +75,11 @@ const GuideCard = ({avatar, name, rating, reviews, bio, languages, experience, s
             style={{background:"#f15d30", color: "#fff"}}
             className="flex-1 background:[#F15D30] transition-all duration-300 hover:opacity-90 hover:scale-[1.01] active:scale-[0.98]"
             variant="default"
+            onClick={handleBookUser}
             >
             Book Me
             </Button>
+        {/* </Popover> */}
 
             <Button
             style={{color: "#F15D30"}}
