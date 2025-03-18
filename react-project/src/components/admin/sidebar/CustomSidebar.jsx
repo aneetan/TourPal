@@ -8,6 +8,7 @@ const CustomSidebar = () => {
     <>
         <Sider
           theme="light"
+          style={{position: "fixed", overflowY:"scroll", height:"100vh" }}
           breakpoint="lg"
           collapsedWidth="0"
         >

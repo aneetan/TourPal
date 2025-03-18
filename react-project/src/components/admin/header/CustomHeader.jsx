@@ -5,7 +5,7 @@ import ProfileDropDown from './ProfileDropDown'
 
 const CustomHeader = () => {
   return (
-    <div className='flex justify-between items-center' >
+    <div className='flex justify-between sticky items-center' >
         <div className="left-header mr-4 mt-3">
             <SearchBar/>
         </div>
@@ -13,9 +13,8 @@ const CustomHeader = () => {
             <Notifications/>
             <ProfileDropDown/>
         </div>
-      
     </div>  
-  )
+  ) 
 }
 
 export default CustomHeader

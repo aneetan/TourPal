@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Layout, Menu } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 import { useNavigate } from 'react-router';
@@ -7,6 +7,7 @@ import { AreaChartOutlined, LogoutOutlined, TeamOutlined, UserOutlined, VideoCam
 
 const MenuList = () => {
     const navigate = useNavigate();
+    const [selectedKey, setSelectedKey] = useState('1')
 
     const items = [
         {
@@ -30,7 +31,7 @@ const MenuList = () => {
         {
         key: '4',
         icon: <LogoutOutlined />,
-        label: 'Logout',
+        label: "Logout",
         onClick: () => {
             localStorage.setItem("is_user", 0)
             navigate('/login'); 

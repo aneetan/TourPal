@@ -35,7 +35,7 @@ const Signin = () => {
     const {email, password} = values;
     if(values.email === "admin@gmail.com" && values.password === "admin"){
       localStorage.setItem("is_user", 1)
-      navigate("/admin")
+      navigate("/admin/dashboard")
       return
     }
     

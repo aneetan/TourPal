@@ -7,12 +7,11 @@ import CustomLayout from './pages/CustomLayout';
 import Signin from './pages/authenticate/Signin';
 import Login from './pages/authenticate/Login';
 import Signup from './pages/authenticate/Signup';
-import Admin from './pages/admin/Admin';
 import ViewGuides from './pages/user/ViewGuides';
 import RequestPop from './pages/user/SendBookingRequest';
 import GuideProfile from './pages/user/GuideProfile';
-
-
+import AdminLayout from './pages/admin/AdminLayout';
+import AdminDashboard from './pages/admin/AdminDashboard';
 
 function App() {
 
@@ -27,11 +26,16 @@ function App() {
             <Route path='/viewGuides' element={<ViewGuides/>}/>
             <Route path='/bookGuides' element={<RequestPop/>}/>
             <Route path='/guideProfile' element={<GuideProfile/>}/>
-
           </Route>
+
+          <Route path='/admin' element={<AdminLayout/>}>
+            <Route path='/admin/dashboard' element={<AdminDashboard/>}/>
+            <Route path='/admin/users' element={<div> This is user </div>}/>
+            <Route path='/admin/guides' element={<div> This is guide </div>}/>
+          </Route>
+
           <Route path='/login' element={<Signin/>}/>
           <Route path='/register' element={<Signup/>}/>
-          <Route path='/admin' element={<Admin/>}/>
         </Routes>
 
       </BrowserRouter>
