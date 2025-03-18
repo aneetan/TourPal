@@ -1,28 +1,62 @@
 import { Button,Form,Input, Typography } from "antd";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 const { Text, Link } = Typography;
 
 const Signin = () => {
   const [isFocused, setIsFocused] = useState(false);
   const navigate = useNavigate();
+  const [users, setUser] = useState([])
+  const [guides, setGuides] = useState([])
+  const [errorMsg, setErrorMsg] = useState([""])
+
+
+  useEffect(() => {
+    axios.get(`http://localhost:3000/users`)
+      .then(function (response) {
+        setUser(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+      axios.get(`http://localhost:3000/guides`)
+      .then((response) => {
+        setGuides(response.data);
+      })
+      .catch((error) => {
+        console.log("Error fetching guides:", error);
+      });
+
+  },[])
 
   const handleUserLogin = (values) => {
+    const {email, password} = values;
     if(values.email === "admin@gmail.com" && values.password === "admin"){
       localStorage.setItem("is_user", 1)
       navigate("/admin")
-
-    } else if(values.email === "user@gmail.com" && values.password === "user"){
+      return
+    }
+    
+    //check for user
+    const user = users.find((u) => u.email === email && u.password === password);
+    if(user){
       localStorage.setItem("is_user", 2)
       navigate("/")
-
-    } else if(values.email === "guide@gmail.com" && values.password === "guide"){
-      localStorage.setItem("is_user", 3)
-      navigate("/admin")
-
-    } else {
-        localStorage.setItem("is_user", 0)
+      return
     }
+
+    //check for guide
+    const guide = guides.find((g) => g.email === email && g.password === password);
+    if(guide){
+      localStorage.setItem("is_guide", 3)
+      navigate("/admin")
+      return
+    }
+
+    setErrorMsg("Incorrect username or password")
+    localStorage.setItem("is_user", 0)
   }
   
   return (
@@ -49,6 +83,10 @@ const Signin = () => {
                     alt="logo"
                   /> */}
                 </a>
+              </div>
+
+              <div className="text-red-500 pt-3 text-[0.8rem]">
+                {errorMsg}
               </div>
 
               <Form onFinish={handleUserLogin}>
