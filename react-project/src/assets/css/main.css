@@ -1,0 +1,28 @@
+*{
+    font-family: "Poppins", sans-serif;
+}
+
+.ant-form-item-explain-error{
+    float: left;
+    font-size: 11px;
+}
+
+.ant-menu .ant-menu-item-selected {
+    background-color: #FF9248 !important; 
+    color: #fff !important; 
+}
+  
+.ant-menu .ant-menu-item-selected:hover {
+background-color: #FF9248 !important; 
+}
+
+.ant-statistic-title,
+.ant-statistic-content-prefix{
+    color: #000 !important;
+    font-weight: 500 !important;
+}
+
+.ant-statistic-content-prefix{
+    color: #fa6704 !important;
+    font-weight: 500 !important;
+}

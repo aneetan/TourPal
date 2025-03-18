@@ -1,6 +1,13 @@
 import React from 'react'
+import { useNavigate } from 'react-router'
 
 const BookGuide = () => {
+    const navigate = useNavigate();
+
+    const handleGuideView = () => {
+        navigate("/viewGuides")
+        
+    }
   return (
     <>
         <section id='guide' className='py-5 bg-[#F9FAFC]'>
@@ -17,7 +24,9 @@ const BookGuide = () => {
                     <div className='flex justify-center mt-5 lg:justify-start'>
                         <button type='button' className='text-white bg-[#f15d30] font-medium rounded-lg px-5 py-4
                         text-center hover:bg-[#f15d30] hover:drop-shadow-md hover:scale-102 transition
-                        cursor-pointer duration-300 ease-in-out'>
+                        cursor-pointer duration-300 ease-in-out'
+                        onClick={handleGuideView}
+                        >
                             Book A Guide
                         </button>
                     </div>
