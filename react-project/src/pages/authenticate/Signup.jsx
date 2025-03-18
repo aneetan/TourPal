@@ -1,12 +1,42 @@
 import React, { useState } from 'react'
+import axios from 'axios';
 import { Button,Form,Input, Typography, Tooltip  } from "antd";
+import { useNavigate } from 'react-router';
+import Password from 'antd/es/input/Password';
 const { Text, Link } = Typography;
 
 const Signup = () => {
     const [isFocused, setIsFocused] = useState(false);
     const [isFormFocused, setIsFormFocused] = useState(false);
+    const [user, setUser] = useState({
+        name:"",
+        email: "",
+        number: "",
+        password:""
+    });
+    const navigate = useNavigate();
 
     const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    const handleRegister = () => {
+        axios.post(`http://localhost:3000/users`, user)
+        .then(function (response) {
+            navigate('/login');
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
+
+    const handleInputChange = (e) => {
+        const {name, value} = e.target;
+        setUser(prevState => ({
+            ...prevState,
+            [name]:value
+        }))
+    }
+
+    
 
   return (
     <>
@@ -35,7 +65,7 @@ const Signup = () => {
                             </a>
                         </div>
 
-                        <Form>
+                        <Form onFinish={handleRegister}>
                             <Form.Item
                                 name="name"
                                 rules={[
@@ -47,7 +77,9 @@ const Signup = () => {
                             >
                                 <Input
                                 style={{marginTop:"4rem",padding:"10px", outline: "none"}}
+                                name="name"
                                 placeholder="Enter Your Name"
+                                onChange={handleInputChange}
                                 onFocus={(e) => e.target.style.border = "1px solid #f15d30"}
                                 onBlur={(e) => e.target.style.border = "1px solid #E7E7E7"}
                                 />
@@ -68,7 +100,9 @@ const Signup = () => {
                             >
                                 <Input
                                 style={{padding:"10px", outline: "none"}}
+                                name='email'
                                 placeholder="Enter Email"
+                                onChange={handleInputChange}
                                 onFocus={(e) => e.target.style.border = "1px solid #f15d30"}
                                 onBlur={(e) => e.target.style.border = "1px solid #E7E7E7"}
                                 />
@@ -93,7 +127,9 @@ const Signup = () => {
                             >
                                 <Input
                                 style={{padding:"10px", outline: "none"}}
+                                name='number'
                                 placeholder="Enter number"
+                                onChange={handleInputChange}
                                 onFocus={(e) => e.target.style.border = "1px solid #f15d30"}
                                 onBlur={(e) => e.target.style.border = "1px solid #E7E7E7"}
                                 />
@@ -126,13 +162,15 @@ const Signup = () => {
                             <Input.Password
                             style={{padding:"10px", outline:"none", border:"none"}}
                             placeholder="Enter password"
+                            name='password'
+                            onChange={handleInputChange}
                             onFocus={() => setIsFocused(true)} 
                             onBlur={() => setIsFocused(false)}
                             />
                             </Form.Item>
 
                             <Form.Item
-                            name="confirmPassword"
+                            name="password"
                             dependencies={['password']}
                             rules={[
                                 {
@@ -158,6 +196,7 @@ const Signup = () => {
                             placeholder="Confirm password"
                             onFocus={() => setIsFormFocused(true)} 
                             onBlur={() => setIsFormFocused(false)}
+                            onChange={handleInputChange}
                             />
                             </Form.Item>
 
@@ -167,7 +206,7 @@ const Signup = () => {
                                     <div className="text-sm">
                                         <label for="terms" className="font-light text-[0.8rem] float-left text-gray-600">
                                             By proceeding, you agree to our
-                                            <a class="font-medium text-primary-600 ml-1 hover:underline dark:text-primary-500" href="#">
+                                            <a className="font-medium text-primary-600 ml-1 hover:underline dark:text-primary-500" href="#">
                                                 Terms and Conditions
                                             </a>
                                         </label>
@@ -187,9 +226,9 @@ const Signup = () => {
                         </Form>
 
                         <div className="flex justify-center">
-                            <hr class="w-[30%] h-px mx-4 my-8 bg-gray-200 border-0 dark:bg-gray-400"/>
+                            <hr className="w-[30%] h-px mx-4 my-8 bg-gray-200 border-0 dark:bg-gray-400"/>
                             <span className="my-5"> Or </span>
-                            <hr class="w-[30%] h-px mx-4 my-8 bg-gray-200 border-0 dark:bg-gray-400"/>
+                            <hr className="w-[30%] h-px mx-4 my-8 bg-gray-200 border-0 dark:bg-gray-400"/>
                         </div>
                         
                         <div className="-mx-2 mb-12 flex justify-between">

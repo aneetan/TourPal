@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "id": "5e64",
+      "name": "Anita Neupane",
+      "email": "anita@gmail.com",
+      "number": "9845766733",
+      "password": "anita@123"
+    },
+    {
+      "id": "6afe",
+      "name": "Pratik Bhattarai",
+      "email": "pratik@gmail.com",
+      "number": "9843411801",
+      "password": "Pratik@118"
+    }
+  ]
+}

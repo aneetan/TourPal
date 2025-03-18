@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router';
 const Navbar = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
-	const [activeLink, setActiveLink] = useState(false);
+	const [activeLink, setActiveLink] = useState("home");
 	const navigate = useNavigate()
 
 	const handleMenu = () => {
