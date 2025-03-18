@@ -100,17 +100,17 @@ const GuideSection = () => {
                 </div>
             </div>
             
-            <motion.div 
+            <div 
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                 initial="hidden"
                 animate="visible"
             >
                 {guides.map((guide) => (
-                <motion.div key={guide.id}>
+                <div key={guide.id}>
                     <GuideCard {...guide} />
-                </motion.div>
+                </div>
                 ))}
-            </motion.div>
+            </div>
         </div>
         
         </>

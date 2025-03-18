@@ -12,6 +12,10 @@ const GuideCard = ({avatar, name, rating, reviews, bio, languages, experience, s
         navigate('/bookGuides')
     }
 
+    const handleGuideProfile = () => {
+        navigate('/guideProfile')
+    }
+
   return (
     <>
         <div 
@@ -83,6 +87,7 @@ const GuideCard = ({avatar, name, rating, reviews, bio, languages, experience, s
 
             <Button
             style={{color: "#F15D30"}}
+            onClick={handleGuideProfile}
             className="transition-all duration-300 hover:opacity-80 hover:border-[#F15D30] hover:scale-[1.01]"
             >
             View Profile
