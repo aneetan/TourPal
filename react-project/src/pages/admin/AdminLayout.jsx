@@ -18,7 +18,11 @@ const AdminLayout = () => {
       <Layout>
 
         <Header
-          style={{background: "#fff", marginLeft: 200, position:"relative"}}
+          style={{
+            background: "#fff",
+            // marginLeft: 200,
+            position:"relative"
+          }}
         >
           <CustomHeader/>
         </Header>
@@ -31,7 +35,7 @@ const AdminLayout = () => {
           <div
             style={{
               padding: 24,
-              marginLeft: 200,
+              // marginLeft: 200,
               minHeight: 360,
               background: colorBgContainer,
               borderRadius: borderRadiusLG,

@@ -12,6 +12,10 @@ import RequestPop from './pages/user/SendBookingRequest';
 import GuideProfile from './pages/user/GuideProfile';
 import AdminLayout from './pages/admin/AdminLayout';
 import AdminDashboard from './pages/admin/AdminDashboard';
+import CustomTable from './components/admin/CustomTable';
+import UserSection from './pages/admin/UserSection';
+import GuideSection from './pages/user/GuideSection';
+import AdminGuideSection from './pages/admin/AdminGuideSection';
 
 function App() {
 
@@ -30,8 +34,8 @@ function App() {
 
           <Route path='/admin' element={<AdminLayout/>}>
             <Route path='/admin/dashboard' element={<AdminDashboard/>}/>
-            <Route path='/admin/users' element={<div> This is user </div>}/>
-            <Route path='/admin/guides' element={<div> This is guide </div>}/>
+            <Route path='/admin/users' element={<UserSection/>}/>
+            <Route path='/admin/guides' element={<AdminGuideSection/>}/>
           </Route>
 
           <Route path='/login' element={<Signin/>}/>
