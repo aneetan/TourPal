@@ -4,7 +4,7 @@ import { SearchOutlined, PlusOutlined } from '@ant-design/icons';
 
 const Products = () => {
   // Mock product data
-  const productsData = Array.from({ length: 100 }, (_, i) => ({
+  const productsData = Array.from({ length: 9 }, (_, i) => ({
     id: i + 1,
     name: `Product ${i + 1}`,
     category: ['Electronics', 'Clothing', 'Food', 'Books', 'Toys'][Math.floor(Math.random() * 5)],

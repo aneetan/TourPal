@@ -13,7 +13,7 @@ const MenuList = () => {
         {
         key: '/admin/dashboard',
         icon: <AreaChartOutlined />,
-        label: <Link to="/">Dashboard</Link>,
+        label: <Link to="/admin/dashboard">Dashboard</Link>,
         },
         {
         key: '/admin/users',
@@ -23,7 +23,7 @@ const MenuList = () => {
         {
         key: '/admin/guides',
         icon: <TeamOutlined />,
-        label: <Link to="/admin/guides">Users</Link>,
+        label: <Link to="/admin/guides">Guides</Link>,
         },
         {
         key: '/logout',

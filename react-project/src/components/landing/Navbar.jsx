@@ -54,7 +54,7 @@ const Navbar = () => {
 				<div className="flex items-center justify-between">
 					<a href='#' className='flex items-center justify-center'>
 						{/* <img src={Logo} alt='logo' className='h-10 mr-3'/> */}
-						<Logo />
+						<Logo width="80px"/>
 						<span className='text-2xl text-gray-900 font-sans font-bold'> TourPal </span>
 					</a>
 					<span className='block mx-2 text-3xl bg-gray-100 p-2 rounded-lg md:hidden' onClick={handleMenu}>

@@ -1,68 +1,114 @@
-import React from 'react'
-import { Button, Col, Row, Space, Table } from 'antd';
-import { NavLink } from 'react-router';
+import React, { useState } from 'react';
+import { Table, Card, Input, Button, Space, Tag, Typography } from 'antd';
+import { SearchOutlined, PlusOutlined } from '@ant-design/icons';
+const { Title, Paragraph } = Typography;
 
 const UserSection = () => {
-    // const [data, setData] = useState([])
-    const columns = [
-        {
-          title: 'Name',
-          dataIndex: 'name',
-          key: 'name',
-        //   render: (_, item) => <NavLink to={`/admin/user/details/${item.id}`}>{item.name}</NavLink>,
-        },
-        {
-          title: 'Age',
-          dataIndex: 'age',
-          key: 'age',
-        },
-        {
-          title: 'Email',
-          dataIndex: 'email',
-          key: 'email',
-        },
-        {
-            title: 'Role',
-            dataIndex: 'role',
-            key: 'role',
-        },
-        {
-            title: "Action",
-            dataIndex: "edit",
-            key: "edit",
-            render: () => (
-                    <Button type="primary"> Delete </Button>
-            ),
-        }
-      ];
-
-      const data = Array.from({
-        length: 12,
-      }).map((_, i) => ({
-        key: i,
-        name: `Edward King ${i}`,
-        age: 32,
-        address: `London, Park Lane no. ${i}`,
+    const guideData = Array.from({ length: 40 }, (_, i) => ({
+        id: i + 1,
+        name: `Product ${i + 1}`,
+        category: ['Electronics', 'Clothing', 'Food', 'Books', 'Toys'][Math.floor(Math.random() * 5)],
+        price: Math.floor(Math.random() * 1000) + 10,
+        stock: Math.floor(Math.random() * 100),
+        status: ['In Stock', 'Low Stock', 'Out of Stock'][Math.floor(Math.random() * 3)],
       }));
 
-  return (
-    <>
-        <div className='text-xl font-semibold pb-3' > Users </div>
+    const [pagination, setPagination] = useState({
+        current: 1,
+        pageSize: 10,
+        total: guideData.length,
+      });
 
-        <Row
-            gutter={{
-                xs: 8,
-                sm: 16,
-                md: 24,
-                lg: 32,
-            }}
-        >
-            <Col span={24}>
-              <Table columns={columns} dataSource={data} />
-            </Col>
-        </Row>
-    </>
-  )
+    const [tableData, setTableData] = useState(guideData);
+    
+    
+    const handleTableChange = (pagination, filters, sorter) => {
+        setPagination(pagination);
+    };
+
+    const columns = [
+        {
+          title: 'ID',
+          dataIndex: 'id',
+          key: 'id',
+          sorter: (a, b) => a.id - b.id,
+        },
+        {
+          title: 'Product Name',
+          dataIndex: 'name',
+          key: 'name',
+          sorter: (a, b) => a.name.localeCompare(b.name),
+          render: (text) => <a href="#">{text}</a>,
+        },
+        {
+          title: 'Category',
+          dataIndex: 'category',
+          key: 'category',
+          sorter: (a, b) => a.category.localeCompare(b.category),
+          filters: [
+            { text: 'Electronics', value: 'Electronics' },
+            { text: 'Clothing', value: 'Clothing' },
+            { text: 'Food', value: 'Food' },
+            { text: 'Books', value: 'Books' },
+            { text: 'Toys', value: 'Toys' },
+          ],
+          onFilter: (value, record) => record.category === value,
+        },
+        {
+          title: 'Price',
+          dataIndex: 'price',
+          key: 'price',
+          sorter: (a, b) => a.price - b.price,
+          render: (price) => `$${price.toFixed(2)}`,
+          responsive: ['md'],
+        },
+        {
+          title: 'Stock',
+          dataIndex: 'stock',
+          key: 'stock',
+          sorter: (a, b) => a.stock - b.stock,
+          responsive: ['lg'],
+        },
+        {
+          title: 'Action',
+          key: 'action',
+          render: (_, record) => (
+            <Space size="small">
+              <Button type="primary" size="small" danger> Delete </Button>
+            </Space>
+          ),
+        },
+      ];
+
+    return (
+        <div>
+            <Card>
+              <Title level={3}>Users</Title>
+
+                <div style={{ marginBottom: 16 }}>
+                <Space>
+                    <Input
+                    placeholder="Search "
+                    allowClear
+                    suffix={<SearchOutlined />}
+                    style={{ width: '90%' }}
+                    />
+                </Space>
+                </div>
+
+                <Table
+                columns={columns}
+                dataSource={tableData}
+                rowKey="id"
+                pagination={pagination}
+                onChange={handleTableChange}
+                scroll={{ x: 800 }}
+                size="middle"
+                bordered
+                />
+            </Card>
+        </div>
+    )
 }
 
 export default UserSection

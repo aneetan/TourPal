@@ -1,14 +1,8 @@
 import React from 'react';
-import { Card, Row, Col, Statistic, Typography, List, Avatar } from 'antd';
-import { 
-  UserOutlined, 
-  ShoppingCartOutlined, 
-  DollarOutlined, 
-  BarChartOutlined,
-  ArrowUpOutlined,
-  ArrowDownOutlined 
-} from '@ant-design/icons';
+import { Card, Row, Col, Typography } from 'antd';
 import CustomData from '../../components/admin/CustomData';
+import CustomerChart from '../../components/admin/CustomerChart';
+import RecentActivity from '../../components/admin/RecentActivity';
 
 const { Title, Paragraph } = Typography;
 
@@ -31,7 +25,7 @@ const Dashboard = () => {
       
       <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
         <Col xs={24} lg={16}>
-          <Card title="Recent Sales" style={{ height: '100%' }}>
+          <Card title="Customer Volume" style={{ height: '100%' }}>
             <div style={{ 
               height: '300px', 
               display: 'flex', 
@@ -39,28 +33,12 @@ const Dashboard = () => {
               justifyContent: 'center',
               color: '#8c8c8c'
             }}>
-              Sales chart will appear here
+              <CustomerChart/>
             </div>
           </Card>
         </Col>
         
-        <Col xs={24} lg={8}>
-          <Card title="Recent Activity" style={{ height: '100%' }}>
-            <List
-              itemLayout="horizontal"
-              dataSource={activities}
-              renderItem={item => (
-                <List.Item>
-                  <List.Item.Meta
-                    avatar={<Avatar icon={<UserOutlined />} />}
-                    title={`${item.user} ${item.action}`}
-                    description={item.time}
-                  />
-                </List.Item>
-              )}
-            />
-          </Card>
-        </Col>
+        <RecentActivity activities={activities}/>
       </Row>
     </div>
   );

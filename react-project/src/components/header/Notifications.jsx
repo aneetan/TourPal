@@ -1,6 +1,7 @@
 import { BellOutlined } from "@ant-design/icons";
 import { Menu, Avatar, Badge, Dropdown } from "antd";
 import { useState } from "react";
+import RecentActivity from "../admin/RecentActivity";
 
 const Notifications = () => {
 
