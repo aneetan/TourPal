@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Card, Row, Statistic  } from 'antd';
-import { ArrowUpOutlined, StarOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
+import { ArrowUpOutlined, StarFilled, TeamOutlined, UserOutlined } from '@ant-design/icons';
 
 
 const CustomData = () => {
@@ -48,7 +48,7 @@ const CustomData = () => {
                         fontWeight: 600
 
                     }}
-                    prefix={<StarOutlined />}
+                    prefix={<StarFilled />}
                     />
                 </Card>
             </Col>

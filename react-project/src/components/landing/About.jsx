@@ -16,7 +16,7 @@ const About = () => {
                                 <img src='https://www.himalayanst.com/uploads/media/Blogs/places-to-visit-in-kathmandu/chandragiri.jpg' alt='image'
                                 className='lg:h-60 md:h-48 w-full object-cover object-center'/>
                                 <div className='p-6'>
-                                    <h1 className='text-2xl text-[#F47D59] text-center font-bold mb-3'> Discover What's Around You </h1>
+                                    <h1 className='text-xl text-[#F47D59] text-center font-bold mb-3'> Discover What's Around You </h1>
                                     <p className='leading-relaxed text-[#888E9B] text-center mb-3'> From popular spots to hidden gems, find amazing destinations just a tap away!</p>
                                 </div>
                             </div>
@@ -26,7 +26,7 @@ const About = () => {
                                 <img src='https://s3.us-west-1.amazonaws.com/assets.activeadventures.com/public/blog-images/Active%2520guide%2520with%2520locals__ResizedImageWzYwMCw0MDBd.jpg' alt='image'
                                 className='lg:h-60 md:h-48 w-full object-cover object-center'/>
                                 <div className='p-6 '>
-                                    <h1 className='text-2xl text-[#F47D59] text-center font-bold mb-3'> Book Your Personalized Travel Buddy</h1>
+                                    <h1 className='text-xl text-[#F47D59] text-center font-bold mb-3'> Book Your Personalized Travel Buddy</h1>
                                     <p className='leading-relaxed text-[#888E9B] text-center mb-3'> Connect with experienced local guides for unforgettable experiences! </p>
                                 </div>
                             </div>
@@ -36,7 +36,7 @@ const About = () => {
                                 <img src='https://thehimalayantimes.com/uploads/imported_images/wp-content/uploads/2017/11/rural-life.jpg' alt='image'
                                 className='lg:h-60 md:h-48 w-full object-cover object-center'/>
                                 <div className='p-6'>
-                                    <h1 className='text-2xl text-[#F47D59] text-center font-bold mb-3'> Unlock the Unseen </h1>
+                                    <h1 className='text-xl text-[#F47D59] text-center font-bold mb-3'> Unlock the Unseen </h1>
                                     <p className='leading-relaxed text-[#888E9B] text-center mb-3'> Discover secret places no one else dares to explore! </p>
                                 </div>
                             </div>

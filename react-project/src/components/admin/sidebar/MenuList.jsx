@@ -1,35 +1,32 @@
 import React, { useState } from 'react'
 import { Layout, Menu } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { AreaChartOutlined, LogoutOutlined, TeamOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
 
 
 const MenuList = () => {
     const navigate = useNavigate();
-    const [selectedKey, setSelectedKey] = useState('1')
+    const selectedKey = location.pathname === '/' ? '/' : location.pathname;
 
     const items = [
         {
-        key: '1',
+        key: '/admin/dashboard',
         icon: <AreaChartOutlined />,
-        label: 'Dashboard',
-        onClick: () => navigate('/admin/dashboard'),
+        label: <Link to="/">Dashboard</Link>,
         },
         {
-        key: '2',
+        key: '/admin/users',
         icon: <UserOutlined />,
-        label: 'Users',
-        onClick: () => navigate('/admin/users'),
+        label: <Link to="/admin/users">Users</Link>,
         },
         {
-        key: '3',
+        key: '/admin/guides',
         icon: <TeamOutlined />,
-        label: 'Guides',
-        onClick: () => navigate('/admin/guides'),
+        label: <Link to="/admin/guides">Users</Link>,
         },
         {
-        key: '4',
+        key: '/logout',
         icon: <LogoutOutlined />,
         label: "Logout",
         onClick: () => {
@@ -40,7 +37,11 @@ const MenuList = () => {
     ];
   
     return (
-        <Menu mode="inline" defaultSelectedKeys={['1']} items={items} />
+        <Menu
+            mode="inline"
+            selectedKeys={[selectedKey]}
+            items={items} 
+        />
             
     );
 };

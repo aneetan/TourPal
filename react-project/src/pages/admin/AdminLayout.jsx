@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Layout, Menu, theme } from 'antd';
+import { Layout } from 'antd';
 const { Header, Content, Sider } = Layout;
 import CustomFooter from '../../components/admin/footer/CustomFooter';
 import CustomSidebar from '../../components/admin/sidebar/CustomSidebar';
@@ -7,44 +7,24 @@ import CustomHeader from '../../components/admin/header/CustomHeader';
 import { Outlet } from 'react-router';
 
 const AdminLayout = () => {
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+  const [collapsed, setCollapsed] = useState(false);
 
+  const toggleSidebar = () => {
+    setCollapsed(!collapsed);
+  };
   return (
     <>
-      <Layout style={{minHeight: '100vh', zIndex:100}}>
-        <CustomSidebar/>
+      <Layout style={{ minHeight: '100vh' }}>
+      <CustomSidebar collapsed={collapsed} />
       <Layout>
-
-        <Header
-          style={{
-            background: "#fff",
-            // marginLeft: 200,
-            position:"relative"
-          }}
-        >
-          <CustomHeader/>
-        </Header>
-         
-        <Content
-          style={{
-            margin: '24px 16px 0',
-          }}
-        >
-          <div
-            style={{
-              padding: 24,
-              // marginLeft: 200,
-              minHeight: 360,
-              background: colorBgContainer,
-              borderRadius: borderRadiusLG,
-            }}
-          >
-            <Outlet/>
-          </div>
+        <CustomHeader
+          collapsed={collapsed} 
+          toggleSidebar={toggleSidebar} 
+        />
+        <Content className="site-layout-background" style={{ margin: '24px 16px', padding: 24, minHeight: 280 }}>
+          <Outlet />
         </Content>
-        <CustomFooter/>
+      <CustomFooter/>
       </Layout>
     </Layout>
 

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import Logo from '../../assets/images/tourguidelogo.png'
 import { MenuOutlined, CloseOutlined, FlagFilled} from '@ant-design/icons';
 import HeroSection from './HeroSection';
 import { useNavigate } from 'react-router';
+import Logo from '../Logo';
 
 
 const Navbar = () => {
@@ -47,13 +47,14 @@ const Navbar = () => {
 
   	return (
 	<>
-		<nav className={`py-5 sticky z-50 top-0 transition-colors duration-500 
+		<nav className={`sticky z-50 top-0 transition-colors duration-500 
 			${isScrolled? "bg-[#f9fafc] shadow-md border-b border-gray-100" : "bg-transparent border-transparent"}`}>
 
 			<div className="container md:px-12 md:flex md:items-center md:justify-between">
 				<div className="flex items-center justify-between">
-					<a href='#' className='flex items-center'>
+					<a href='#' className='flex items-center justify-center'>
 						{/* <img src={Logo} alt='logo' className='h-10 mr-3'/> */}
+						<Logo />
 						<span className='text-2xl text-gray-900 font-sans font-bold'> TourPal </span>
 					</a>
 					<span className='block mx-2 text-3xl bg-gray-100 p-2 rounded-lg md:hidden' onClick={handleMenu}>

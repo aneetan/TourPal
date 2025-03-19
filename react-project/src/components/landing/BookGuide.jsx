@@ -6,7 +6,6 @@ const BookGuide = () => {
 
     const handleGuideView = () => {
         navigate("/viewGuides")
-        
     }
   return (
     <>
