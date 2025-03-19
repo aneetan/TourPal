@@ -8,6 +8,7 @@ const AdminDashboard = () => {
         <div className='text-xl font-semibold pb-3' > Dashboard </div>
         <div className='mb-12'>
             <CustomData/>
+            
         </div>
         <div className='mx-5'>
             <CustomTable/>
