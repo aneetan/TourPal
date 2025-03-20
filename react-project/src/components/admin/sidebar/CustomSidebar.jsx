@@ -1,19 +1,37 @@
 import React from 'react'
 import { Layout } from 'antd';
 import MenuList from '../sidebar/MenuList';
-const { Header, Content, Sider } = Layout;
+import Logo from '../../Logo';
+const { Sider } = Layout;
 
-const CustomSidebar = () => {
+const CustomSidebar = ({ collapsed }) => {
   return (
     <>
-        <Sider
+        <Sider 
+          trigger={null} 
+          collapsible 
+          collapsed={collapsed}
           theme="light"
-          style={{position: "fixed", overflowY:"scroll", height:"100vh" }}
-          breakpoint="lg"
-          collapsedWidth="0"
+          style={{
+            overflow: 'auto',
+            height: '100vh',
+            position: 'sticky',
+            left: 0,
+            top: 0,
+            bottom: 0,
+          }}
         >
-          <div className=" justify-center mx-16 my-8 demo-logo-horizontal">
-            Logo
+          <div className="logo" style={{ 
+            height: '32px', 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center',
+            fontSize: collapsed ? '14px' : '18px',
+            fontWeight: 'bold',
+            margin: '16px 0'
+          }}>
+            <Logo width="50px"/>
+            {collapsed ? '' : 'TourPal'} 
           </div>
           <MenuList/>
         </Sider>

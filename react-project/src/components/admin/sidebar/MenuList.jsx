@@ -1,46 +1,55 @@
 import React, { useState } from 'react'
-import { Layout, Menu } from 'antd';
-const { Header, Content, Footer, Sider } = Layout;
-import { useNavigate } from 'react-router';
-import { AreaChartOutlined, LogoutOutlined, TeamOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
+import { Menu } from 'antd';
+import { Link, useLocation, useNavigate } from 'react-router';
+import { AreaChartOutlined, EnvironmentOutlined, LogoutOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
 
 
 const MenuList = () => {
+    const location = useLocation();
     const navigate = useNavigate();
-    const [selectedKey, setSelectedKey] = useState('1')
+    const selectedKey = location.pathname.startsWith('/admin/guides') ? '/admin/guides' :
+                        location.pathname.startsWith('/admin/places') ? '/admin/places' :
+                        location.pathname;
 
     const items = [
         {
-        key: '1',
-        icon: <AreaChartOutlined />,
-        label: 'Dashboard',
-        onClick: () => navigate('/admin/dashboard'),
+            key: '/admin/dashboard',
+            icon: <AreaChartOutlined />,
+            label: <Link to="/admin/dashboard">Dashboard</Link>,
         },
         {
-        key: '2',
-        icon: <UserOutlined />,
-        label: 'Users',
-        onClick: () => navigate('/admin/users'),
+            key: '/admin/users',
+            icon: <UserOutlined />,
+            label: <Link to="/admin/users">Users</Link>,
         },
         {
-        key: '3',
-        icon: <TeamOutlined />,
-        label: 'Guides',
-        onClick: () => navigate('/admin/guides'),
+            key: '/admin/guides',
+            icon: <TeamOutlined />,
+            label: <Link to="/admin/guides">Guides</Link>,                                                          
         },
         {
-        key: '4',
-        icon: <LogoutOutlined />,
-        label: "Logout",
-        onClick: () => {
-            localStorage.setItem("is_user", 0)
-            navigate('/login'); 
+            key: '/admin/places',
+            icon: <EnvironmentOutlined/>,
+            label: <Link to="/admin/places"> Places </Link>
+
         },
+        {
+            key: '/logout',
+            icon: <LogoutOutlined />,
+            label: "Logout",
+            onClick: () => {
+                localStorage.setItem("is_user", 0)
+                navigate('/login'); 
+            },
         },
     ];
   
     return (
-        <Menu mode="inline" defaultSelectedKeys={['1']} items={items} />
+        <Menu
+            mode="inline"
+            selectedKeys={[selectedKey]}
+            items={items} 
+        />
             
     );
 };

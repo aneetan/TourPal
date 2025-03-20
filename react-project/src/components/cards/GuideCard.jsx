@@ -12,10 +12,6 @@ const GuideCard = ({avatar, name, rating, reviews, bio, languages, experience, s
         navigate('/bookGuides')
     }
 
-    // const handleGuideProfile = () => {
-    //     navigate('/guideProfile')
-    // }
-
   return (
     <>
         <div 
