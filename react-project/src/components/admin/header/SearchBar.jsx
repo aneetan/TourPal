@@ -1,16 +1,17 @@
+import { SearchOutlined } from '@ant-design/icons';
 import {Input} from 'antd'
 
 const SearchBar = () => {
     const {Search} = Input
     return(
-        <div className='search-btn'>
-            <Search
-            placeholder='Search here...'
-            allowClear 
-            size='large'
-            onSearch={() => {console.log("Searched")}}
+        <>
+            <Input
+                placeholder="Search "
+                allowClear
+                suffix={<SearchOutlined />}
+                style={{ width: '90%' }}
             />
-        </div>
+        </>
     )
 }
 

@@ -1,15 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import {MapContainer, Marker, Popup, TileLayer, useMap} from "react-leaflet"
 import osmProviders from '../../components/map/osm-providers'
-import L, { icon } from "leaflet"
-import 'leaflet/dist/leaflet.css'
-import 'leaflet-routing-machine';
 import cities from "../../components/map/cities.json"
 import useGeoLocation from '../../hooks/useGeoLocation'
-import { Button } from 'antd'
-import Navbar from '../../components/landing/Navbar'
-import Footer from '../../components/landing/Footer'
 import { useNavigate } from 'react-router'
+import L from "leaflet"
+import 'leaflet/dist/leaflet.css'
+import 'leaflet-routing-machine';
 
 //icon for added geolocations
 const MarkerIcon = new L.Icon({
@@ -70,19 +67,6 @@ const CustomMap = () => {
     const location = useGeoLocation();
     const navigate = useNavigate();
 
-    //zoom in to user location
-    const zoomToUserLocation = () => {
-        if (location.loaded && !location.error && mapRef.current) {
-            mapRef.current.flyTo(
-                [location.coordinates.lat, location.coordinates.lon],
-                ZOOM_LEVEL,
-                { animate: true }
-            );
-        } else {
-            alert(location.error ? location.error.message : 'Location not available');
-        }
-    };
-
     // Filter nearby locations within a radius (e.g., 10 km)
     useEffect(() => {
         if (location.loaded && !location.error) {
@@ -126,21 +110,14 @@ const CustomMap = () => {
 
     //Book Guide button function
     const handleBookGuide = (city) => {
-        console.log("Booking guide for:", city.Place);
         navigate("/seeMore")
-        
     }
 
     return (
         <>
             <div className='row'> 
                 <div className='col text-center'>
-                    {/* <h1> Loading maps</h1>
-
-                    <Button onClick={zoomToUserLocation}> Load </Button> */}
-
                     <div className='col'>
-
                         <MapContainer center= {focus} zoom={ZOOM_LEVEL} ref={mapRef}
                             whenCreated={(mapInstance) => (mapRef.current = mapInstance)}
                         >

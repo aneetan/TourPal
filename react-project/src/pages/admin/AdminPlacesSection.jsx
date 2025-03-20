@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Table, Card, Input, Button, Space, Tag, Typography } from 'antd';
 import { SearchOutlined, PlusOutlined } from '@ant-design/icons';
-import SearchBar from '../../components/admin/header/SearchBar';
 import CustomTable from '../../components/CustomTable';
+import SearchBar from '../../components/admin/header/SearchBar';
 const { Title, Paragraph } = Typography;
 
-const AdminGuideSection = () => {
+const AdminPlacesSection = () => {
     const guideData = Array.from({ length: 10 }, (_, i) => ({
         id: i + 1,
         name: `Product ${i + 1}`,
@@ -16,22 +16,23 @@ const AdminGuideSection = () => {
       }));
 
     const [tableData, setTableData] = useState(guideData);
-  
+
     const columns = [
         {
-          title: 'Name',
+          title: 'ID',
+          dataIndex: 'id',
+          key: 'id',
+          sorter: (a, b) => a.id - b.id,
+        },
+        {
+          title: 'Place Name',
           dataIndex: 'name',
           key: 'name',
           sorter: (a, b) => a.name.localeCompare(b.name),
-          render: (text) =>
-          <div className='flex items-center'>
-            <img src='https://images.pexels.com/photos/14653174/pexels-photo-14653174.jpeg'
-            className='w-[40px] mx-2' alt='pro'/>
-            <a href="#">{text}</a>
-          </div>,
+          render: (text) => <a href="#">{text}</a>,
         },
         {
-          title: 'Skill',
+          title: 'Category',
           dataIndex: 'category',
           key: 'category',
           sorter: (a, b) => a.category.localeCompare(b.category),
@@ -46,16 +47,16 @@ const AdminGuideSection = () => {
         },
         {
           title: 'Location',
-          dataIndex: 'price',
-          key: 'price',
+          dataIndex: 'location',
+          key: 'location',
           sorter: (a, b) => a.price - b.price,
-          render: (price) => `$${price.toFixed(2)}`,
+          // render: (price) => `$${price.toFixed(2)}`,
           responsive: ['md'],
         },
         {
-          title: 'Stock',
-          dataIndex: 'stock',
-          key: 'stock',
+          title: 'Latitude',
+          dataIndex: 'lat',
+          key: 'lat',
           sorter: (a, b) => a.stock - b.stock,
           responsive: ['lg'],
         },
@@ -75,10 +76,10 @@ const AdminGuideSection = () => {
         <div>
             <Card>
               <div className='flex justify-between items-center my-2'>
-                <Title level={3}>Guides</Title>
+                <Title level={3}>Places</Title>
 
                 <Button type="primary" icon={<PlusOutlined />}>
-                      Add Guides
+                      Add Places
                   </Button>
                 
               </div>
@@ -88,11 +89,11 @@ const AdminGuideSection = () => {
                     <SearchBar/>
                 </Space>
                 </div>
-
                 <CustomTable tableData={tableData} columns={columns}/>
+
             </Card>
         </div>
     )
 }
 
-export default AdminGuideSection
+export default AdminPlacesSection

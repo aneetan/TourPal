@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card, Row, Col, Typography } from 'antd';
-import CustomData from '../../components/admin/CustomData';
-import CustomerChart from '../../components/admin/CustomerChart';
-import RecentActivity from '../../components/admin/RecentActivity';
+import CustomData from '../../components/admin/dashboard/CustomData';
+import CustomerChart from '../../components/admin/dashboard/CustomerChart';
+import RecentActivity from '../../components/admin/dashboard/RecentActivity';
 
 const { Title, Paragraph } = Typography;
 

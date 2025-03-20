@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import { Layout, Menu } from 'antd';
-const { Header, Content, Footer, Sider } = Layout;
+import { Menu } from 'antd';
 import { Link, useNavigate } from 'react-router';
-import { AreaChartOutlined, LogoutOutlined, TeamOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
+import { AreaChartOutlined, EnvironmentOutlined, LogoutOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
 
 
 const MenuList = () => {
@@ -11,28 +10,34 @@ const MenuList = () => {
 
     const items = [
         {
-        key: '/admin/dashboard',
-        icon: <AreaChartOutlined />,
-        label: <Link to="/admin/dashboard">Dashboard</Link>,
+            key: '/admin/dashboard',
+            icon: <AreaChartOutlined />,
+            label: <Link to="/admin/dashboard">Dashboard</Link>,
         },
         {
-        key: '/admin/users',
-        icon: <UserOutlined />,
-        label: <Link to="/admin/users">Users</Link>,
+            key: '/admin/users',
+            icon: <UserOutlined />,
+            label: <Link to="/admin/users">Users</Link>,
         },
         {
-        key: '/admin/guides',
-        icon: <TeamOutlined />,
-        label: <Link to="/admin/guides">Guides</Link>,
+            key: '/admin/guides',
+            icon: <TeamOutlined />,
+            label: <Link to="/admin/guides">Guides</Link>,                                                          
         },
         {
-        key: '/logout',
-        icon: <LogoutOutlined />,
-        label: "Logout",
-        onClick: () => {
-            localStorage.setItem("is_user", 0)
-            navigate('/login'); 
+            key: '/admin/places',
+            icon: <EnvironmentOutlined/>,
+            label: <Link to="/admin/places"> Places </Link>
+
         },
+        {
+            key: '/logout',
+            icon: <LogoutOutlined />,
+            label: "Logout",
+            onClick: () => {
+                localStorage.setItem("is_user", 0)
+                navigate('/login'); 
+            },
         },
     ];
   
