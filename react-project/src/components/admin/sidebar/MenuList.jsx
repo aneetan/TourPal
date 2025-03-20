@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { Menu } from 'antd';
-import { Link, useNavigate } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { AreaChartOutlined, EnvironmentOutlined, LogoutOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
 
 
 const MenuList = () => {
+    const location = useLocation();
     const navigate = useNavigate();
-    const selectedKey = location.pathname === '/' ? '/' : location.pathname;
+    const selectedKey = location.pathname.startsWith('/admin/guides') ? '/admin/guides' :
+                        location.pathname.startsWith('/admin/places') ? '/admin/places' :
+                        location.pathname;
 
     const items = [
         {

@@ -9,7 +9,7 @@ function useFetch (url) {
     //the axios api call has three states
         //- data (the actual data returned)
         //- loading (to give information that the data is being loaded)
-        //- erro(to catch any errors)
+        //- error(to catch any errors)
 
     //the dependency array consist of the [url] which means the useEffect will be triggered at the beginning
     // and when the ul changes

@@ -3,9 +3,11 @@ import { Table, Card, Input, Button, Space, Tag, Typography } from 'antd';
 import { SearchOutlined, PlusOutlined } from '@ant-design/icons';
 import CustomTable from '../../components/CustomTable';
 import SearchBar from '../../components/admin/header/SearchBar';
+import { useNavigate } from 'react-router';
 const { Title, Paragraph } = Typography;
 
 const AdminPlacesSection = () => {
+    const navigate = useNavigate();
     const guideData = Array.from({ length: 10 }, (_, i) => ({
         id: i + 1,
         name: `Product ${i + 1}`,
@@ -72,13 +74,17 @@ const AdminPlacesSection = () => {
         },
       ];
 
+      const handleAddPlaces = () => {
+        navigate('/admin/places/add')
+      }
+
     return (
         <div>
             <Card>
               <div className='flex justify-between items-center my-2'>
                 <Title level={3}>Places</Title>
 
-                <Button type="primary" icon={<PlusOutlined />}>
+                <Button type="primary" onClick={handleAddPlaces} icon={<PlusOutlined />}>
                       Add Places
                   </Button>
                 

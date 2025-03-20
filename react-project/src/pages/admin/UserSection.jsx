@@ -14,8 +14,6 @@ const UserSection = () => {
 
     const tableData = data || []
 
-    // const [tableData, setTableData] = useState(guideData);
-
     const columns = [
         {
           title: 'Full Name',

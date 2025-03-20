@@ -14,6 +14,8 @@ import AdminGuideSection from './pages/admin/AdminGuideSection';
 import Dashboard from './pages/admin/Dashboard';
 import GuideSection from './pages/user/GuideSection';
 import AdminPlacesSection from './pages/admin/AdminPlacesSection';
+import AddPlaces from './pages/admin/AddPlaces';
+import AddLocationForm from './pages/admin/AddLocationForm';
 
 function App() {
 
@@ -35,6 +37,7 @@ function App() {
             <Route path='/admin/users' element={<UserSection/>}/>
             <Route path='/admin/guides' element={<AdminGuideSection/>}/>
             <Route path='/admin/places' element={<AdminPlacesSection/>}/>
+            <Route path='/admin/places/add' element={<AddPlaces/>}/>
           </Route>
 
           <Route path='/login' element={<Signin/>}/>

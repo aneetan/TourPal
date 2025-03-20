@@ -3,9 +3,12 @@ import { Table, Card, Input, Button, Space, Tag, Typography } from 'antd';
 import { SearchOutlined, PlusOutlined } from '@ant-design/icons';
 import SearchBar from '../../components/admin/header/SearchBar';
 import CustomTable from '../../components/CustomTable';
+import { useNavigate } from 'react-router';
 const { Title, Paragraph } = Typography;
 
 const AdminGuideSection = () => {
+    const navigate = useNavigate();
+
     const guideData = Array.from({ length: 10 }, (_, i) => ({
         id: i + 1,
         name: `Product ${i + 1}`,
@@ -14,6 +17,10 @@ const AdminGuideSection = () => {
         stock: Math.floor(Math.random() * 100),
         status: ['In Stock', 'Low Stock', 'Out of Stock'][Math.floor(Math.random() * 3)],
       }));
+
+    const handleAddGuides= () => {
+      navigate('/admin/guides/add')
+    }
 
     const [tableData, setTableData] = useState(guideData);
   
@@ -77,7 +84,7 @@ const AdminGuideSection = () => {
               <div className='flex justify-between items-center my-2'>
                 <Title level={3}>Guides</Title>
 
-                <Button type="primary" icon={<PlusOutlined />}>
+                <Button type="primary" onClick={handleAddGuides} icon={<PlusOutlined />}>
                       Add Guides
                   </Button>
                 
