@@ -4,28 +4,16 @@ import { SearchOutlined, PlusOutlined } from '@ant-design/icons';
 import CustomTable from '../../components/CustomTable';
 import SearchBar from '../../components/admin/header/SearchBar';
 import { useNavigate } from 'react-router';
+import useFetch from '../../hooks/useFetch';
 const { Title, Paragraph } = Typography;
 
 const AdminPlacesSection = () => {
     const navigate = useNavigate();
-    const guideData = Array.from({ length: 10 }, (_, i) => ({
-        id: i + 1,
-        name: `Product ${i + 1}`,
-        category: ['Electronics', 'Clothing', 'Food', 'Books', 'Toys'][Math.floor(Math.random() * 5)],
-        price: Math.floor(Math.random() * 1000) + 10,
-        stock: Math.floor(Math.random() * 100),
-        status: ['In Stock', 'Low Stock', 'Out of Stock'][Math.floor(Math.random() * 3)],
-      }));
+    const{error, loading, data} = useFetch("http://localhost:3000/places");
 
-    const [tableData, setTableData] = useState(guideData);
+    const placeData = data || []
 
     const columns = [
-        {
-          title: 'ID',
-          dataIndex: 'id',
-          key: 'id',
-          sorter: (a, b) => a.id - b.id,
-        },
         {
           title: 'Place Name',
           dataIndex: 'name',
@@ -39,26 +27,28 @@ const AdminPlacesSection = () => {
           key: 'category',
           sorter: (a, b) => a.category.localeCompare(b.category),
           filters: [
-            { text: 'Electronics', value: 'Electronics' },
-            { text: 'Clothing', value: 'Clothing' },
-            { text: 'Food', value: 'Food' },
-            { text: 'Books', value: 'Books' },
-            { text: 'Toys', value: 'Toys' },
+            { text: 'Historical', value: 'Historical' },
+            { text: 'Religious', value: 'Religious' },
+            { text: 'Nature', value: 'Nature' },
+            { text: 'Others', value: 'Others' },
           ],
           onFilter: (value, record) => record.category === value,
         },
         {
-          title: 'Location',
-          dataIndex: 'location',
-          key: 'location',
-          sorter: (a, b) => a.price - b.price,
-          // render: (price) => `$${price.toFixed(2)}`,
-          responsive: ['md'],
+          title: 'Description',
+          dataIndex: 'description',
+          key: 'description',
         },
         {
           title: 'Latitude',
-          dataIndex: 'lat',
-          key: 'lat',
+          dataIndex: 'latitude',
+          key: 'latitude',
+          responsive: ['md'],
+        },
+        {
+          title: 'Longitude',
+          dataIndex: 'longitude',
+          key: 'longitude',
           sorter: (a, b) => a.stock - b.stock,
           responsive: ['lg'],
         },
@@ -68,7 +58,7 @@ const AdminPlacesSection = () => {
           render: (_, record) => (
             <Space size="small">
               <Button type="link" size="small">Edit</Button>
-              <Button type="link" size="small" danger>Delete</Button>
+              <Button type="primary" size="small" danger>Delete</Button>
             </Space>
           ),
         },
@@ -95,7 +85,7 @@ const AdminPlacesSection = () => {
                     <SearchBar/>
                 </Space>
                 </div>
-                <CustomTable tableData={tableData} columns={columns}/>
+                <CustomTable tableData={placeData} columns={columns}/>
 
             </Card>
         </div>
