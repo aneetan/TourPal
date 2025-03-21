@@ -14,11 +14,9 @@ import AdminGuideSection from './pages/admin/AdminGuideSection';
 import Dashboard from './pages/admin/Dashboard';
 import GuideSection from './pages/user/GuideSection';
 import AdminPlacesSection from './pages/admin/AdminPlacesSection';
-import AddPlaces from './pages/admin/AddPlaces';
-import AddLocationForm from './pages/admin/AddLocationForm';
+import AddPlacesAdmin from './pages/admin/AddPlacesAdmin';
 
 function App() {
-
   return (
     <>
       <BrowserRouter>
@@ -37,7 +35,7 @@ function App() {
             <Route path='/admin/users' element={<UserSection/>}/>
             <Route path='/admin/guides' element={<AdminGuideSection/>}/>
             <Route path='/admin/places' element={<AdminPlacesSection/>}/>
-            <Route path='/admin/places/add' element={<AddPlaces/>}/>
+            <Route path='/admin/places/add' element={<AddPlacesAdmin/>}/>
           </Route>
 
           <Route path='/login' element={<Signin/>}/>
