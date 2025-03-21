@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-function useFetch (url) {
+//we'll need body for post/ patch/ put
+function useFetch (url, method="GET", body = null) {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -15,14 +16,24 @@ function useFetch (url) {
     // and when the ul changes
     useEffect(()=> {
         setLoading(true);
-        axios.get(url).then((response) => {
+
+        const config = {
+            method: method.toLowerCase(),
+            url:url,
+            data:body
+        }
+
+        axios(config).
+        then((response) => {
             setData(response.data)
-        }).catch((err)=> {
+        })
+        .catch((err)=> {
             setError(err)
-        }).finally(() => {
+        })
+        .finally(() => {
             setLoading(false)
         })
-    }, [url]);
+    }, [url, method, body]);
 
     //return an object consisting all three states
     return {data, loading, error};

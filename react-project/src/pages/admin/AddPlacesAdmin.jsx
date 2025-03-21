@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
-import { Button, DatePicker , Form, Input, message } from 'antd';
+import { Button, Select , Form, Input, message } from 'antd';
 import { useNavigate } from 'react-router';
 import AdminMapComponent from '../../components/map/AdminMapComponent';
+import useFetch from '../../hooks/useFetch';
+import axios from 'axios';
 
 const { TextArea } = Input;
+const { Option } = Select;
 
 const AddPlacesAdmin = () => {
     const [messageApi, contextHolder] = message.useMessage();
@@ -22,29 +25,31 @@ const AddPlacesAdmin = () => {
         });
       };
 
-    const onFinish = (values) => {
+    const onFinish = async(values) => {
         setLoading(true);
-
         const formData = {
             ...values,
             latitude: values.latitude,
             longitude: values.longitude,
         };
         
-        // Success Message
-        setTimeout(() => {
-            console.log('Request submitted:', values);
-            localStorage.setItem('booking', "yes");
-            messageApi.open({
-                type: 'success',
-                content: 'Your request has been sent successfully!',
-              });
-            form.resetFields();
-            setLatitude('');
-            setLongitude('');
-            setLoading(false);
-        }, 1000);
-        navigate('/bookGuides')
+        try{
+            await axios.post("http://localhost:3000/places", formData)
+            setTimeout(() => {
+                console.log('Request submitted:', values);
+                messageApi.open({
+                    type: 'success',
+                    content: 'Place Added successfully',
+                  });
+                },[1000])
+                form.resetFields()
+                setLatitude('');
+                setLongitude('');
+        } catch(e){
+            console.error("error", e)
+        } finally{
+            setLoading(false)
+        }
     };
 
   return (
@@ -71,6 +76,22 @@ const AddPlacesAdmin = () => {
                         rules={[{ required: true, message: 'Please enter place name' }]}
                         >
                         <Input placeholder="E.g. Godawari" />
+                        </Form.Item>
+
+                        <Form.Item
+                        name="category"
+                        label="Category"
+                        rules={[{ required: true, message: 'Please select a category' }]}
+                        >
+                        <Select
+                        placeholder="--Select---"
+                        allowClear
+                        >
+                        <Option value="Religious">Religious</Option>
+                        <Option value="Historical">Historical</Option>
+                        <Option value="Nature">Nature</Option>
+                        <Option value="Others">Others</Option>
+                        </Select>
                         </Form.Item>
 
                         <Form.Item
