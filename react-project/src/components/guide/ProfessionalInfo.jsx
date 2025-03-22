@@ -7,11 +7,11 @@ const { Option } = Select;
 const ProfessionalInfo = ({onFinish, initialValues}) => {
     const [selectedLanguages, setSelectedLanguages] = useState([]);
     const languages = [
-        { label: 'English', value: 'english' },
-        { label: 'Spanish', value: 'spanish' },
-        { label: 'French', value: 'french' },
-        { label: 'German', value: 'german' },
-        { label: 'Chinese', value: 'chinese' },
+        { label: 'English', value: 'English' },
+        { label: 'Spanish', value: 'Spanish' },
+        { label: 'French', value: 'French' },
+        { label: 'German', value: 'German' },
+        { label: 'Chinese', value: 'Chinese' },
       ];
 
   return (

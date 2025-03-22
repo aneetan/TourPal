@@ -4,8 +4,11 @@ import React, { useState } from 'react'
 import PersonalDetails from '../../components/guide/PersonalDetails'
 import ProfessionalInfo from '../../components/guide/ProfessionalInfo'
 import DocumentsForm from '../../components/guide/DocumentsForm'
+import axios from 'axios'
+import { useNavigate } from 'react-router'
 
 const RegisterGuides = () => {
+    const navigate = useNavigate()
     const [currentStep, setCurrentStep] = useState(0)
     const [personalDetails, setPersonalDetails] = useState(null)
     const [professionalInfo, setProfessionalInfo] = useState(null)
@@ -21,9 +24,19 @@ const RegisterGuides = () => {
         setCurrentStep(2)
     }
 
-    const submitDocuments= (values) => {
-        setDocuments(values)
-        
+    const data ={
+        personalDetails,
+        professionalInfo
+    }
+
+    const submitDocuments= () => {
+        axios.post("http://localhost:3000/guides", data)
+        .then(function (response) {
+            navigate('/login')
+        })
+        .catch(function (error) {
+            console.log(error);
+        })   
     }
 
     const forms = [
