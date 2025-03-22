@@ -79,9 +79,14 @@ const Navbar = () => {
 						onClick={() => handleActiveLink('destinations')}> Destinations</a>
 					</li>
 					<li className='my-6 md:my-0'>
+						<a href='/viewGuides' className={`font-medium duration-500 hover:text-[#f15d30]
+						${activeLink === 'bookGuide' ? 'text-[#f15d30]' : 'text-gray-900'}`}
+						onClick={() => handleActiveLink('bookGuide')}> Book A Guide </a>
+					</li>
+					<li className='my-6 md:my-0'>
 						<a href='#guide' className={`font-medium duration-500 hover:text-[#f15d30]
-						${activeLink === 'guide' ? 'text-[#f15d30]' : 'text-gray-900'}`}
-						onClick={() => handleActiveLink('guide')}> Guide </a>
+						${activeLink === 'registerGuide' ? 'text-[#f15d30]' : 'text-gray-900'}`}
+						onClick={() => handleActiveLink('registerGuide')}> Register as Guide </a>
 					</li>
 					<li className='my-6 md:my-0'>
 						<a href='#about' className={`font-medium duration-500 hover:text-[#f15d30]

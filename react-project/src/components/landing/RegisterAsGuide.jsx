@@ -1,11 +1,11 @@
 import React from 'react'
 import { useNavigate } from 'react-router'
 
-const BookGuide = () => {
+const RegisterAsGuide = () => {
     const navigate = useNavigate();
 
     const handleGuideView = () => {
-        navigate("/viewGuides")
+        navigate("/registerGuides")
     }
   return (
     <>
@@ -15,10 +15,10 @@ const BookGuide = () => {
                 <div className='mb-14 lg:mb-0 lg:w-1/2'>
                     <h1 className='max-w-xl text-[2.5rem] leading-none text-gray-900 font-extrabold font-sans text-center
                     lg:text-left lg:leading-tight mb-5'>
-                        Book A <br/> Trusted Guide
+                        Share Stories, <br/> Create Memories!
                     </h1>
                     <p className='max-x-xl text-[1.2rem] text-center text-gray-500 lg:text-left lg:max-w-md'>
-                        Connect with passionate guides who know the city like the back of their hand.
+                        Connect with passionate travellers and make every journey a story worth telling! 
                     </p>
                     <div className='flex justify-center mt-5 lg:justify-start'>
                         <button type='button' className='text-white bg-[#f15d30] font-medium rounded-lg px-5 py-4
@@ -26,7 +26,7 @@ const BookGuide = () => {
                         cursor-pointer duration-300 ease-in-out'
                         onClick={handleGuideView}
                         >
-                            Book A Guide
+                            Register Now
                         </button>
                     </div>
                 </div>
@@ -42,4 +42,4 @@ const BookGuide = () => {
   )
 }
 
-export default BookGuide
+export default RegisterAsGuide

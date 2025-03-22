@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Checkbox, Form, Input,Typography } from 'antd';
 const { Title } = Typography;
 
-const Login = () => {
+const Register = () => {
     const onFinish = (values) => {
         console.log('Success:', values);
     };
@@ -91,4 +91,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Register

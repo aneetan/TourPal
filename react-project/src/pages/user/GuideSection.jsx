@@ -1,82 +1,28 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import GuideCard from '../../components/cards/GuideCard';
 import { Button, Input } from 'antd';
 import { FilterOutlined, SearchOutlined } from '@ant-design/icons';
 import Search from 'antd/es/input/Search';
 import RequestPop from './SendBookingRequest';
+import useFetch from '../../hooks/useFetch';
+import { useParams } from 'react-router';
 
 const GuideSection = () => {
     const [searchTerm, setSearchTerm] = useState('');
+    const {data, loading, error} = useFetch(`http://localhost:3000/guides`);
 
-    const guides = [
-        {
-          id: '1',
-          name: 'Kati Pyari',
-          avatar: 'https://media.istockphoto.com/id/1437816897/photo/business-woman-manager-or-human-resources-portrait-for-career-success-company-we-are-hiring.jpg?s=612x612&w=0&k=20&c=tyLvtzutRh22j9GqSGI33Z4HpIwv9vL_MZw_xOE19NQ=',
-          bio: "I'm a professional tour guide with expertise in historical monuments and cultural experiences. Let me show you the hidden gems of Europe!",
-          rating: 4.9,
-          reviews: 127,
-          languages: ['English', 'French'],
-          experience: '7+ years',
-          specialty: 'Historical Tours',
-        },
-        {
-          id: '2',
-          name: 'Ram Maya Tamang',
-          avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80',
-          bio: "Adventure enthusiast specializing in mountain expeditions and hiking trails. Safety certified with emergency training.",
-          rating: 4.8,
-          reviews: 94,
-          languages: ['English', 'German'],
-          experience: '5+ years',
-          specialty: 'Adventure Tours',
-        },
-        {
-          id: '3',
-          name: 'Hari Bahadur',
-          avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJwdbxJXwe4Fw9ovDa2o53XHw1RdqqioWu9Q&s',
-          bio: "Food and wine connoisseur, I'll take you through the finest culinary experiences. From street food to Michelin stars.",
-          rating: 4.7,
-          reviews: 113,
-          languages: ['English', 'Spanish'],
-          experience: '8+ years',
-          specialty: 'Food Tours',
-        },
-        {
-            id: '1',
-            name: 'Kati Pyari',
-            avatar: 'https://media.istockphoto.com/id/1437816897/photo/business-woman-manager-or-human-resources-portrait-for-career-success-company-we-are-hiring.jpg?s=612x612&w=0&k=20&c=tyLvtzutRh22j9GqSGI33Z4HpIwv9vL_MZw_xOE19NQ=',
-            bio: "I'm a professional tour guide with expertise in historical monuments and cultural experiences. Let me show you the hidden gems of Europe!",
-            rating: 4.9,
-            reviews: 127,
-            languages: ['English', 'French'],
-            experience: '7+ years',
-            specialty: 'Historical Tours',
-          },
-          {
-            id: '2',
-            name: 'Ram Maya Tamang',
-            avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80',
-            bio: "Adventure enthusiast specializing in mountain expeditions and hiking trails. Safety certified with emergency training.",
-            rating: 4.8,
-            reviews: 94,
-            languages: ['English', 'German'],
-            experience: '5+ years',
-            specialty: 'Adventure Tours',
-          },
-          {
-            id: '3',
-            name: 'Hari Bahadur',
-            avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJwdbxJXwe4Fw9ovDa2o53XHw1RdqqioWu9Q&s',
-            bio: "Food and wine connoisseur, I'll take you through the finest culinary experiences. From street food to Michelin stars.",
-            rating: 4.7,
-            reviews: 113,
-            languages: ['English', 'Spanish'],
-            experience: '8+ years',
-            specialty: 'Food Tours',
-          }
-      ];
-
+    const guideData = (data || []).map((guide)=> ({
+      id: guide.id,
+      name: guide.personalDetails.name, 
+      email: guide.personalDetails.email,
+      phone: guide.personalDetails.phone,
+      bio:guide.professionalInfo.Bio,
+      experience: guide.professionalInfo.experience,
+      languages: guide.professionalInfo.languages,
+      speciality: guide.professionalInfo.speciality,
+      pricing: guide.professionalInfo.pricing
+  }))
+  
     return (
         <>
         <div className="w-full max-w-7xl mx-auto px-4 py-10">
@@ -105,11 +51,12 @@ const GuideSection = () => {
                 initial="hidden"
                 animate="visible"
             >
-                {guides.map((guide) => (
+                {guideData.map((guide) => (
                 <div key={guide.id}>
                     <GuideCard {...guide} />
                 </div>
                 ))}
+                
             </div>
         </div>
         
