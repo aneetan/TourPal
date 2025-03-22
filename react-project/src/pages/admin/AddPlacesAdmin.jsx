@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Button, Select , Form, Input, message } from 'antd';
+import { Button, Select , Form, Input, message, Upload  } from 'antd';
 import { useNavigate } from 'react-router';
 import AdminMapComponent from '../../components/map/AdminMapComponent';
-import useFetch from '../../hooks/useFetch';
 import axios from 'axios';
+import { UploadOutlined } from '@ant-design/icons';
 
 const { TextArea } = Input;
 const { Option } = Select;
