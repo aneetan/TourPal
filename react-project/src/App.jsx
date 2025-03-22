@@ -16,6 +16,7 @@ import GuideSection from './pages/user/GuideSection';
 import AdminPlacesSection from './pages/admin/AdminPlacesSection';
 import AddPlacesAdmin from './pages/admin/AddPlacesAdmin';
 import RegisterGuides from './pages/guides/RegisterGuides';
+import AddReviewForm from './pages/user/AddReviewForm';
 
 function App() {
   return (
@@ -28,7 +29,9 @@ function App() {
             <Route path='/seeMore' element={<SeeDestinations/>}/>
             <Route path='/viewGuides' element={<GuideSection/>}/>
             <Route path='/bookGuides' element={<RequestPop/>}/>
-            <Route path='/guideProfile' element={<GuideProfile/>}/>
+            <Route path='/guideProfile/:id' element={<GuideProfile/>}/>
+            <Route path='/addReview' element={<AddReviewForm/>}/>
+
           </Route>
 
           <Route path='/admin' element={<AdminLayout/>}>

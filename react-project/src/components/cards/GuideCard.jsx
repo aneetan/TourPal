@@ -2,14 +2,22 @@ import React from 'react'
 import { Button, Popover, Form, Input, Select } from 'antd';
 import { SendOutlined } from '@ant-design/icons';
 import { CalendarOutlined, StarFilled, ZhihuOutlined } from "@ant-design/icons"
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
+import useFetch from '../../hooks/useFetch';
 
-const GuideCard = ({avatar, name, rating, reviews, bio, languages, experience, specialty}) => {
+const GuideCard = ({name, rating=2, reviews=123, bio, languages, experience, speciality}) => {
     const stars = Array(5).fill(0);
     const navigate = useNavigate();
+    const {data, error, loading} = useFetch("http://localhost:3000/guides");
+
+    const guideData = data || []
 
     const handleBookUser = () => {
         navigate('/bookGuides')
+    }
+
+    const handleGuideProfile = () => {
+        navigate(`/guideProfile/${guideData[0].id}`)
     }
 
   return (
@@ -20,7 +28,7 @@ const GuideCard = ({avatar, name, rating, reviews, bio, languages, experience, s
         <div className="flex items-start gap-4">
             <div className="relative">
             <img 
-                src={avatar} 
+                src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuNhTZJTtkR6b-ADMhmzPvVwaLuLdz273wvQ&s'
                 alt={name} 
                 className="h-16 w-16 rounded-full object-cover border-2 border-white shadow-sm"
                 loading="lazy"
@@ -32,7 +40,7 @@ const GuideCard = ({avatar, name, rating, reviews, bio, languages, experience, s
             <div className="flex flex-col sm:flex-row sm:items-center justify-between">
                 <div>
                 <h3 className="text-lg font-semibold text-gray-900">{name}</h3>
-                <p className="text-sm text-gray-500">{reviews} reviews</p>
+                <p className="text-sm text-gray-500">126 reviews</p>
                 <div className="flex items-center gap-1 mt-2 sm:mt-0">
                 
                 {stars.map((_, index) => (
@@ -54,13 +62,13 @@ const GuideCard = ({avatar, name, rating, reviews, bio, languages, experience, s
         
         <p className="mt-4 text-sm text-gray-600 text-balance line-clamp-2">{bio}</p>
         <div className="flex items-center pt-2 text-sm text-gray-600">
-            <span>Speciality In: {specialty}</span>
+            <span>Speciality In: {speciality}</span>
         </div>
         
         <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-2">
             <div className="flex items-center text-sm text-gray-600">
             <ZhihuOutlined className="h-4 w-4 mr-1 text-gray-500"/>
-            <span>{languages.join(' , ')}</span>
+            <span>{languages.join(' , ')} </span>
             </div>
 
             <div className="flex items-center text-sm text-gray-600">
@@ -80,13 +88,13 @@ const GuideCard = ({avatar, name, rating, reviews, bio, languages, experience, s
             Book Me
             </Button>
 
-            {/* <Button
+            <Button
             style={{color: "#F15D30"}}
             onClick={handleGuideProfile}
             className="transition-all duration-300 hover:opacity-80 hover:border-[#F15D30] hover:scale-[1.01]"
             >
             View Profile
-            </Button> */}
+            </Button>
         </div>
         </div>
       

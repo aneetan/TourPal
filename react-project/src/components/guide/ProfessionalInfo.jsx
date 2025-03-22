@@ -59,9 +59,10 @@ const ProfessionalInfo = ({onFinish, initialValues}) => {
                         allowClear
                         >
                             <Option value="Adventure & Nature"> Adventure & Nature</Option>
-                            <Option value="Cultural & Historical"> Cultural & Historical </Option>
+                            <Option value="Cultural & Historical">Cultural & Historical </Option>
                             <Option value="City & Lifestyle">City & Lifestyle</Option>
                             <Option value="Outdoor Activities">Outdoor Activities</Option>
+                            <Option value="Others"> Others </Option>
                         </Select>
                     </Form.Item>
                 </div>

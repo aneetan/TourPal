@@ -20,7 +20,10 @@ function useFetch (url, method="GET", body = null) {
         const config = {
             method: method.toLowerCase(),
             url:url,
-            data:body
+            data:body,
+            headers: {
+                "Content-Type": "application/json",
+              },
         }
 
         axios(config).
