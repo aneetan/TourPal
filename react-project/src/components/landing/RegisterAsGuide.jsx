@@ -5,7 +5,7 @@ const RegisterAsGuide = () => {
     const navigate = useNavigate();
 
     const handleGuideView = () => {
-        navigate("/viewGuides")
+        navigate("/registerGuides")
     }
   return (
     <>

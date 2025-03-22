@@ -15,6 +15,7 @@ import Dashboard from './pages/admin/Dashboard';
 import GuideSection from './pages/user/GuideSection';
 import AdminPlacesSection from './pages/admin/AdminPlacesSection';
 import AddPlacesAdmin from './pages/admin/AddPlacesAdmin';
+import RegisterGuides from './pages/guides/RegisterGuides';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
 
           <Route path='/login' element={<Signin/>}/>
           <Route path='/register' element={<Signup/>}/>
+          <Route path='/registerGuides' element={<RegisterGuides/>}/>
         </Routes>
 
       </BrowserRouter>
