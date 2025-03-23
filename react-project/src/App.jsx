@@ -40,6 +40,9 @@ function App() {
             <Route path='/admin/guides' element={<AdminGuideSection/>}/>
             <Route path='/admin/places' element={<AdminPlacesSection/>}/>
             <Route path='/admin/places/add' element={<AddPlacesAdmin/>}/>
+            <Route path='/admin/guideProfile/:id' element={<GuideProfile/>}/>
+
+            
           </Route>
 
           <Route path='/login' element={<Signin/>}/>

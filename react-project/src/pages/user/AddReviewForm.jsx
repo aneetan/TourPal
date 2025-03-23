@@ -42,8 +42,6 @@ const AddReviewForm = () => {
                          <Rate onChange={setValue} value={value} />
                         </Form.Item>
 
-
-        
                         <Form.Item
                         name="message"
                         label="Message"

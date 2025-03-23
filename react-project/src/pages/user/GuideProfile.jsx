@@ -10,8 +10,11 @@ import ReviewCard from "../../components/user/ReviewCard";
 const { Meta } = Card;
 
 const GuideProfile = () => {
+  const currentPath = window.location.pathname
   const navigate = useNavigate();
   let params = useParams();
+  const isAdmin = currentPath.includes('admin/guideProfile')
+
   const [activeSection, setActiveSection] = useState('details');
 
   const {data, loading, error} = useFetch(`http://localhost:3000/guides/${params.id}`) 
@@ -19,8 +22,6 @@ const GuideProfile = () => {
   if (!data) return <p>No guide found.</p>;
 
   const {personalDetails, professionalInfo} = data || []
-
-  console.log(activeSection)
 
   const handleBookNow = () => {
     navigate('/bookGuides')
@@ -34,13 +35,13 @@ const GuideProfile = () => {
     {
       id:1,
       user: "Anita Neupane",
-      rating: 4.5,
+      rating: 4,
       body: "Resolving deltas: 100% (8/8), completed with 8 local objects.To https://github.com/aneetan/TourPal.git 2cfc204..e2a8cdf  tourpal -> tourpal",
       date: "Aug 13, 2025"
     },
     {
       id:2,
-      user: "Beautoful girl",
+      user: "Beautiful girl",
       rating: 2,
       body: "He is very handsome sweet friendly but have girlfriend",
       date: "Aug 14, 2025"
@@ -79,13 +80,28 @@ const GuideProfile = () => {
             <h3 className="text-base mb-3 font-medium"> <PhoneOutlined/> {personalDetails?.phone}</h3>
             <h3 className="text-base mb-3 font-medium"> <MailOutlined/> {personalDetails?.email} </h3>
             <h3 className="text-sm mb-3 font-normal">Rs. {professionalInfo?.pricing} / hour</h3>
-            <Button 
+            {isAdmin && (
+              <a href="https://www.alexholidays.com/tours/images/credentials/Tourist-Guide-Alex--2016-2018.jpg"
+              className="underline"> View Document</a>
+            )}
+            <br/>
+            
+            {isAdmin?(
+              <Button 
+                className="mt-2"
+                color="danger" variant="solid"
+              >
+                 Delete
+              </Button>
+            ): (
+              <Button 
               type="primary" 
               size="large" 
               onClick={handleBookNow}
-            >
-              Book Now
-            </Button>
+              >
+                Book Now
+              </Button>
+            )}
           </div>
         </div>
 
@@ -122,13 +138,16 @@ const GuideProfile = () => {
         ):
         (
           <div className="container w-[100%]">
+              {!isAdmin? (
             <div className="pb-10 pt-2 w-[50%] md:w-[100%]">
               <Button style={{float:"right"}} onClick={handleReview}
                type="primary"><PlusOutlined/> Add Review</Button>
             </div>
+              ):''}
+
             {reviews.map((r)=>(
               <div className="mb-2" key={r.id}>
-                <ReviewCard reviews={r}/>
+                <ReviewCard reviews={r} isAdmin={isAdmin}/>
               </div>
             ))}
           </div>

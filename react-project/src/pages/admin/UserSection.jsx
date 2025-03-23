@@ -10,7 +10,6 @@ const UserSection = () => {
     const { data, loading, error } = useFetch("http://localhost:3000/users");
 
     if (loading) return <h1> Loading ...</h1>;
-    // if(error) console.log(error) 
 
     const tableData = data || []
 
@@ -37,7 +36,7 @@ const UserSection = () => {
           key: 'action',
           render: (_, record) => (
             <Space size="small">
-              <Button size="small" danger> Delete </Button>
+              <Button color='danger' variant="solid">Delete</Button>
             </Space>
           ),
         },

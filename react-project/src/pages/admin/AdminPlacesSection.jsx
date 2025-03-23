@@ -57,8 +57,8 @@ const AdminPlacesSection = () => {
           key: 'action',
           render: (_, record) => (
             <Space size="small">
-              <Button type="link" size="small">Edit</Button>
-              <Button type="primary" size="small" danger>Delete</Button>
+              <Button type="link" variant='solid'>Edit</Button>
+              <Button color='danger' variant="solid">Delete</Button>
             </Space>
           ),
         },
