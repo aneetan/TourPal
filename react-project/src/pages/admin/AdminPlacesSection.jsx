@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table, Card, Input, Button, Space, Tag, Typography } from 'antd';
 import { SearchOutlined, PlusOutlined } from '@ant-design/icons';
 import CustomTable from '../../components/CustomTable';
@@ -6,25 +6,43 @@ import SearchBar from '../../components/admin/header/SearchBar';
 import { useNavigate } from 'react-router';
 import useFetch from '../../hooks/useFetch';
 import CustomModal from '../../components/CustomModal';
+import { deletePlace, getAllPlaces } from '../../utils/user.utils';
+import { showSucessToast } from '../../../../../React/react-training/src/toastify/toastify.utils';
 const { Title, Paragraph } = Typography;
 
 const AdminPlacesSection = () => {
     const navigate = useNavigate();
     const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+    const [deleteId, setDeleteId] = useState(null);
+    const [fetchData, setFetchData] = useState([])
 
-    const{error, loading, data} = useFetch("http://localhost:3000/places");
-
-    const placeData = data || []
-
-    const showDeleteModal = () => {
+    const showDeleteModal = (id) => {
+      setDeleteId(id)
       setIsDeleteOpen(true);
     };
+    
     const handleOk = () => {
-      setIsDeleteOpen(false);
+      deletePlace(deleteId).then(() => {
+
+        getAllPlaces().then((response)=> {
+          setFetchData(response);
+          showSucessToast("Place deleted")
+        })  
+        setIsDeleteOpen(false);
+
+      })
     };
+
     const handleCancel = () => {
       setIsDeleteOpen(false);
     };
+
+    useEffect(() => {
+      getAllPlaces().then((response) => {
+            console.log(response)
+            setFetchData(response);
+      });
+    }, [])
 
     const columns = [
         {
@@ -72,9 +90,9 @@ const AdminPlacesSection = () => {
             <Space size="small">
               <Button type="link" onClick={() => navigate(`/admin/editPlace/${record.id}`)}
                 variant='solid'>Edit</Button>
-              <Button color='danger' onClick={showDeleteModal} variant="solid">Delete</Button>
+              <Button color='danger' onClick={() => showDeleteModal(record.id)} variant="solid">Delete</Button>
               <CustomModal
-                title="Are you sure to delete the user?"
+                title="Are you sure to delete the place?"
                 content="This action cannot be undone"
                 text="Delete"
                 isOpen={isDeleteOpen}
@@ -107,7 +125,7 @@ const AdminPlacesSection = () => {
                     <SearchBar/>
                 </Space>
                 </div>
-                <CustomTable tableData={placeData} columns={columns}/>
+                <CustomTable tableData={fetchData} columns={columns}/>
 
             </Card>
         </div>

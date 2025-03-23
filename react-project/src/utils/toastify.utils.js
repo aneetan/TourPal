@@ -1,9 +1,9 @@
 import { toast } from "react-toastify";
 
-export function showSuccess(){
-    toast.success('Login Successful', {
+export function showSuccess(message){
+    toast.success(message, {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,
@@ -16,7 +16,7 @@ export function showSuccess(){
 export function showError(){
     toast.error('Invalid username and password', {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,

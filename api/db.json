@@ -45,20 +45,20 @@
   ],
   "places": [
     {
-      "id": "30ac",
-      "name": "Patan durbar",
-      "category": "Historical",
-      "description": "A marvel of Newari architecture that includes ancient monuments, temples, shrines, statues, and idols",
-      "latitude": 27.673385640798777,
-      "longitude": 85.3253642590734
-    },
-    {
       "id": "a428",
       "name": "Garden of Dreams",
       "category": "Nature",
       "description": "A place where you can feel peace amidst of crowded city\n- Traqui city\n- Peace",
       "latitude": 27.71220369320509,
       "longitude": 85.31184440419062
+    },
+    {
+      "id": "ef10",
+      "name": "Shivapuri National Park",
+      "category": "Nature",
+      "description": "You’ll find hiking trails, temples, restaurants, and a few hotels if you want to spend the night. The park is higher in altitude than the valley making it the perfect escape on a hot day since it’s slightly cooler. ",
+      "latitude": 27.790491224830877,
+      "longitude": 85.38006556307946
     }
   ]
 }

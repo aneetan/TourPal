@@ -4,12 +4,24 @@ export const addPlace = async (data) => {
     await axios.post(`http://localhost:3000/places`, data)
 }
 
+export const getAllPlaces = () => {
+    return new Promise((resolve, reject) => {
+        axios.get('http://localhost:3000/places')
+        .then(function (response) {
+            resolve(response.data);
+        })
+        .catch(function (error) {
+            reject(error);
+        });
+    })
+}
+
 export const updatePlace = async (id, data) => {
     await axios.patch(`http://localhost:3000/places/${id}`, data)
 }
 
 export const deletePlace = async (id, data) => {
-    await axios.delete(`http://localhost:3000/places/${id}`, data)
+    await axios.delete(`http://localhost:3000/places/${id}`, data)  
 }
 
 // export const authenticateUser = async (email, password) => {
