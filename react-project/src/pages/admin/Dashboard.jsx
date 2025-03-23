@@ -75,7 +75,7 @@ const Dashboard = () => {
       title: 'Document',
       dataIndex: 'document',
       key: 'document',
-      render: () => <a className='underline' href="https://www.alexholidays.com/tours/images/credentials/Tourist-Guide-Alex--2016-2018.jpg"> View Document </a>,
+      render: () => <a className='underline' target="_blank" href="https://www.alexholidays.com/tours/images/credentials/Tourist-Guide-Alex--2016-2018.jpg"> View Document </a>,
       responsive: ['md'],
     },
 

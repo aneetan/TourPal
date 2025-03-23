@@ -13,6 +13,13 @@
       "email": "pratik@gmail.com",
       "number": "9843411801",
       "password": "Pratik@118"
+    },
+    {
+      "id": "a7f3",
+      "name": "Binita Regmi",
+      "email": "regmibinita@gmail.com",
+      "number": "9869084390",
+      "password": "Binita@123"
     }
   ],
   "guides": [
@@ -41,7 +48,7 @@
       "id": "30ac",
       "name": "Patan durbar",
       "category": "Historical",
-      "description": "A good place to look for traditional arts ",
+      "description": "A marvel of Newari architecture that includes ancient monuments, temples, shrines, statues, and idols",
       "latitude": 27.673385640798777,
       "longitude": 85.3253642590734
     },

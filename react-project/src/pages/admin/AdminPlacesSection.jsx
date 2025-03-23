@@ -70,7 +70,8 @@ const AdminPlacesSection = () => {
           key: 'action',
           render: (_, record) => (
             <Space size="small">
-              <Button type="link" variant='solid'>Edit</Button>
+              <Button type="link" onClick={() => navigate(`/admin/editPlace/${record.id}`)}
+                variant='solid'>Edit</Button>
               <Button color='danger' onClick={showDeleteModal} variant="solid">Delete</Button>
               <CustomModal
                 title="Are you sure to delete the user?"

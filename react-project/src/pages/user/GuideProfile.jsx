@@ -95,7 +95,7 @@ const GuideProfile = () => {
             <h3 className="text-sm mb-3 font-normal">Rs. {professionalInfo?.pricing} / hour</h3>
             {isAdmin && (
               <a href="https://www.alexholidays.com/tours/images/credentials/Tourist-Guide-Alex--2016-2018.jpg"
-              className="underline"> View Document</a>
+              className="underline" target="_blank"> View Document</a>
             )}
             <br/>
             
