@@ -6,11 +6,13 @@ import useFetch from "../../hooks/useFetch";
 import { Anchor } from 'antd';
 import DetailsCard from "../../components/user/DetailsCard";
 import ReviewCard from "../../components/user/ReviewCard";
+import CustomModal from "../../components/CustomModal";
 
 const { Meta } = Card;
 
 const GuideProfile = () => {
   const currentPath = window.location.pathname
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const navigate = useNavigate();
   let params = useParams();
   const isAdmin = currentPath.includes('admin/guideProfile')
@@ -30,6 +32,17 @@ const GuideProfile = () => {
   const handleReview =() => {
     navigate('/addReview')
   }
+
+  const showDeleteModal = () => {
+    setIsDeleteOpen(true);
+  };
+  const handleOk = () => {
+    setIsDeleteOpen(false);
+  };
+  const handleCancel = () => {
+    setIsDeleteOpen(false);
+  };
+
 
   const reviews =[
     {
@@ -90,6 +103,7 @@ const GuideProfile = () => {
               <Button 
                 className="mt-2"
                 color="danger" variant="solid"
+                onClick={showDeleteModal}
               >
                  Delete
               </Button>
@@ -102,6 +116,15 @@ const GuideProfile = () => {
                 Book Now
               </Button>
             )}
+
+              <CustomModal
+                title="Are you sure to delete the user?"
+                content="This action cannot be undone"
+                text="Delete"
+                isOpen={isDeleteOpen}
+                handleOk={handleOk}
+                handleCancel={handleCancel}
+              />
           </div>
         </div>
 

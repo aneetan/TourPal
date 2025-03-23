@@ -5,13 +5,25 @@ import SearchBar from '../../components/admin/header/SearchBar';
 import CustomTable from '../../components/CustomTable';
 import { useNavigate } from 'react-router';
 import useFetch from '../../hooks/useFetch';
+import CustomModal from '../../components/CustomModal';
 const { Title, Paragraph } = Typography;
 
 const AdminGuideSection = () => {
     const navigate = useNavigate();
+    const [isDeleteOpen, setIsDeleteOpen] = useState(false);
     const {data, error, loading} = useFetch('http://localhost:3000/guides');
 
     const guideData = data || []
+
+    const showDeleteModal = () => {
+      setIsDeleteOpen(true);
+    };
+    const handleOk = () => {
+      setIsDeleteOpen(false);
+    };
+    const handleCancel = () => {
+      setIsDeleteOpen(false);
+    };
 
      const flattenedData = guideData.map((guide)=>({
       id: guide.id,
@@ -67,7 +79,15 @@ const AdminGuideSection = () => {
           key: 'action',
           render: (_, record) => (
             <Space size="small">
-              <Button color='danger' variant="solid">Delete</Button>
+              <Button color='danger' onClick={showDeleteModal} variant="solid">Delete</Button>
+              <CustomModal
+                title="Are you sure to delete the user?"
+                content="This action cannot be undone"
+                text="Delete"
+                isOpen={isDeleteOpen}
+                handleOk={handleOk}
+                handleCancel={handleCancel}
+              />
             </Space>
           ),
         },

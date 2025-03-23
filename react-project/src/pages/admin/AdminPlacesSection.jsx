@@ -5,13 +5,26 @@ import CustomTable from '../../components/CustomTable';
 import SearchBar from '../../components/admin/header/SearchBar';
 import { useNavigate } from 'react-router';
 import useFetch from '../../hooks/useFetch';
+import CustomModal from '../../components/CustomModal';
 const { Title, Paragraph } = Typography;
 
 const AdminPlacesSection = () => {
     const navigate = useNavigate();
+    const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+
     const{error, loading, data} = useFetch("http://localhost:3000/places");
 
     const placeData = data || []
+
+    const showDeleteModal = () => {
+      setIsDeleteOpen(true);
+    };
+    const handleOk = () => {
+      setIsDeleteOpen(false);
+    };
+    const handleCancel = () => {
+      setIsDeleteOpen(false);
+    };
 
     const columns = [
         {
@@ -58,7 +71,15 @@ const AdminPlacesSection = () => {
           render: (_, record) => (
             <Space size="small">
               <Button type="link" variant='solid'>Edit</Button>
-              <Button color='danger' variant="solid">Delete</Button>
+              <Button color='danger' onClick={showDeleteModal} variant="solid">Delete</Button>
+              <CustomModal
+                title="Are you sure to delete the user?"
+                content="This action cannot be undone"
+                text="Delete"
+                isOpen={isDeleteOpen}
+                handleOk={handleOk}
+                handleCancel={handleCancel}
+              />
             </Space>
           ),
         },

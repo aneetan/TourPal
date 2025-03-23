@@ -4,14 +4,26 @@ import { SearchOutlined, PlusOutlined } from '@ant-design/icons';
 import SearchBar from '../../components/admin/header/SearchBar';
 import CustomTable from '../../components/CustomTable';
 import useFetch from '../../hooks/useFetch';
+import CustomModal from '../../components/CustomModal';
 const { Title, Paragraph } = Typography;
 
 const UserSection = () => {
+    const [isDeleteOpen, setIsDeleteOpen] = useState(false);
     const { data, loading, error } = useFetch("http://localhost:3000/users");
 
     if (loading) return <h1> Loading ...</h1>;
 
     const tableData = data || []
+
+    const showDeleteModal = () => {
+      setIsDeleteOpen(true);
+    };
+    const handleOk = () => {
+      setIsDeleteOpen(false);
+    };
+    const handleCancel = () => {
+      setIsDeleteOpen(false);
+    };
 
     const columns = [
         {
@@ -36,7 +48,15 @@ const UserSection = () => {
           key: 'action',
           render: (_, record) => (
             <Space size="small">
-              <Button color='danger' variant="solid">Delete</Button>
+              <Button onClick={showDeleteModal} color='danger' variant="solid">Delete</Button>
+              <CustomModal
+                title="Are you sure to delete the user?"
+                content="This action cannot be undone"
+                text="Delete"
+                isOpen={isDeleteOpen}
+                handleOk={handleOk}
+                handleCancel={handleCancel}
+              />
             </Space>
           ),
         },

@@ -4,11 +4,30 @@ import CustomData from '../../components/admin/dashboard/CustomData';
 import CustomTable from '../../components/CustomTable';
 import useFetch from '../../hooks/useFetch';
 import { UnderlineOutlined } from '@ant-design/icons';
+import CustomModal from '../../components/CustomModal';
 
 const { Title, Paragraph } = Typography;
 
 const Dashboard = () => {
   const {data, error, loading} = useFetch("http://localhost:3000/guides");
+  const [isApproveOpen, setIsApproveOpen] = useState(false);
+  const [isDeclineOpen, setIsDeclineOpen] = useState(false);
+
+  const showApproveModal = () => {
+    setIsApproveOpen(true);
+  };
+
+  const showDeclineModal = () => {
+    setIsDeclineOpen(true);
+  };
+  const handleOk = () => {
+    setIsApproveOpen(false);
+    setIsDeclineOpen(false);
+  };
+  const handleCancel = () => {
+    setIsApproveOpen(false);
+    setIsDeclineOpen(false);
+  };
 
   const guideData = data || []
 
@@ -65,8 +84,24 @@ const Dashboard = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="small">
-          <Button color='primary' variant='solid'>Approve</Button>
-          <Button color='danger' variant="solid">Decline</Button>
+          <Button color='primary' onClick={showApproveModal} variant='solid'>Approve</Button>
+          <CustomModal
+            title="Are you sure to approve the user as guide?"
+            content="This user will get access to the guide section"
+            text="Approve"
+            isOpen={isApproveOpen}
+            handleOk={handleOk}
+            handleCancel={handleCancel}
+          />
+          <Button color='danger' onClick={showDeclineModal} variant="solid">Decline</Button>
+          <CustomModal
+            title="Are you sure to decline the user as guide?"
+            content="This action cannot be undone"
+            text="Decline"
+            isOpen={isDeclineOpen}
+            handleOk={handleOk}
+            handleCancel={handleCancel}
+          />
         </Space>
       ),
     },

@@ -17,11 +17,14 @@ import AdminPlacesSection from './pages/admin/AdminPlacesSection';
 import AddPlacesAdmin from './pages/admin/AddPlacesAdmin';
 import RegisterGuides from './pages/guides/RegisterGuides';
 import AddReviewForm from './pages/user/AddReviewForm';
+import { ToastContainer, toast } from 'react-toastify';
+  
 
 function App() {
   return (
     <>
       <BrowserRouter>
+        <ToastContainer/>
         <Routes>
           <Route path='/' element={<CustomLayout/>}>
             <Route path="/" element={<LandingPage />} />
