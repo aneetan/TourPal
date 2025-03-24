@@ -55,11 +55,19 @@ export const getAllGuides = () => {
 export const deleteGuide = async(id, data) => {
     await axios.delete(`http://localhost:3000/guides/${id}`, data)
 }
-// export const authenticateUser = async (email, password) => {
-//     const response= await axios.get(`http://localhost:3000/users/?email=${email}&password=${password}`)
-//     if (response.data.length === 0) {
-//         return null;
-//       }
-//     return response.data[0];
-// }
+
+// ------------------------- Authenticate ------------------------------
+export const authenticateUser = async (email, password) => {
+    const response= await axios.get(`http://localhost:3000/users/?email=${email}&password=${password}`)
+    if (response.data.length === 0) {
+        return null;
+      }
+    return response.data[0];
+}
+
+export const authenticateGuide = async(email, password) => {
+    const response = await axios.get(`http://localhost:3000/guides/?personalDetails.email=${email}&personalDetails.password=${password}`);
+     
+    return response.data[0] || null;
+}
 

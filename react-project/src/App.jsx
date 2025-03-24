@@ -18,6 +18,7 @@ import AddPlacesAdmin from './pages/admin/AddPlacesAdmin';
 import RegisterGuides from './pages/guides/RegisterGuides';
 import AddReviewForm from './pages/user/AddReviewForm';
 import { ToastContainer, toast } from 'react-toastify';
+import GuideLayout from './pages/guides/GuideLayout';
   
 
 function App() {
@@ -45,8 +46,10 @@ function App() {
             <Route path='/admin/places/add' element={<AddPlacesAdmin/>}/>
             <Route path='/admin/editPlace/:id' element={<AddPlacesAdmin/>}/>
             <Route path='/admin/guideProfile/:id' element={<GuideProfile/>}/>
-            
-            
+          </Route>
+
+          <Route path='/guide' element={<GuideLayout/>}>
+            <Route path ='guide/dashboard' element={<div> Hello Guide </div>}/>
           </Route>
 
           <Route path='/login' element={<Signin/>}/>
