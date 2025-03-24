@@ -25,13 +25,15 @@ const Signin = () => {
     } else if (userResponse){
       if(userResponse.email === values.email && userResponse.password === values.password){
         localStorage.setItem("is_user", 2)
+        localStorage.setItem("username", userResponse.name)
         navigate("/")
         return
       }
     } else if (guideResponse) {
       if(guideResponse.personalDetails.email === values.email && guideResponse.personalDetails.password === values.password){
         localStorage.setItem("is_user", 3)
-        navigate("/guide")
+        localStorage.setItem("username", guideResponse.personalDetails.name)
+        navigate("/guide/dashboard")
         return
       }
     } else {

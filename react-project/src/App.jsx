@@ -19,6 +19,8 @@ import RegisterGuides from './pages/guides/RegisterGuides';
 import AddReviewForm from './pages/user/AddReviewForm';
 import { ToastContainer, toast } from 'react-toastify';
 import GuideLayout from './pages/guides/GuideLayout';
+import GuideDashboard from './pages/guides/GuideDashboard';
+import Bookings from './pages/guides/Bookings';
   
 
 function App() {
@@ -49,7 +51,8 @@ function App() {
           </Route>
 
           <Route path='/guide' element={<GuideLayout/>}>
-            <Route path ='guide/dashboard' element={<div> Hello Guide </div>}/>
+            <Route path ='/guide/dashboard' element={<GuideDashboard/>}/>
+            <Route path ='/guide/bookings' element={<Bookings/>}/>
           </Route>
 
           <Route path='/login' element={<Signin/>}/>

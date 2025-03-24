@@ -1,6 +1,6 @@
 import React from 'react'
 import { Layout, Button, Space, Avatar, Dropdown } from 'antd';
-import { BellOutlined, LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import { MenuFoldOutlined, MenuUnfoldOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import Notifications from '../../admin/header/Notifications';
 const { Header } = Layout;
 
@@ -15,15 +15,7 @@ const GuideHeader = ({ collapsed, toggleSidebar }) => {
       key: '2',
       icon: <SettingOutlined />,
       label: 'Settings',
-    },
-    {
-      type: 'divider',
-    },
-    {
-      key: '3',
-      icon: <LogoutOutlined />,
-      label: 'Logout',
-    },
+    }
   ];
 
   return (
@@ -50,7 +42,7 @@ const GuideHeader = ({ collapsed, toggleSidebar }) => {
         <Dropdown menu={{ items }} placement="bottomRight">
           <Space style={{ cursor: 'pointer' }}>
             <Avatar icon={<UserOutlined />} />
-            <span>Admin</span>
+            <span> {localStorage.getItem("username")} </span>
           </Space>
         </Dropdown>
       </Space>

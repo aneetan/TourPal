@@ -1,37 +1,26 @@
 import React, { useState } from 'react'
 import { Menu } from 'antd';
 import { Link, useLocation, useNavigate } from 'react-router';
-import { AreaChartOutlined, EnvironmentOutlined, LogoutOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
+import { AreaChartOutlined, EnvironmentOutlined, FileOutlined, FileProtectOutlined, LogoutOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
 
 
 const GuideMenu = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const selectedKey = location.pathname.startsWith('/admin/guides') ? '/admin/guides' :
-                        location.pathname.startsWith('/admin/places') ? '/admin/places' :
+    const selectedKey = location.pathname.startsWith('/guide/dashboard') ? '/guide/dashboard' :
+                        location.pathname.startsWith('/guide/bookings') ? '/guide/bookings' :
                         location.pathname;
 
     const items = [
         {
-            key: '/admin/dashboard',
+            key: '/guide/dashboard',
             icon: <AreaChartOutlined />,
-            label: <Link to="/admin/dashboard">Dashboard</Link>,
+            label: <Link to="/guide/dashboard">Dashboard</Link>,
         },
         {
-            key: '/admin/users',
-            icon: <UserOutlined />,
-            label: <Link to="/admin/users">Users</Link>,
-        },
-        {
-            key: '/admin/guides',
-            icon: <TeamOutlined />,
-            label: <Link to="/admin/guides">Guides</Link>,                                                          
-        },
-        {
-            key: '/admin/places',
-            icon: <EnvironmentOutlined/>,
-            label: <Link to="/admin/places"> Places </Link>
-
+            key: '/guide/bookings',
+            icon: <FileProtectOutlined />,
+            label: <Link to="/guide/bookings">Bookings</Link>,
         },
         {
             key: '/logout',
