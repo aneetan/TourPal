@@ -12,7 +12,6 @@ const { Meta } = Card;
 
 const GuideProfile = () => {
   const currentPath = window.location.pathname
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const navigate = useNavigate();
   let params = useParams();
   const isAdmin = currentPath.includes('admin/guideProfile')
@@ -32,17 +31,6 @@ const GuideProfile = () => {
   const handleReview =() => {
     navigate('/addReview')
   }
-
-  const showDeleteModal = () => {
-    setIsDeleteOpen(true);
-  };
-  const handleOk = () => {
-    setIsDeleteOpen(false);
-  };
-  const handleCancel = () => {
-    setIsDeleteOpen(false);
-  };
-
 
   const reviews =[
     {
@@ -100,13 +88,7 @@ const GuideProfile = () => {
             <br/>
             
             {isAdmin?(
-              <Button 
-                className="mt-2"
-                color="danger" variant="solid"
-                onClick={showDeleteModal}
-              >
-                 Delete
-              </Button>
+              ''
             ): (
               <Button 
               type="primary" 
@@ -116,15 +98,6 @@ const GuideProfile = () => {
                 Book Now
               </Button>
             )}
-
-              <CustomModal
-                title="Are you sure to delete the user?"
-                content="This action cannot be undone"
-                text="Delete"
-                isOpen={isDeleteOpen}
-                handleOk={handleOk}
-                handleCancel={handleCancel}
-              />
           </div>
         </div>
 

@@ -13,8 +13,8 @@ export function showSuccess(message){
     });
 }
 
-export function showError(){
-    toast.error('Invalid username and password', {
+export function showError(message){
+    toast.error(message, {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table, Card, Input, Button, Space, Tag, Typography } from 'antd';
 import { SearchOutlined, PlusOutlined } from '@ant-design/icons';
 import SearchBar from '../../components/admin/header/SearchBar';
@@ -6,26 +6,41 @@ import CustomTable from '../../components/CustomTable';
 import { useNavigate } from 'react-router';
 import useFetch from '../../hooks/useFetch';
 import CustomModal from '../../components/CustomModal';
+import { deleteGuide, getAllGuides } from '../../utils/user.utils';
+import { showSucessToast } from '../../../../../React/react-training/src/toastify/toastify.utils';
 const { Title, Paragraph } = Typography;
 
 const AdminGuideSection = () => {
     const navigate = useNavigate();
     const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-    const {data, error, loading} = useFetch('http://localhost:3000/guides');
+    const [data, setData] = useState([])
+    const [deleteId, setDeleteId] = useState(null)
 
-    const guideData = data || []
-
-    const showDeleteModal = () => {
+    const showDeleteModal = (id) => {
+      setDeleteId(id)
       setIsDeleteOpen(true);
     };
+
     const handleOk = () => {
+      deleteGuide(deleteId).then(() => {
+        getAllGuides().then((response) => {
+          setData(response)
+          showSucessToast("Guide Deleted")
+        })
+      })
       setIsDeleteOpen(false);
     };
     const handleCancel = () => {
       setIsDeleteOpen(false);
     };
 
-     const flattenedData = guideData.map((guide)=>({
+    useEffect(()=> {
+      getAllGuides().then((response) => {
+        setData(response)
+      })
+    }, [])
+
+     const flattenedData = data.map((guide)=>({
       id: guide.id,
       email: guide.personalDetails.email,
       name: guide.personalDetails.name,
@@ -37,7 +52,7 @@ const AdminGuideSection = () => {
     const columns = [
         {
           title: 'Name',
-          dataIndex: 'name',
+          dataIndex: ["personalDetails", 'name'],
           key: 'name',
           sorter: (a, b) => a.name.localeCompare(b.name),
           render: (text, record) => <a href={`/admin/guideProfile/${record.id}`}>{text}</a>, 
@@ -45,17 +60,17 @@ const AdminGuideSection = () => {
         },
         {
           title: 'Email',
-          dataIndex: 'email',
+          dataIndex: ["personalDetails", 'email'],
           key: 'email'
         },
         {
           title: 'Phone',
-          dataIndex: 'phone',
+          dataIndex: ["personalDetails", 'phone'],
           key: 'phone',
         },
         {
           title: 'Speciality',
-          dataIndex: 'speciality',
+          dataIndex: ["professionalInfo", 'speciality'],
           key: 'speciality',
           filters: [
             { text: 'Adventure & Nature', value: 'Adventure & Nature' },
@@ -79,7 +94,7 @@ const AdminGuideSection = () => {
           key: 'action',
           render: (_, record) => (
             <Space size="small">
-              <Button color='danger' onClick={showDeleteModal} variant="solid">Delete</Button>
+              <Button color='danger' onClick={() => showDeleteModal(record.id)} variant="solid">Delete</Button>
               <CustomModal
                 title="Are you sure to delete the user?"
                 content="This action cannot be undone"
@@ -107,7 +122,7 @@ const AdminGuideSection = () => {
                 </Space>
                 </div>
 
-                <CustomTable tableData={flattenedData} columns={columns}/>
+                <CustomTable tableData={data} columns={columns}/>
             </Card>
         </div>
     )
