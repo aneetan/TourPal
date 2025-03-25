@@ -1,78 +1,108 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table, Card, Input, Button, Space, Tag, Typography } from 'antd';
 import { SearchOutlined, PlusOutlined } from '@ant-design/icons';
 import SearchBar from '../../components/admin/header/SearchBar';
 import CustomTable from '../../components/CustomTable';
 import { useNavigate } from 'react-router';
+import useFetch from '../../hooks/useFetch';
+import CustomModal from '../../components/CustomModal';
+import { deleteGuide, getAllGuides } from '../../utils/user.utils';
+import { showSucessToast } from '../../../../../React/react-training/src/toastify/toastify.utils';
 const { Title, Paragraph } = Typography;
 
 const AdminGuideSection = () => {
     const navigate = useNavigate();
+    const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+    const [data, setData] = useState([])
+    const [deleteId, setDeleteId] = useState(null)
 
-    const guideData = Array.from({ length: 10 }, (_, i) => ({
-        id: i + 1,
-        name: `Product ${i + 1}`,
-        category: ['Electronics', 'Clothing', 'Food', 'Books', 'Toys'][Math.floor(Math.random() * 5)],
-        price: Math.floor(Math.random() * 1000) + 10,
-        stock: Math.floor(Math.random() * 100),
-        status: ['In Stock', 'Low Stock', 'Out of Stock'][Math.floor(Math.random() * 3)],
-      }));
+    const showDeleteModal = (id) => {
+      setDeleteId(id)
+      setIsDeleteOpen(true);
+    };
 
-    const handleAddGuides= () => {
-      navigate('/admin/guides/add')
-    }
+    const handleOk = () => {
+      deleteGuide(deleteId).then(() => {
+        getAllGuides().then((response) => {
+          setData(response)
+          showSucessToast("Guide Deleted")
+        })
+      })
+      setIsDeleteOpen(false);
+    };
+    const handleCancel = () => {
+      setIsDeleteOpen(false);
+    };
 
-    const [tableData, setTableData] = useState(guideData);
+    useEffect(()=> {
+      getAllGuides().then((response) => {
+        setData(response)
+      })
+    }, [])
+
+     const flattenedData = data.map((guide)=>({
+      id: guide.id,
+      email: guide.personalDetails.email,
+      name: guide.personalDetails.name,
+      phone: guide.personalDetails.phone,
+      speciality: guide.professionalInfo.speciality,
+      experience: guide.professionalInfo.experience,
+    }))
   
     const columns = [
         {
           title: 'Name',
-          dataIndex: 'name',
+          dataIndex: ["personalDetails", 'name'],
           key: 'name',
           sorter: (a, b) => a.name.localeCompare(b.name),
-          render: (text) =>
-          <div className='flex items-center'>
-            <img src='https://images.pexels.com/photos/14653174/pexels-photo-14653174.jpeg'
-            className='w-[40px] mx-2' alt='pro'/>
-            <a href="#">{text}</a>
-          </div>,
+          render: (text, record) => <a href={`/admin/guideProfile/${record.id}`}>{text}</a>, 
+
         },
         {
-          title: 'Skill',
-          dataIndex: 'category',
-          key: 'category',
-          sorter: (a, b) => a.category.localeCompare(b.category),
+          title: 'Email',
+          dataIndex: ["personalDetails", 'email'],
+          key: 'email'
+        },
+        {
+          title: 'Phone',
+          dataIndex: ["personalDetails", 'phone'],
+          key: 'phone',
+        },
+        {
+          title: 'Speciality',
+          dataIndex: ["professionalInfo", 'speciality'],
+          key: 'speciality',
           filters: [
-            { text: 'Electronics', value: 'Electronics' },
-            { text: 'Clothing', value: 'Clothing' },
-            { text: 'Food', value: 'Food' },
-            { text: 'Books', value: 'Books' },
-            { text: 'Toys', value: 'Toys' },
+            { text: 'Adventure & Nature', value: 'Adventure & Nature' },
+            { text: 'Cultural & Historical', value: 'Cultural & Historical' },
+            { text: 'City & Lifestyle', value: 'City & Lifestyle' },
+            { text: 'Outdoor Activities', value: 'Outdoor Activities' },
+            { text: 'Others', value: 'Others' },
           ],
-          onFilter: (value, record) => record.category === value,
+          onFilter: (value, record) => record.speciality === value,
         },
         {
-          title: 'Location',
-          dataIndex: 'price',
-          key: 'price',
-          sorter: (a, b) => a.price - b.price,
-          render: (price) => `$${price.toFixed(2)}`,
+          title: 'Document',
+          dataIndex: 'document',
+          key: 'document',
+          render: () => <a className='underline' href="https://www.alexholidays.com/tours/images/credentials/Tourist-Guide-Alex--2016-2018.jpg"> View Document </a>,
           responsive: ['md'],
         },
-        {
-          title: 'Stock',
-          dataIndex: 'stock',
-          key: 'stock',
-          sorter: (a, b) => a.stock - b.stock,
-          responsive: ['lg'],
-        },
+    
         {
           title: 'Action',
           key: 'action',
           render: (_, record) => (
             <Space size="small">
-              <Button type="link" size="small">Edit</Button>
-              <Button type="link" size="small" danger>Delete</Button>
+              <Button color='danger' onClick={() => showDeleteModal(record.id)} variant="solid">Delete</Button>
+              <CustomModal
+                title="Are you sure to delete the user?"
+                content="This action cannot be undone"
+                text="Delete"
+                isOpen={isDeleteOpen}
+                handleOk={handleOk}
+                handleCancel={handleCancel}
+              />
             </Space>
           ),
         },
@@ -83,10 +113,6 @@ const AdminGuideSection = () => {
             <Card>
               <div className='flex justify-between items-center my-2'>
                 <Title level={3}>Guides</Title>
-
-                <Button type="primary" onClick={handleAddGuides} icon={<PlusOutlined />}>
-                      Add Guides
-                  </Button>
                 
               </div>
 
@@ -96,7 +122,7 @@ const AdminGuideSection = () => {
                 </Space>
                 </div>
 
-                <CustomTable tableData={tableData} columns={columns}/>
+                <CustomTable tableData={data} columns={columns}/>
             </Card>
         </div>
     )

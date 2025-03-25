@@ -17,20 +17,26 @@ import AdminPlacesSection from './pages/admin/AdminPlacesSection';
 import AddPlacesAdmin from './pages/admin/AddPlacesAdmin';
 import RegisterGuides from './pages/guides/RegisterGuides';
 import AddReviewForm from './pages/user/AddReviewForm';
+import { ToastContainer, toast } from 'react-toastify';
+import GuideLayout from './pages/guides/GuideLayout';
+import GuideDashboard from './pages/guides/GuideDashboard';
+import Bookings from './pages/guides/Bookings';
+  
 
 function App() {
   return (
     <>
       <BrowserRouter>
+        <ToastContainer/>
         <Routes>
           <Route path='/' element={<CustomLayout/>}>
             <Route path="/" element={<LandingPage />} />
             <Route path='/seeDestination' element={<CustomMap/>}/>
             <Route path='/seeMore' element={<SeeDestinations/>}/>
             <Route path='/viewGuides' element={<GuideSection/>}/>
-            <Route path='/bookGuides' element={<RequestPop/>}/>
+            <Route path='/bookGuides/:id' element={<RequestPop/>}/>
             <Route path='/guideProfile/:id' element={<GuideProfile/>}/>
-            <Route path='/addReview' element={<AddReviewForm/>}/>
+            <Route path='/addReview/:id' element={<AddReviewForm/>}/>
 
           </Route>
 
@@ -40,6 +46,13 @@ function App() {
             <Route path='/admin/guides' element={<AdminGuideSection/>}/>
             <Route path='/admin/places' element={<AdminPlacesSection/>}/>
             <Route path='/admin/places/add' element={<AddPlacesAdmin/>}/>
+            <Route path='/admin/editPlace/:id' element={<AddPlacesAdmin/>}/>
+            <Route path='/admin/guideProfile/:id' element={<GuideProfile/>}/>
+          </Route>
+
+          <Route path='/guide' element={<GuideLayout/>}>
+            <Route path ='/guide/dashboard' element={<GuideDashboard/>}/>
+            <Route path ='/guide/bookings' element={<Bookings/>}/>
           </Route>
 
           <Route path='/login' element={<Signin/>}/>

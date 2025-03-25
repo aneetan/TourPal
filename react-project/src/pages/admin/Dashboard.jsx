@@ -3,11 +3,31 @@ import { Card, Row, Col, Typography, Space, Button } from 'antd';
 import CustomData from '../../components/admin/dashboard/CustomData';
 import CustomTable from '../../components/CustomTable';
 import useFetch from '../../hooks/useFetch';
+import { UnderlineOutlined } from '@ant-design/icons';
+import CustomModal from '../../components/CustomModal';
 
 const { Title, Paragraph } = Typography;
 
 const Dashboard = () => {
   const {data, error, loading} = useFetch("http://localhost:3000/guides");
+  const [isApproveOpen, setIsApproveOpen] = useState(false);
+  const [isDeclineOpen, setIsDeclineOpen] = useState(false);
+
+  const showApproveModal = () => {
+    setIsApproveOpen(true);
+  };
+
+  const showDeclineModal = () => {
+    setIsDeclineOpen(true);
+  };
+  const handleOk = () => {
+    setIsApproveOpen(false);
+    setIsDeclineOpen(false);
+  };
+  const handleCancel = () => {
+    setIsApproveOpen(false);
+    setIsDeclineOpen(false);
+  };
 
   const guideData = data || []
 
@@ -26,7 +46,7 @@ const Dashboard = () => {
       dataIndex: 'name',
       key: 'name',
       sorter: (a, b) => a.name.localeCompare(b.name),
-      render: (text) => <a href="#">{text}</a>,
+      render: (text, record) => <a href={`/admin/guideProfile/${record.id}`}>{text}</a>, 
     },
     {
       title: 'Email',
@@ -52,9 +72,10 @@ const Dashboard = () => {
       onFilter: (value, record) => record.speciality === value,
     },
     {
-      title: 'Experience',
-      dataIndex: 'experience',
-      key: 'experience',
+      title: 'Document',
+      dataIndex: 'document',
+      key: 'document',
+      render: () => <a className='underline' target="_blank" href="https://www.alexholidays.com/tours/images/credentials/Tourist-Guide-Alex--2016-2018.jpg"> View Document </a>,
       responsive: ['md'],
     },
 
@@ -63,8 +84,24 @@ const Dashboard = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="small">
-          <Button type="link" size="small">Edit</Button>
-          <Button type="link" size="small" danger>Delete</Button>
+          <Button color='primary' onClick={showApproveModal} variant='solid'>Approve</Button>
+          <CustomModal
+            title="Are you sure to approve the user as guide?"
+            content="This user will get access to the guide section"
+            text="Approve"
+            isOpen={isApproveOpen}
+            handleOk={handleOk}
+            handleCancel={handleCancel}
+          />
+          <Button color='danger' onClick={showDeclineModal} variant="solid">Decline</Button>
+          <CustomModal
+            title="Are you sure to decline the user as guide?"
+            content="This action cannot be undone"
+            text="Decline"
+            isOpen={isDeclineOpen}
+            handleOk={handleOk}
+            handleCancel={handleCancel}
+          />
         </Space>
       ),
     },
@@ -81,7 +118,8 @@ const Dashboard = () => {
       
       <Row style={{ marginTop: 16 }}>
         <Col span={24}>
-           <CustomTable tableData={flattenedData} columns={columns}/>
+          <h2 className='font-semibold py-2'> Recent Guide Requests</h2>
+          <CustomTable tableData={flattenedData} columns={columns}/>
         </Col>
       </Row>
     </div>

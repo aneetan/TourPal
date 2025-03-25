@@ -1,20 +1,41 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Select , Form, Input, message, Upload  } from 'antd';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import AdminMapComponent from '../../components/map/AdminMapComponent';
 import axios from 'axios';
 import { UploadOutlined } from '@ant-design/icons';
+import { addPlace, updatePlace } from '../../utils/user.utils';
+import useFetch from '../../hooks/useFetch';
+import { showSuccess } from '../../utils/toastify.utils';
 
 const { TextArea } = Input;
 const { Option } = Select;
 
 const AddPlacesAdmin = () => {
-    const [messageApi, contextHolder] = message.useMessage();
+    let {id} = useParams();
     const [form] = Form.useForm();
-    const [loading, setLoading] = useState(false);
+    const [load, setLoad] = useState(false);
+    const {data, loading, error} = useFetch(`http://localhost:3000/places/${id}`)
     const navigate = useNavigate();
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
+
+    useEffect(()=> {
+
+        if(data){
+            form.setFieldsValue({
+                name: data.name,
+                category: data.category,
+                description: data.description,
+                latitude: data.latitude,
+                longitude: data.longitude
+            });
+            setLatitude(data.latitude);
+            setLongitude(data.longitude);
+        }
+    }, [data, form])
+
+
 
     const handleLocationSelect = (latlng) => {
         setLatitude(latlng.lat);
@@ -26,31 +47,31 @@ const AddPlacesAdmin = () => {
       };
 
     const onFinish = async(values) => {
-        setLoading(true);
+        setLoad(true);
         const formData = {
             ...values,
             latitude: values.latitude,
             longitude: values.longitude,
         };
-        
-        try{
-            await axios.post("http://localhost:3000/places", formData)
-            setTimeout(() => {
-                console.log('Request submitted:', values);
-                messageApi.open({
-                    type: 'success',
-                    content: 'Place Added successfully',
-                  });
-                },[1000])
+
+        if(!id){
+            addPlace(formData)
+            .then(() => {
                 form.resetFields()
                 setLatitude('');
                 setLongitude('');
-        } catch(e){
-            console.error("error", e)
-        } finally{
-            setLoading(false)
-        }
+                setLoad(false)
+                showSuccess("Place added")
+                navigate('/admin/places')
+            }); 
+        } else {
+            updatePlace(id, formData)
+            .then(()=> {
+                navigate('/admin/places')
+            })
+        }   
     };
+
 
   return (
     <div className="min-h-screen w-[100%]">
@@ -61,7 +82,8 @@ const AddPlacesAdmin = () => {
                 </div>
 
                 <div className="w-full lg:w-1/2 py-16 px-12">
-                    <h3 className="text-2xl font-medium">Add a Place</h3>
+                <h3 className="text-2xl font-medium">
+                    {id? "Update ": "Add "} Place</h3>
                     <p className="text-sm font-small mt-2 text-[#FF9248]">(You can select location in map)</p>
 
                     <Form
@@ -129,12 +151,12 @@ const AddPlacesAdmin = () => {
                         <Button 
                             type="primary" 
                             htmlType="submit" 
-                            loading={loading}
+                            loading={load}
                             block
                             style={{backgroundColor:"#F15D30"}}
                             className="bg-amber-500 transiiton hover:opacity-90 hover:scale-[1.004]"
                         >
-                            Add
+                            {id? "Update": "Add"}
                         </Button>
                         </Form.Item>
 

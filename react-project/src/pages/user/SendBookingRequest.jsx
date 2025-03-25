@@ -1,41 +1,47 @@
 import React, { useState } from 'react'
-import { Button, DatePicker , Form, Input, message } from 'antd';
+import { Button, DatePicker , Form, Input} from 'antd';
 import dayjs from 'dayjs';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { addMessages } from '../../utils/user.utils';
+import { showSuccess } from '../../utils/toastify.utils';
 dayjs.extend(customParseFormat);
 
 const { TextArea } = Input;
 
 const SendBookingRequest = () => {
     const dateFormat = 'YYYY-MM-DD';
-    const [messageApi, contextHolder] = message.useMessage();
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     let currentDate = new Date().toJSON().slice(0, 10);
+    let {id} = useParams();
 
-    const onFinish = (values) => {
-        console.log(currentDate);
+    const onFinish = async(values) => {
         setLoading(true);
-        
-        // Success Message
-        setTimeout(() => {
-            console.log('Request submitted:', values);
-            localStorage.setItem('booking', "yes");
-            messageApi.open({
-                type: 'success',
-                content: 'Your request has been sent successfully!',
-              });
+
+        try{
+            const formData = {
+                ...values,
+                guideId: id,
+                user: localStorage.getItem('username'),
+                userId: localStorage.getItem('userId'),
+            }
+            await addMessages(formData);
             form.resetFields();
-            setLoading(false);
-        }, 1000);
-        navigate('/bookGuides')
+            localStorage.setItem("is_booked", 1)
+            showSuccess("Guide Requested Successfully")
+            navigate('/viewGuides')
+        } catch(error){
+            console.log("Error submitting form", error)
+        } finally {
+            setLoading(false)
+        }
+        
     };
 
   return (
     <>
-        {contextHolder}
         <div className=' py-10 flex align-bottom justify-center bg-[#f9f5f1]'>
         <div className="w-full p-6 max-w-[350px] md:min-w-[400px] border-gray-500 bg-white shadow-2xl">
             <h3 className="text-lg font-medium mb-4">Send a Custom Request</h3>

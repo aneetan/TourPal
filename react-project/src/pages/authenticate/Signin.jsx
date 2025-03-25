@@ -2,61 +2,45 @@ import { Button,Form,Input, Typography } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { authenticateGuide, authenticateUser } from "../../utils/user.utils";
+import { showError, showSuccess } from "../../utils/toastify.utils";
 const { Text, Link } = Typography;
 
 const Signin = () => {
   const [isFocused, setIsFocused] = useState(false);
   const navigate = useNavigate();
-  const [users, setUser] = useState([])
-  const [guides, setGuides] = useState([])
   const [errorMsg, setErrorMsg] = useState([""])
 
 
-  useEffect(() => {
-    axios.get(`http://localhost:3000/users`)
-      .then(function (response) {
-        setUser(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-      axios.get(`http://localhost:3000/guides`)
-      .then((response) => {
-        setGuides(response.data);
-      })
-      .catch((error) => {
-        console.log("Error fetching guides:", error);
-      });
-
-  },[])
-
-  const handleUserLogin = (values) => {
+  const handleUserLogin = async(values) => {
     const {email, password} = values;
+    const userResponse = await authenticateUser(email, password);
+    const guideResponse = await authenticateGuide(email, password);
+
+
     if(values.email === "admin@gmail.com" && values.password === "admin"){
       localStorage.setItem("is_user", 1)
       navigate("/admin/dashboard")
       return
+    } else if (userResponse){
+      if(userResponse.email === values.email && userResponse.password === values.password){
+        localStorage.setItem("is_user", 2)
+        localStorage.setItem("username", userResponse.name)
+        localStorage.setItem("userId", userResponse.id)
+        navigate("/")
+        return
+      }
+    } else if (guideResponse) {
+      if(guideResponse.personalDetails.email === values.email && guideResponse.personalDetails.password === values.password){
+        localStorage.setItem("is_user", 3)
+        localStorage.setItem("username", guideResponse.personalDetails.name)
+        navigate("/guide/dashboard")
+        return
+      }
+    } else {
+      showError("Incorrect Username or Password")
+      localStorage.setItem("is_user", 0)
     }
-    
-    //check for user
-    const user = users.find((u) => u.email === email && u.password === password);
-    if(user){
-      localStorage.setItem("is_user", 2)
-      navigate("/")
-      return
-    }
-
-    //check for guide
-    const guide = guides.find((g) => g.email === email && g.password === password);
-    if(guide){
-      localStorage.setItem("is_user", 3)
-      navigate("/admin")
-      return
-    }
-
-    setErrorMsg("Incorrect username or password")
-    localStorage.setItem("is_user", 0)
   }
   
   return (
