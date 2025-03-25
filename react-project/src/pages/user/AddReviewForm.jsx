@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Button, DatePicker , Form, Input, message, Rate } from 'antd';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
+import { addReview } from '../../utils/user.utils';
+import { showSuccess } from '../../utils/toastify.utils';
 
 const { TextArea } = Input;
 
@@ -9,18 +11,28 @@ const AddReviewForm = () => {
     const [loading, setLoading] = useState(false);
     const [value, setValue] = useState(3);
     const navigate = useNavigate();
+    const {id} = useParams();
 
-    const onFinish = (values) => {
+    const onFinish = async(values) => {
         setLoading(true);
-        
-        // Success Message
-        setTimeout(() => {
-            console.log('Request submitted:', values);
-            localStorage.setItem('booking', "yes");
+
+        try{
+            const formData = {
+                ...values,
+                guideId: id,
+                user: localStorage.getItem('username')
+            }
+            await addReview(formData);
             form.resetFields();
-            setLoading(false);
-        }, 1000);
-        navigate('/bookGuides')
+            showSuccess("Review posted")
+            navigate(`/guideProfile/${id}`)
+
+        } catch(error) {
+            console.log(error)
+        } finally{
+            setLoading(false)
+        }
+        
     };
     return (
         <>
@@ -63,7 +75,7 @@ const AddReviewForm = () => {
                             style={{backgroundColor:"#F15D30"}}
                             className="bg-amber-500 transiiton hover:opacity-90 hover:scale-[1.004]"
                         >
-                            Send Request
+                            Add Review
                         </Button>
                         </Form.Item>
                     </Form>

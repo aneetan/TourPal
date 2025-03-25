@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Card, Avatar, Rate, Tag} from "antd";
 import { GlobalOutlined, TagOutlined, CalendarOutlined, StarFilled, PhoneOutlined, MailOutlined, PlusOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router";
@@ -7,6 +7,7 @@ import { Anchor } from 'antd';
 import DetailsCard from "../../components/user/DetailsCard";
 import ReviewCard from "../../components/user/ReviewCard";
 import CustomModal from "../../components/CustomModal";
+import { getAllReviews } from "../../utils/user.utils";
 
 const { Meta } = Card;
 
@@ -19,42 +20,29 @@ const GuideProfile = () => {
   const [activeSection, setActiveSection] = useState('details');
 
   const {data, loading, error} = useFetch(`http://localhost:3000/guides/${params.id}`) 
+  const [reviews, setReviews] = useState()
+
+  useEffect(()=> {
+    getAllReviews().then((response )=> {
+      setReviews(response)
+    })
+  }, [reviews])
   
   if (!data) return <p>No guide found.</p>;
 
   const {personalDetails, professionalInfo} = data || []
 
+  
+
   const handleBookNow = () => {
-    navigate('/bookGuides')
+    navigate(`/bookGuides/${params.id}`)
   };
 
   const handleReview =() => {
-    navigate('/addReview')
+    navigate(`/addReview/${params.id}`)
   }
 
-  const reviews =[
-    {
-      id:1,
-      user: "Anita Neupane",
-      rating: 4,
-      body: "Resolving deltas: 100% (8/8), completed with 8 local objects.To https://github.com/aneetan/TourPal.git 2cfc204..e2a8cdf  tourpal -> tourpal",
-      date: "Aug 13, 2025"
-    },
-    {
-      id:2,
-      user: "Beautiful girl",
-      rating: 2,
-      body: "He is very handsome sweet friendly but have girlfriend",
-      date: "Aug 14, 2025"
-    },
-    {
-      id:3,
-      user: "Anita Neupane",
-      rating: 3,
-      body: "Kata hideko bijuli balera, hot vayera, poat vayera, beauty vayera, timi cutie vayera hami hereko herei",
-      date: "Nov 13, 2024"
-    }
-  ]
+  console.log(reviews)
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">

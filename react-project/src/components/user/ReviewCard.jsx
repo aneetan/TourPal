@@ -7,13 +7,12 @@ const ReviewCard = ({reviews, isAdmin = false}) => {
     <>
         <Card className='mb-4'>
             <div className='flex justify-between'>
-                <div class="flex items-center my-3">
-                    <img class="w-10 h-10 me-4 rounded-full"
+                <div className="flex items-center my-3">
+                    <img className="w-10 h-10 me-4 rounded-full"
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnFJnwOdZCFgJa__N0Cl8EUdQUEZpshe-Npg&s" alt=""/>
 
-                    <div class="font-medium dark:text-white">
+                    <div className="font-medium dark:text-white">
                         <p> {reviews.user} </p>
-                        <p class="mt-1 text-xs text-gray-500 dark:text-gray-400"> {reviews.date}</p>
 
                         <div className="items-center mt-3">
                         <Rate
@@ -24,6 +23,7 @@ const ReviewCard = ({reviews, isAdmin = false}) => {
                             className="text-yellow-500"
                         />
                         </div>
+                        <p className="mt-1 text-xs text-gray-500 dark:text-gray-400"> {reviews.message}</p>
                     </div>
                 </div>
                 <div>
@@ -34,7 +34,7 @@ const ReviewCard = ({reviews, isAdmin = false}) => {
                    )}
                 </div>
             </div>
-            <p class="mb-3 text-gray-500 dark:text-gray-400"> {reviews.body} </p>
+            <p className="mb-3 text-gray-500 dark:text-gray-400"> {reviews.body} </p>
         </Card>
 
       

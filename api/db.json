@@ -13,13 +13,6 @@
       "email": "pratik@gmail.com",
       "number": "9843411801",
       "password": "Pratik@118"
-    },
-    {
-      "id": "a7f3",
-      "name": "Binita Regmi",
-      "email": "regmibinita@gmail.com",
-      "number": "9869084390",
-      "password": "Binita@123"
     }
   ],
   "guides": [
@@ -29,6 +22,25 @@
         "name": "Pratik Bhattarai",
         "email": "pb@gmail.com",
         "password": "Pratik@123",
+        "phone": "9843411801"
+      },
+      "professionalInfo": {
+        "Bio": "Passionate local guide specializing in cultural heritage tours and adventurous treks, dedicated to creating unforgettable experiences.",
+        "speciality": "Cultural & Historical",
+        "experience": "2-3",
+        "languages": [
+          "english",
+          "french"
+        ],
+        "pricing": "600"
+      }
+    },
+    {
+      "id": "375e",
+      "personalDetails": {
+        "name": "Guide2",
+        "email": "guide@gmail.com",
+        "password": "Guide@123",
         "phone": "9843411801"
       },
       "professionalInfo": {
@@ -59,6 +71,63 @@
       "description": "You’ll find hiking trails, temples, restaurants, and a few hotels if you want to spend the night. The park is higher in altitude than the valley making it the perfect escape on a hot day since it’s slightly cooler. ",
       "latitude": 27.790491224830877,
       "longitude": 85.38006556307946
+    },
+    {
+      "id": "55bc",
+      "name": "Godawari Botanical Garden",
+      "category": "Nature",
+      "description": "Popular hiking destinations in Nepal for its rich wildlife and splendid environment!!",
+      "latitude": 27.611755419683686,
+      "longitude": 85.33958206945567
+    }
+  ],
+  "messages": [
+    {
+      "id": "4253",
+      "destination": "Malai Tha xaina",
+      "date": "2025-03-30T18:15:00.000Z",
+      "message": "Data save huna paryo k\n",
+      "guideId": "375f",
+      "user": "Pratik Bhattarai"
+    },
+    {
+      "id": "0aac",
+      "destination": "Kalinchowk",
+      "date": "2025-03-27T18:15:00.000Z",
+      "message": "Kata hideko bijuli balera",
+      "guideId": "375f",
+      "user": "Pratik Bhattarai"
+    },
+    {
+      "id": "02b5",
+      "destination": "Home",
+      "date": "2025-03-27T18:15:00.000Z",
+      "message": "My ssweet home.",
+      "guideId": "375f",
+      "user": "Anita Neupane"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "87e2",
+      "rating": 4,
+      "message": "Hello User! This is a review",
+      "guideId": "375f",
+      "user": "Anita Neupane"
+    },
+    {
+      "id": "d7d6",
+      "rating": 5,
+      "message": "Always recommned!! He was very nice and cute",
+      "guideId": "375f",
+      "user": "Pratik Bhattarai"
+    },
+    {
+      "id": "fa5e",
+      "rating": 5,
+      "message": "Thank you for choosing us! Your feedback helps us improve. Please share your experience by leaving a review: ",
+      "guideId": "375f",
+      "user": "Anita Neupane"
     }
   ]
 }

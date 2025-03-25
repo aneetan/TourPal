@@ -34,9 +34,9 @@ function App() {
             <Route path='/seeDestination' element={<CustomMap/>}/>
             <Route path='/seeMore' element={<SeeDestinations/>}/>
             <Route path='/viewGuides' element={<GuideSection/>}/>
-            <Route path='/bookGuides' element={<RequestPop/>}/>
+            <Route path='/bookGuides/:id' element={<RequestPop/>}/>
             <Route path='/guideProfile/:id' element={<GuideProfile/>}/>
-            <Route path='/addReview' element={<AddReviewForm/>}/>
+            <Route path='/addReview/:id' element={<AddReviewForm/>}/>
 
           </Route>
 

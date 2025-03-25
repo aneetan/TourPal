@@ -71,3 +71,23 @@ export const authenticateGuide = async(email, password) => {
     return response.data[0] || null;
 }
 
+export const addMessages = async(data) => {
+    await axios.post("http://localhost:3000/messages", data)
+}
+
+export const addReview = async(data) => {
+    await axios.post("http://localhost:3000/reviews", data)
+}
+
+export const getAllReviews = () => {
+    return new Promise((resolve, reject) => {
+        axios.get("http://localhost:3000/reviews")
+        .then(function (response){
+            resolve(response.data)
+        })
+        .catch(function (error){
+            reject(error)
+        })
+    })
+}
+

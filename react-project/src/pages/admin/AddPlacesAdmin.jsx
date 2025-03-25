@@ -6,6 +6,7 @@ import axios from 'axios';
 import { UploadOutlined } from '@ant-design/icons';
 import { addPlace, updatePlace } from '../../utils/user.utils';
 import useFetch from '../../hooks/useFetch';
+import { showSuccess } from '../../utils/toastify.utils';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -55,16 +56,17 @@ const AddPlacesAdmin = () => {
 
         if(!id){
             addPlace(formData)
-            .then((response) => {
+            .then(() => {
                 form.resetFields()
                 setLatitude('');
                 setLongitude('');
                 setLoad(false)
+                showSuccess("Place added")
                 navigate('/admin/places')
             }); 
         } else {
             updatePlace(id, formData)
-            .then((response)=> {
+            .then(()=> {
                 navigate('/admin/places')
             })
         }   

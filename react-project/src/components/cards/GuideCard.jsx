@@ -13,7 +13,7 @@ const GuideCard = ({name, rating=2, reviews=123, bio, languages, experience, spe
     const guideData = data || []
 
     const handleBookUser = () => {
-        navigate('/bookGuides')
+        navigate(`/bookGuides/${guideData[0].id}`)
     }
 
     const handleGuideProfile = () => {
