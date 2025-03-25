@@ -1,18 +1,52 @@
 import React, { useState } from 'react';
-import { Card, Row, Col, Typography, Space, Button } from 'antd';
+import { Card, Row, Col, Typography, Space, Button, Modal, Descriptions } from 'antd';
 import CustomData from '../../components/admin/dashboard/CustomData';
 import CustomTable from '../../components/CustomTable';
 import useFetch from '../../hooks/useFetch';
 import { UnderlineOutlined } from '@ant-design/icons';
 import CustomModal from '../../components/CustomModal';
 import CustomGuideData from '../../components/guide/CustomGuideData';
+import dayjs from 'dayjs';
 
 const { Title, Paragraph } = Typography;
 
 const GuideDashboard = () => {
-  const {data, error, loading} = useFetch("http://localhost:3000/guides");
+  const {data, error, loading} = useFetch("http://localhost:3000/messages");
   const [isApproveOpen, setIsApproveOpen] = useState(false);
   const [isDeclineOpen, setIsDeclineOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [load, setLoad] = useState(false)
+  const [user, setUser] = useState(null)
+  const [userId, setUserId] = useState()
+
+  const showModal = async(name) => {
+    setIsModalOpen(true);
+    setLoad(true);
+    setUserId(name)
+
+
+    try{
+      const response = await fetch(`http://localhost:3000/users/${name}`);
+      const data = await response.json();
+      setUser(data)
+  console.log(user)
+
+    } catch (e){
+      console.log(e)
+    } finally{
+      setLoad(false)
+    }
+
+  };
+
+
+  const handleModalOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleModalCancel = () => {
+    setIsModalOpen(false);
+  };
 
   const showApproveModal = () => {
     setIsApproveOpen(true);
@@ -30,56 +64,61 @@ const GuideDashboard = () => {
     setIsDeclineOpen(false);
   };
 
-  const guideData = data || []
+  const msgData = data || []
 
-  const flattenedData = guideData.map((guide)=>({
-    id: guide.id,
-    email: guide.personalDetails.email,
-    name: guide.personalDetails.name,
-    phone: guide.personalDetails.phone,
-    speciality: guide.professionalInfo.speciality,
-    experience: guide.professionalInfo.experience,
-  }))
 
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
+      title: 'User',
+      dataIndex: 'user',
+      key: 'user',
       sorter: (a, b) => a.name.localeCompare(b.name),
-      render: (text, record) => <a href={`/admin/guideProfile/${record.id}`}>{text}</a>, 
-    },
-    {
-      title: 'Email',
-      dataIndex: 'email',
-      key: 'email'
-    },
-    {
-      title: 'Phone',
-      dataIndex: 'phone',
-      key: 'phone',
-    },
-    {
-      title: 'Speciality',
-      dataIndex: 'speciality',
-      key: 'speciality',
-      filters: [
-        { text: 'Adventure & Nature', value: 'Adventure & Nature' },
-        { text: 'Cultural & Historical', value: 'Cultural & Historical' },
-        { text: 'City & Lifestyle', value: 'City & Lifestyle' },
-        { text: 'Outdoor Activities', value: 'Outdoor Activities' },
-        { text: 'Others', value: 'Others' },
-      ],
-      onFilter: (value, record) => record.speciality === value,
-    },
-    {
-      title: 'Document',
-      dataIndex: 'document',
-      key: 'document',
-      render: () => <a className='underline' target="_blank" href="https://www.alexholidays.com/tours/images/credentials/Tourist-Guide-Alex--2016-2018.jpg"> View Document </a>,
-      responsive: ['md'],
-    },
+      render: (text, record) => (
+        <Space>
+          {/* <a href={`/userProfile/${record.id}`}>{text}</a> */}
+          <a onClick={() => showModal(record.userId)}>{text}</a>
 
+          <Modal title="User Detail" open={isModalOpen} onOk={handleModalOk} onCancel={handleModalCancel}>
+              {user &&(
+                <Descriptions bordered column={1}>
+                <Descriptions.Item label="Name">{user.name}</Descriptions.Item>
+                <Descriptions.Item label="Email">{user.email}</Descriptions.Item>
+                <Descriptions.Item label="Number">
+                  {user.number}
+                </Descriptions.Item>
+              </Descriptions>
+              )}
+          </Modal>
+        </Space>
+
+      ), 
+    },
+    {
+      title: 'Destination',
+      dataIndex: 'destination',
+      key: 'destination'
+    },
+    {
+      title: 'Date',
+      dataIndex: 'date',
+      key: 'date',
+      render: (date) => dayjs(date).format('YYYY-MM-DD'),
+      filters: [
+        { text: '2025-03-31', value: '2025-03-31' },
+        { text: '2025-03-32', value: '2025-03-32' },
+        { text: '2025-04-01', value: '2025-04-01' },
+        { text: '2025-04-02', value: '2025-04-02' },
+        { text: '2025-04-03', value: '2025-04-03' },
+      ],
+      onFilter: (value, record) => {
+        return dayjs(record.date).format('YYYY-MM-DD') === value;
+      },
+    },
+    {
+      title: 'Message',
+      dataIndex: 'message',
+      key: 'message',
+    },
     {
       title: 'Action',
       key: 'action',
@@ -87,8 +126,8 @@ const GuideDashboard = () => {
         <Space size="small">
           <Button color='primary' onClick={showApproveModal} variant='solid'>Approve</Button>
           <CustomModal
-            title="Are you sure to approve the user as guide?"
-            content="This user will get access to the guide section"
+            title="Are you sure to approve the user request?"
+            content=""
             text="Approve"
             isOpen={isApproveOpen}
             handleOk={handleOk}
@@ -96,7 +135,7 @@ const GuideDashboard = () => {
           />
           <Button color='danger' onClick={showDeclineModal} variant="solid">Decline</Button>
           <CustomModal
-            title="Are you sure to decline the user as guide?"
+            title="Are you sure to decline the user request?"
             content="This action cannot be undone"
             text="Decline"
             isOpen={isDeclineOpen}
@@ -120,7 +159,7 @@ const GuideDashboard = () => {
       <Row style={{ marginTop: 16 }}>
         <Col span={24}>
           <h2 className='font-semibold py-2'> Recent Booking Requests</h2>
-          <CustomTable tableData={flattenedData} columns={columns}/>
+          <CustomTable tableData={msgData} columns={columns}/>
         </Col>
       </Row>
     </div>

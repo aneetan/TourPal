@@ -75,6 +75,18 @@ export const addMessages = async(data) => {
     await axios.post("http://localhost:3000/messages", data)
 }
 
+export const getAllMessages = () => {
+    return new Promise((resolve, reject) => {
+        axios.get("http://localhost:3000/messages")
+        .then(function (response){
+            resolve(response.data)
+        })
+        .catch(function (error){
+            reject(error)
+        })
+    })
+}
+
 export const addReview = async(data) => {
     await axios.post("http://localhost:3000/reviews", data)
 }

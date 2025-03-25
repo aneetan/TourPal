@@ -26,6 +26,7 @@ const Signin = () => {
       if(userResponse.email === values.email && userResponse.password === values.password){
         localStorage.setItem("is_user", 2)
         localStorage.setItem("username", userResponse.name)
+        localStorage.setItem("userId", userResponse.id)
         navigate("/")
         return
       }

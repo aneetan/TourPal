@@ -25,6 +25,7 @@ const SendBookingRequest = () => {
                 ...values,
                 guideId: id,
                 user: localStorage.getItem('username'),
+                userId: localStorage.getItem('userId'),
             }
             await addMessages(formData);
             form.resetFields();
