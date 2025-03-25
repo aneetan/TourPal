@@ -109,13 +109,6 @@
   ],
   "reviews": [
     {
-      "id": "87e2",
-      "rating": 4,
-      "message": "Hello User! This is a review",
-      "guideId": "375f",
-      "user": "Anita Neupane"
-    },
-    {
       "id": "d7d6",
       "rating": 5,
       "message": "Always recommned!! He was very nice and cute",

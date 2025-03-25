@@ -79,6 +79,10 @@ export const addReview = async(data) => {
     await axios.post("http://localhost:3000/reviews", data)
 }
 
+export const deleteReview = async(id, data) => {
+    await axios.delete(`http://localhost:3000/reviews/${id}`, data)
+}
+
 export const getAllReviews = () => {
     return new Promise((resolve, reject) => {
         axios.get("http://localhost:3000/reviews")

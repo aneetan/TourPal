@@ -1,8 +1,35 @@
 import { DeleteOutlined, StarFilled } from '@ant-design/icons'
 import { Button, Card, Rate } from 'antd'
-import React from 'react'
+import React, { useState } from 'react'
+import CustomModal from '../CustomModal';
+import { deleteReview, getAllReviews } from '../../utils/user.utils';
 
 const ReviewCard = ({reviews, isAdmin = false}) => {
+    const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+    const [deleteId, setDeleteId] = useState(null);
+
+    const showDeleteModal = (id) => {
+        setDeleteId(id)
+        setIsDeleteOpen(true)
+    }
+
+    const handleOk = () => {
+        deleteReview(deleteId).then(() => {
+
+        getAllReviews().then((response)=> {
+            setFetchData(response);
+            showSucessToast("Review deleted")
+        })  
+        setIsDeleteOpen(false);
+
+        })
+    };
+
+    const handleCancel = () => {
+        setIsDeleteOpen(false);
+    };
+    
+
   return (
     <>
         <Card className='mb-4'>
@@ -23,18 +50,27 @@ const ReviewCard = ({reviews, isAdmin = false}) => {
                             className="text-yellow-500"
                         />
                         </div>
-                        <p className="mt-1 text-xs text-gray-500 dark:text-gray-400"> {reviews.message}</p>
+                        {/* <p className="mt-1 text-xs text-gray-500 dark:text-gray-400"> {reviews.message}</p> */}
                     </div>
                 </div>
                 <div>
                     {isAdmin && (
                     <Button style={{outline:"none", border:"none"}}>
-                            <DeleteOutlined style={{color:'#FF4D4F'}}/>
+                            <DeleteOutlined onClick={() => showDeleteModal(reviews.id)} style={{color:'#FF4D4F'}}/>
                     </Button>
                    )}
+
+                <CustomModal
+                title="Are you sure to delete the place?"
+                content="This action cannot be undone"
+                text="Delete"
+                isOpen={isDeleteOpen}
+                handleOk={handleOk}
+                handleCancel={handleCancel}
+                />
                 </div>
             </div>
-            <p className="mb-3 text-gray-500 dark:text-gray-400"> {reviews.body} </p>
+            <p className="mb-3 text-gray-500 dark:text-gray-400"> {reviews.message} </p>
         </Card>
 
       
