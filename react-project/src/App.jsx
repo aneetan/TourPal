@@ -21,6 +21,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import GuideLayout from './pages/guides/GuideLayout';
 import GuideDashboard from './pages/guides/GuideDashboard';
 import Bookings from './pages/guides/Bookings';
+import EditGuideProfile from './pages/guides/EditGuideProfile';
   
 
 function App() {
@@ -53,6 +54,8 @@ function App() {
           <Route path='/guide' element={<GuideLayout/>}>
             <Route path ='/guide/dashboard' element={<GuideDashboard/>}/>
             <Route path ='/guide/bookings' element={<Bookings/>}/>
+            <Route path ='/guide/profile/:id' element={<GuideProfile/>}/>
+            <Route path ='/guide/edit/:id' element={<EditGuideProfile/>}/>
           </Route>
 
           <Route path='/login' element={<Signin/>}/>

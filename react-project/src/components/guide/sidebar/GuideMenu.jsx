@@ -9,6 +9,7 @@ const GuideMenu = () => {
     const navigate = useNavigate();
     const selectedKey = location.pathname.startsWith('/guide/dashboard') ? '/guide/dashboard' :
                         location.pathname.startsWith('/guide/bookings') ? '/guide/bookings' :
+                        location.pathname.startsWith('/guide/') ? '/guide/' :
                         location.pathname;
 
     const items = [

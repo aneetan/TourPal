@@ -2,19 +2,21 @@ import React from 'react'
 import { Layout, Button, Space, Avatar, Dropdown } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import Notifications from '../../admin/header/Notifications';
+import { Link } from 'react-router';
 const { Header } = Layout;
 
 const GuideHeader = ({ collapsed, toggleSidebar }) => {
+  const id = localStorage.getItem('guideId')
   const items = [
     {
-      key: '1',
+      key: `/guide/profile`,
       icon: <UserOutlined/>,
-      label: 'Profile',
+      label: <Link to={`/guide/profile/${id}`}> Profile </Link>,
     },
     {
-      key: '2',
+      key: '/guide/settings',
       icon: <SettingOutlined />,
-      label: 'Settings',
+      label: <Link to='/guide/settings'> Settings </Link>,
     }
   ];
 

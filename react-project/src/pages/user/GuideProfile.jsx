@@ -16,6 +16,7 @@ const GuideProfile = () => {
   const navigate = useNavigate();
   let params = useParams();
   const isAdmin = currentPath.includes('admin/guideProfile')
+  const isGuide = currentPath.includes('guide/profile')
 
   const [activeSection, setActiveSection] = useState('details');
 
@@ -32,14 +33,16 @@ const GuideProfile = () => {
 
   const {personalDetails, professionalInfo} = data || []
 
-  
-
   const handleBookNow = () => {
     navigate(`/bookGuides/${params.id}`)
   };
 
   const handleReview =() => {
     navigate(`/addReview/${params.id}`)
+  }
+
+  const handleEditGuide= () => {
+    navigate(`/guide/edit/${params.id}`)
   }
 
   console.log(reviews)
@@ -64,7 +67,7 @@ const GuideProfile = () => {
                 character={<StarFilled />}
                 className="text-yellow-500"
               />
-              <span className="text-gray-500">(126 reviews)</span>
+              <span className="text-gray-500">(4 reviews)</span>
             </div>
             <h3 className="text-base mb-3 font-medium"> <PhoneOutlined/> {personalDetails?.phone}</h3>
             <h3 className="text-base mb-3 font-medium"> <MailOutlined/> {personalDetails?.email} </h3>
@@ -75,17 +78,28 @@ const GuideProfile = () => {
             )}
             <br/>
             
-            {isAdmin?(
-              ''
-            ): (
-              <Button 
-              type="primary" 
-              size="large" 
-              onClick={handleBookNow}
-              >
-                Book Now
-              </Button>
-            )}
+            {isAdmin? null: (
+              (isGuide? (
+                <Button 
+                type="primary" 
+                size="large" 
+                onClick={handleEditGuide}
+                >
+                  Edit
+                </Button>
+              ): (
+                <Button 
+                type="primary" 
+                size="large" 
+                onClick={handleBookNow}
+                >
+                  Book Now
+                </Button>
+              )
+            )
+          )
+          }
+               
           </div>
         </div>
 
@@ -122,7 +136,7 @@ const GuideProfile = () => {
         ):
         (
           <div className="container w-[100%]">
-              {!isAdmin? (
+              {!isAdmin && !isGuide? (
             <div className="pb-10 pt-2 w-[50%] md:w-[100%]">
               <Button style={{float:"right"}} onClick={handleReview}
                type="primary"><PlusOutlined/> Add Review</Button>

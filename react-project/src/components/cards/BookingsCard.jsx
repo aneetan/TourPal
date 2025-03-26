@@ -1,4 +1,5 @@
-import { AimOutlined, CalendarOutlined, InboxOutlined } from '@ant-design/icons';
+import { AimOutlined, CalendarOutlined, MailOutlined } from '@ant-design/icons';
+import dayjs from 'dayjs';
 import React from 'react';
 
 const BookingsCard = ({ booking, status = "accepted" }) => {
@@ -31,7 +32,7 @@ const BookingsCard = ({ booking, status = "accepted" }) => {
             <div className="flex items-start gap-2">
               <AimOutlined className="w-3 h-3 sm:w-4 sm:h-4 text-primary/70 mt-0.5 flex-shrink-0" />
               <div>
-                <span className="text-xs sm:text-sm font-medium">Destination:</span>
+                <span className="text-xs sm:text-sm font-medium">Destination</span>
                 <p className="text-xs sm:text-sm line-clamp-1">{destination}</p>
               </div>
             </div>
@@ -40,14 +41,16 @@ const BookingsCard = ({ booking, status = "accepted" }) => {
             <div className="flex items-start gap-2">
               <CalendarOutlined className="w-3 h-3 sm:w-4 sm:h-4 text-primary/70 mt-0.5 flex-shrink-0" />
               <div>
-                <span className="text-xs sm:text-sm font-medium">Date:</span>
-                <p className="text-xs sm:text-sm">{date}</p>
+                <span className="text-xs sm:text-sm font-medium">Date </span>
+                <p className="text-xs sm:text-sm">
+                {dayjs(date).format('YYYY-MM-DD')}
+                </p>
               </div>
             </div>
             
             {/* Message */}
             <div className="flex gap-2 mt-2 sm:mt-3">
-              <InboxOutlined className="w-3 h-3 sm:w-4 sm:h-4 text-primary/70 mt-0.5 flex-shrink-0" />
+              <MailOutlined className="w-3 h-3 sm:w-4 sm:h-4 text-primary/70 mt-0.5 flex-shrink-0" />
               <p className="text-xs sm:text-sm">
                 {message}
               </p>

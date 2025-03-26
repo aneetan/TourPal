@@ -57,6 +57,10 @@ export const deleteGuide = async(id, data) => {
     await axios.delete(`http://localhost:3000/guides/${id}`, data)
 }
 
+export const updateGuide = async (id, data) => {
+    await axios.patch(`http://localhost:3000/guides/${id}`, data)
+}
+
 // ------------------------- Authenticate ------------------------------
 export const authenticateUser = async (email, password) => {
     const response= await axios.get(`http://localhost:3000/users/?email=${email}&password=${password}`)

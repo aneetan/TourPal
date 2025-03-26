@@ -22,17 +22,18 @@
         "name": "Pratik Bhattarai",
         "email": "pb@gmail.com",
         "password": "Pratik@123",
-        "phone": "9843411801"
+        "phone": "9845766734"
       },
       "professionalInfo": {
         "Bio": "Passionate local guide specializing in cultural heritage tours and adventurous treks, dedicated to creating unforgettable experiences.",
         "speciality": "Cultural & Historical",
-        "experience": "2-3",
+        "experience": "5+",
         "languages": [
-          "english",
-          "french"
+          "English",
+          "Spanish",
+          "French"
         ],
-        "pricing": "600"
+        "pricing": "1000"
       }
     },
     {
@@ -48,8 +49,8 @@
         "speciality": "Cultural & Historical",
         "experience": "2-3",
         "languages": [
-          "english",
-          "french"
+          "English",
+          "French"
         ],
         "pricing": "600"
       }
@@ -80,7 +81,6 @@
       "latitude": 27.611755419683686,
       "longitude": 85.33958206945567
     }
-
   ],
   "messages": [
     {

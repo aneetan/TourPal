@@ -34,6 +34,7 @@ const Signin = () => {
       if(guideResponse.personalDetails.email === values.email && guideResponse.personalDetails.password === values.password){
         localStorage.setItem("is_user", 3)
         localStorage.setItem("username", guideResponse.personalDetails.name)
+        localStorage.setItem("guideId", guideResponse.id)
         navigate("/guide/dashboard")
         return
       }

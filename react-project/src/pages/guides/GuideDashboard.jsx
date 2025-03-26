@@ -29,7 +29,6 @@ const GuideDashboard = () => {
       const response = await fetch(`http://localhost:3000/users/${name}`);
       const data = await response.json();
       setUser(data)
-  console.log(user)
 
     } catch (e){
       console.log(e)
