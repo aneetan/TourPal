@@ -22,6 +22,9 @@ import GuideLayout from './pages/guides/GuideLayout';
 import GuideDashboard from './pages/guides/GuideDashboard';
 import Bookings from './pages/guides/Bookings';
 import EditGuideProfile from './pages/guides/EditGuideProfile';
+import GuideSettings from './pages/guides/GuideSettings';
+import ChangePwForm from './components/ChangePwForm';
+import PasswordForm from './components/PasswordForm';
   
 
 function App() {
@@ -56,6 +59,10 @@ function App() {
             <Route path ='/guide/bookings' element={<Bookings/>}/>
             <Route path ='/guide/profile/:id' element={<GuideProfile/>}/>
             <Route path ='/guide/edit/:id' element={<EditGuideProfile/>}/>
+            <Route path ='/guide/settings' element={<GuideSettings/>}>
+                <Route path='/guide/settings/pw' element={<PasswordForm/>}/>
+                <Route path='/guide/settings/changePw' element={<ChangePwForm/>}/>
+            </Route>
           </Route>
 
           <Route path='/login' element={<Signin/>}/>

@@ -218,7 +218,7 @@ const EditGuideProfile = () => {
             </Form.Item>
 
             {/* Submit Button */}
-            <Form.Item className="text-right">
+            <Form.Item className="text-left">
             <Button 
                 type="primary"
                 htmlType="submit"

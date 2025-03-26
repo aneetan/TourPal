@@ -14,9 +14,9 @@ const GuideHeader = ({ collapsed, toggleSidebar }) => {
       label: <Link to={`/guide/profile/${id}`}> Profile </Link>,
     },
     {
-      key: '/guide/settings',
+      key: '/guide/settings/pw',
       icon: <SettingOutlined />,
-      label: <Link to='/guide/settings'> Settings </Link>,
+      label: <Link to='/guide/settings/pw'> Settings </Link>,
     }
   ];
 
