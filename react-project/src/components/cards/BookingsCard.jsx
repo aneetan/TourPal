@@ -7,7 +7,7 @@ const BookingsCard = ({ booking, status = "accepted" }) => {
   const isAccepted = status === 'accepted';
 
   return (
-    <div className="mt-6 w-full sm:w-[50%] lg:w-[70%] xl:w-[30%] rounded-2xl shadow-lg bg-[#FFEBD6] hover:shadow-xl transition-shadow duration-300">
+    <div className="mt-6 w-full sm:w-[50%] lg:w-[70%] xl:w-[100%] rounded-2xl shadow-lg bg-[#FFEBD6] hover:shadow-xl transition-shadow duration-300">
       <div className="glass-card rounded-2xl overflow-hidden card-hover">
         <div className="px-4 sm:px-6 py-4 sm:py-6">
           {/* User Section */}

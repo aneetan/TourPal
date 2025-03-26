@@ -9,6 +9,7 @@ import UserEditForm from '../../components/user/UserEditForm';
 import PasswordForm from '../../components/PasswordForm';
 import PasswordUser from '../../components/user/PasswordUser';
 import ChangePwUser from '../../components/user/ChangePwUser';
+import UserBookings from './UserBookings';
 
 const {Content} = Layout;
 const {TabPane} = Tabs;
@@ -45,7 +46,7 @@ const UserProfile = ({active = "profile"}) => {
             label: <span className="w-full text-left px-2 md:px-4 py-2">My Bookings</span>,
             children: (
                 <Card className="md:ml-4">
-                    Bookings
+                    <UserBookings/>
                 </Card>
             ),
         }
@@ -54,9 +55,9 @@ const UserProfile = ({active = "profile"}) => {
   return (
     <>
         <div className="min-h-screen bg-background">
-            <main className="container mx-auto pt-24 px-4 pb-12">
+            <main className="container mx-auto pt-10 px-4 pb-12">
                 <div className="max-w-5xl mx-auto">
-                <h1 className="text-3xl font-bold mb-8">My Account</h1>
+                <h1 className="text-2xl ml-8 font-bold mb-8">User Profile</h1>
                 
                 <Tabs
                         activeKey={activeTab}
