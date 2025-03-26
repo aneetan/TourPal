@@ -1,17 +1,33 @@
 import { Button, Card, Checkbox, Form, Input, Select } from 'antd'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useNavigate, useParams } from 'react-router';
+import { updateGuide } from '../utils/user.utils';
+import { showSuccess } from '../utils/toastify.utils';
+import useFetch from '../hooks/useFetch';
 
 const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
 const ChangePwForm = () => {
   const navigate = useNavigate();
   let {id} = useParams();
-//   const {data, loading, error} = useFetch(`http://localhost:3000/guides/${id}`)
+  const {data, loading, error} = useFetch(`http://localhost:3000/guides/${id}`);
 
-const onFinish = () => {
+    const onFinish = async( values ) => {
+        const {password} = values;
+        const updatedData = {
+            ...data,
+            personalDetails: {
+                ...data.personalDetails,
+                password: password
+            }
+        }
+        updateGuide(id, updatedData). 
+        then(()=> {
+            navigate('/guide/dashboard')
+            showSuccess("Password changed successfully")
+        })
 
-}
+    }
 
   return (
         <Form 
@@ -49,7 +65,7 @@ const onFinish = () => {
             </Form.Item>
 
             <Form.Item
-            name="password"
+            name="password2"
             label="Confirm Password"
             labelCol={{ span: 24 }}
             wrapperCol={{ span: 24 }}

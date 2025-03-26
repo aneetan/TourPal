@@ -27,6 +27,7 @@ const Signin = () => {
         localStorage.setItem("is_user", 2)
         localStorage.setItem("username", userResponse.name)
         localStorage.setItem("userId", userResponse.id)
+        localStorage.setItem("email", userResponse.email)
         navigate("/")
         return
       }
@@ -35,6 +36,7 @@ const Signin = () => {
         localStorage.setItem("is_user", 3)
         localStorage.setItem("username", guideResponse.personalDetails.name)
         localStorage.setItem("guideId", guideResponse.id)
+        localStorage.setItem("email", guideResponse.personalDetails.email)
         navigate("/guide/dashboard")
         return
       }

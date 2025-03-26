@@ -61,7 +61,7 @@ function App() {
             <Route path ='/guide/edit/:id' element={<EditGuideProfile/>}/>
             <Route path ='/guide/settings' element={<GuideSettings/>}>
                 <Route path='/guide/settings/pw' element={<PasswordForm/>}/>
-                <Route path='/guide/settings/changePw' element={<ChangePwForm/>}/>
+                <Route path='/guide/settings/changePw/:id' element={<ChangePwForm/>}/>
             </Route>
           </Route>
 

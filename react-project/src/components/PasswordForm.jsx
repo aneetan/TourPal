@@ -3,17 +3,27 @@ import React, { useEffect, useState } from 'react'
 import { ArrowRightOutlined } from '@ant-design/icons'
 import { useNavigate, useParams } from 'react-router';
 import useFetch from '../hooks/useFetch';
+import { authenticateGuide } from '../utils/user.utils';
+import { showError } from '../utils/toastify.utils';
 const { Option } = Select;
 
 const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
 const PasswordForm = () => {
   const navigate = useNavigate();
-  let {id} = useParams();
-//   const {data, loading, error} = useFetch(`http://localhost:3000/guides/${id}`)
+  const id = localStorage.getItem("guideId")
 
-    const onFinish = () => {
-        navigate('/guide/settings/changePw')
+    const onFinish = async(values) => {
+        const email = localStorage.getItem("email")
+        const {password} = values;
+        const guide = await authenticateGuide(email, password);
+        if(guide){
+            if(guide.personalDetails.email === email && guide.personalDetails.password === values.password){
+                navigate(`/guide/settings/changePw/${id}`)
+            } 
+        } else {
+            showError("Incorrect password")
+        }
     }
   return (
         <Form 
