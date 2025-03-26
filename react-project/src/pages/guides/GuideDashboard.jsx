@@ -29,7 +29,6 @@ const GuideDashboard = () => {
       const response = await fetch(`http://localhost:3000/users/${name}`);
       const data = await response.json();
       setUser(data)
-  console.log(user)
 
     } catch (e){
       console.log(e)
@@ -75,7 +74,6 @@ const GuideDashboard = () => {
       sorter: (a, b) => a.name.localeCompare(b.name),
       render: (text, record) => (
         <Space>
-          {/* <a href={`/userProfile/${record.id}`}>{text}</a> */}
           <a onClick={() => showModal(record.userId)}>{text}</a>
 
           <Modal title="User Detail" open={isModalOpen} onOk={handleModalOk} onCancel={handleModalCancel}>

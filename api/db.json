@@ -4,15 +4,15 @@
       "id": "5e64",
       "name": "Anita Neupane",
       "email": "anita@gmail.com",
-      "number": "9845766733",
+      "number": "9845766731",
       "password": "anita@123"
     },
     {
       "id": "6afe",
       "name": "Pratik Bhattarai",
       "email": "pratik@gmail.com",
-      "number": "9843411801",
-      "password": "Pratik@118"
+      "number": "9812345678",
+      "password": "Pratik@123"
     }
   ],
   "guides": [
@@ -21,18 +21,19 @@
       "personalDetails": {
         "name": "Pratik Bhattarai",
         "email": "pb@gmail.com",
-        "password": "Pratik@123",
-        "phone": "9843411801"
+        "password": "Pratik@118",
+        "phone": "9845766734"
       },
       "professionalInfo": {
         "Bio": "Passionate local guide specializing in cultural heritage tours and adventurous treks, dedicated to creating unforgettable experiences.",
         "speciality": "Cultural & Historical",
-        "experience": "2-3",
+        "experience": "5+",
         "languages": [
-          "english",
-          "french"
+          "English",
+          "Spanish",
+          "French"
         ],
-        "pricing": "600"
+        "pricing": "1000"
       }
     },
     {
@@ -48,8 +49,8 @@
         "speciality": "Cultural & Historical",
         "experience": "2-3",
         "languages": [
-          "english",
-          "french"
+          "English",
+          "French"
         ],
         "pricing": "600"
       }
@@ -86,11 +87,10 @@
       "id": "4253",
       "destination": "Malai Tha xaina",
       "date": "2025-03-30T18:15:00.000Z",
-      "message": "Data save huna paryo k\n",
+      "message": "please organize the accomodation",
       "guideId": "375f",
       "user": "Pratik Bhattarai",
       "userId": "6afe"
-
     },
     {
       "id": "0aac",
@@ -106,6 +106,15 @@
       "destination": "Home",
       "date": "2025-03-27T18:15:00.000Z",
       "message": "My ssweet home.",
+      "guideId": "375f",
+      "user": "Anita Neupane",
+      "userId": "5e64"
+    },
+    {
+      "id": "1a53",
+      "destination": "Syangja",
+      "date": "2025-04-01T18:15:00.000Z",
+      "message": "I don't know",
       "guideId": "375f",
       "user": "Anita Neupane",
       "userId": "5e64"

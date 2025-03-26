@@ -1,5 +1,6 @@
 import axios from "axios"
 
+// --------------------------------- Place ---------------------------------
 export const addPlace = async (data) => {
     await axios.post(`http://localhost:3000/places`, data)
 }
@@ -40,6 +41,10 @@ export const deleteUser = async(id, data) => {
     await axios.delete(`http://localhost:3000/users/${id}`, data)
 }
 
+export const updateUser = async (id, data) => {
+    await axios.patch(`http://localhost:3000/users/${id}`, data)
+}
+
 export const getAllGuides = () => {
     return new Promise((resolve, reject) => {
         axios.get("http://localhost:3000/guides")
@@ -54,6 +59,10 @@ export const getAllGuides = () => {
 
 export const deleteGuide = async(id, data) => {
     await axios.delete(`http://localhost:3000/guides/${id}`, data)
+}
+
+export const updateGuide = async (id, data) => {
+    await axios.patch(`http://localhost:3000/guides/${id}`, data)
 }
 
 // ------------------------- Authenticate ------------------------------

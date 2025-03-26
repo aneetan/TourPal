@@ -1,9 +1,9 @@
 import { Button, Card, Col, Row } from 'antd'
 import React, { useEffect, useState } from 'react'
-import BookingsCard from '../../components/cards/BookingsCard';
 import { getAllMessages } from '../../utils/user.utils';
+import BookingsCard from '../../components/cards/BookingsCard';
 
-const Bookings = () => {
+const UserBookings = () => {
     const [activeSection, setActiveSection] = useState('accepted');
     const [bookingData, setBookingData] = useState([])
     
@@ -20,7 +20,7 @@ const Bookings = () => {
         fetchBookings();
     }, [])
 
-    const declinedData = [
+    const data = [
         {
         img:'https://static.vecteezy.com/system/resources/thumbnails/035/591/149/small_2x/ai-generated-nepali-ethnic-village-girl-generate-ai-photo.jpg',
         destination: 'Egypt',
@@ -49,46 +49,16 @@ const Bookings = () => {
     <>
         <Row>
             <Col span={24}>
-                <Card title="Bookings" variant="borderless">
-                <div className="flex space-x-2">
-                    <Button
-                        style={{
-                        border:"none",
-                        color: activeSection === 'accepted' ? 'orange' : '#000',
-                        borderBottom: activeSection === 'accepted' ? '2px solid orange' : 'none',
-                        borderRadius: 0,
-                        }}
-                        onClick={() => setActiveSection('accepted')}
-                    >
-                        Accepted
-                    </Button>
-                    <Button
-                    style={{
-                        border:"none",
-                        color: activeSection === 'declined' ? 'orange' : '#000',
-                        borderBottom: activeSection === 'declined' ? '2px solid orange' : 'none',
-                        borderRadius: 0,
-                    }}
-                        onClick={() => setActiveSection('declined')}
-                    >
-                        Declined
-                    </Button>
-                    </div>
-
-                    {activeSection === 'accepted'? (
-                        <div className="flex flex-wrap gap-4">
+                <Card  title="My Bookings" variant="borderless" className='w-full'>
                         {bookingData.map((booking, index) => (
                           <BookingsCard key={index} booking={booking} status='accepted' />
                         ))}
-                      </div>
-                    ) : (
-                        <div className="flex flex-wrap gap-4">
-                        {declinedData.map((booking, index) => (
+                        {bookingData.map((booking, index) => (
                           <BookingsCard key={index} booking={booking} status='declined' />
                         ))}
+                    <div className="flex flex-wrap gap-4">
+                        
                       </div>
-                    )
-                }
                 </Card>
             </Col>
         </Row>
@@ -97,4 +67,4 @@ const Bookings = () => {
   )
 }
 
-export default Bookings
+export default UserBookings
