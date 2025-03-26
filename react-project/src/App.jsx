@@ -25,6 +25,8 @@ import EditGuideProfile from './pages/guides/EditGuideProfile';
 import GuideSettings from './pages/guides/GuideSettings';
 import ChangePwForm from './components/ChangePwForm';
 import PasswordForm from './components/PasswordForm';
+import UserProfile from './pages/user/UserProfile';
+import ChangePwUser from './components/user/ChangePwUser';
   
 
 function App() {
@@ -41,7 +43,8 @@ function App() {
             <Route path='/bookGuides/:id' element={<RequestPop/>}/>
             <Route path='/guideProfile/:id' element={<GuideProfile/>}/>
             <Route path='/addReview/:id' element={<AddReviewForm/>}/>
-
+            <Route path='/profile/:id' element={<UserProfile/>}/>
+            <Route path='/user/changePw/:id' element={<UserProfile active="password"/>}/>
           </Route>
 
           <Route path='/admin' element={<AdminLayout/>}>

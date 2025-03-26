@@ -41,6 +41,10 @@ export const deleteUser = async(id, data) => {
     await axios.delete(`http://localhost:3000/users/${id}`, data)
 }
 
+export const updateUser = async (id, data) => {
+    await axios.patch(`http://localhost:3000/users/${id}`, data)
+}
+
 export const getAllGuides = () => {
     return new Promise((resolve, reject) => {
         axios.get("http://localhost:3000/guides")

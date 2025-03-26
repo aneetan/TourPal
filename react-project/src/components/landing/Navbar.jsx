@@ -10,6 +10,8 @@ const Navbar = () => {
 	const [isScrolled, setIsScrolled] = useState(false);
 	const [activeLink, setActiveLink] = useState("home");
 	const navigate = useNavigate()
+	const isUser = localStorage.getItem("is_user")
+	const userId = localStorage.getItem("userId")
 
 	const handleMenu = () => {
 		setIsMenuOpen(!isMenuOpen);
@@ -93,6 +95,15 @@ const Navbar = () => {
 						${activeLink === 'about' ? 'text-[#f15d30]' : 'text-gray-900'}`}
 						onClick={() => handleActiveLink('about')}> About </a>
 					</li>
+					{isUser === "2"? (
+					<li className='my-6 md:my-0'>
+						<a href={`profile/${userId}`} className={`font-medium duration-500 hover:text-[#f15d30]
+						${activeLink === 'profile' ? 'text-[#f15d30]' : 'text-gray-900'}`}
+						onClick={() => handleActiveLink('profile')}> Profile </a>
+					</li>
+					):(
+						null
+					)}
 					<div className="mt-6 md:mt-0 md:ml-8 md:flex">
 						<button
 							type='button'
