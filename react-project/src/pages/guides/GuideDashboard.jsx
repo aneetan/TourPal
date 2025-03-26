@@ -75,7 +75,6 @@ const GuideDashboard = () => {
       sorter: (a, b) => a.name.localeCompare(b.name),
       render: (text, record) => (
         <Space>
-          {/* <a href={`/userProfile/${record.id}`}>{text}</a> */}
           <a onClick={() => showModal(record.userId)}>{text}</a>
 
           <Modal title="User Detail" open={isModalOpen} onOk={handleModalOk} onCancel={handleModalCancel}>

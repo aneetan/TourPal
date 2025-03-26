@@ -1,5 +1,6 @@
 import axios from "axios"
 
+// --------------------------------- Place ---------------------------------
 export const addPlace = async (data) => {
     await axios.post(`http://localhost:3000/places`, data)
 }
