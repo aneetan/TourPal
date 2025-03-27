@@ -38,7 +38,7 @@ function App() {
           <Route path='/' element={<CustomLayout/>}>
             <Route path="/" element={<LandingPage />} />
             <Route path='/seeDestination' element={<CustomMap/>}/>
-            <Route path='/seeMore' element={<SeeDestinations/>}/>
+            <Route path='/seeMore/:id' element={<SeeDestinations/>}/>
             <Route path='/viewGuides' element={<GuideSection/>}/>
             <Route path='/bookGuides/:id' element={<RequestPop/>}/>
             <Route path='/guideProfile/:id' element={<GuideProfile/>}/>

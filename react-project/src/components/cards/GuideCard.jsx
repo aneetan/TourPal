@@ -73,7 +73,7 @@ const GuideCard = ({name, rating=2, reviews=123, bio, languages, experience, spe
 
             <div className="flex items-center text-sm text-gray-600">
             <CalendarOutlined className="h-4 w-4 mr-1 text-gray-500" />
-            <span>{experience}</span>
+            <span>{experience} years</span>
             </div>
             
         </div>

@@ -5,6 +5,7 @@ import React from 'react';
 const BookingsCard = ({ booking, status = "accepted" }) => {
   const { destination, date, message, user, img } = booking;
   const isAccepted = status === 'accepted';
+  const isPending = status === 'pending';
 
   return (
     <div className="mt-6 w-full sm:w-[50%] lg:w-[70%] xl:w-[100%] rounded-2xl shadow-lg bg-[#FFEBD6] hover:shadow-xl transition-shadow duration-300">
@@ -58,9 +59,11 @@ const BookingsCard = ({ booking, status = "accepted" }) => {
 
             {/* Status */}
             <div 
-              className={`text-xs sm:text-sm font-semibold ${isAccepted ? 'text-green-600' : 'text-red-600'}`}
+              className={`text-xs sm:text-sm font-semibold
+                ${isAccepted ? 'text-green-600' : (isPending ? 'text-blue-400' : 'text-red-600')}
+               `}
             >
-              Status: {isAccepted ? 'Accepted' : 'Declined'}
+              Status: {isAccepted ? 'Accepted' :  (isPending? 'Pending' : 'Declined')}
             </div>
           </div>
         </div>
