@@ -3,6 +3,7 @@ import { Layout, Button, Space, Avatar, Dropdown } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import Notifications from '../../admin/header/Notifications';
 import { Link } from 'react-router';
+import GuideNotifications from './GuideNotifications';
 const { Header } = Layout;
 
 const GuideHeader = ({ collapsed, toggleSidebar }) => {
@@ -40,7 +41,7 @@ const GuideHeader = ({ collapsed, toggleSidebar }) => {
         }}
       />
       <Space style={{ marginRight: '3rem' }}>
-        <Notifications/>
+        <GuideNotifications/>
         <Dropdown menu={{ items }} placement="bottomRight">
           <Space style={{ cursor: 'pointer' }}>
             <Avatar icon={<UserOutlined />} />

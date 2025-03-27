@@ -1,7 +1,8 @@
 import React from 'react'
-import { Layout, Button, Space, Avatar, Dropdown } from 'antd';
+import { Layout, Button, Space, Avatar, Dropdown, notification } from 'antd';
 import { BellOutlined, LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import Notifications from './Notifications'
+import AdminNotifications from '../AdminNotifications';
 const { Header } = Layout;
 
 const CustomHeader = ({ collapsed, toggleSidebar }) => {
@@ -46,7 +47,7 @@ const CustomHeader = ({ collapsed, toggleSidebar }) => {
         }}
       />
       <Space style={{ marginRight: '3rem' }}>
-        <Notifications/>
+        <AdminNotifications/>
         <Dropdown menu={{ items }} placement="bottomRight">
           <Space style={{ cursor: 'pointer' }}>
             <Avatar icon={<UserOutlined />} />
