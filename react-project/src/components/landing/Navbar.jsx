@@ -1,26 +1,44 @@
 import React, { useEffect, useState } from 'react'
 import { MenuOutlined, CloseOutlined, FlagFilled} from '@ant-design/icons';
 import HeroSection from './HeroSection';
-import { useNavigate } from 'react-router';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router';
 import Logo from '../Logo';
 
 
 const Navbar = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
-	const [activeLink, setActiveLink] = useState("home");
+	const location = useLocation();
 	const navigate = useNavigate()
 	const isUser = localStorage.getItem("is_user")
 	const userId = localStorage.getItem("userId")
 
+	const getActiveState = () => {
+		const path = location.pathname;
+		const hash = location.hash;
+	
+		if (path === '/' && !hash) return 'home';
+		if (hash === '#destinations') return 'destinations';
+		if (path === '/viewGuides') return 'bookGuide';
+		if (hash === '#guide') return 'registerGuide';
+		if (hash === '#about') return 'about';
+		if (path.startsWith('/profile')) return 'profile';
+		return '';
+	};
+
+	const [activeLink, setActiveLink] = useState(getActiveState());
+
+	useEffect(() => {
+		setActiveLink(getActiveState());
+	  }, [location]);
+
 	const handleMenu = () => {
 		setIsMenuOpen(!isMenuOpen);
 	  };
-	
-	const handleActiveLink = (link) => {
-		setActiveLink(link);
-	}
 
+	 const isHomeActive = () => {
+		return location.pathname === '/' && !location.hash;
+	  };
 	const handleLogin = () => {
 		if (localStorage.getItem("is_user") === "2" ){
 			localStorage.setItem("is_user", 0)
@@ -29,6 +47,17 @@ const Navbar = () => {
 		}
 		navigate('/login')
 	}
+
+	useEffect(() => {
+		if (location.hash) {
+		  const element = document.getElementById(location.hash.substring(1));
+		  if (element) {
+			element.scrollIntoView({ behavior: 'smooth' });
+		  }
+		} else {
+		  window.scrollTo({ top: 0, behavior: 'smooth' });
+		}
+	  }, [location]);
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -54,14 +83,11 @@ const Navbar = () => {
 
 			<div className="container md:px-12 md:flex md:items-center md:justify-between">
 				<div className="flex items-center justify-between">
-					<a href='#' className='flex items-center justify-center'>
-						{/* <img src={Logo} alt='logo' className='h-10 mr-3'/> */}
+					<NavLink to='/' className='flex items-center justify-center' onClick={() => setActiveLink('home')}>
 						<Logo width="80px"/>
 						<span className='text-2xl text-gray-900 font-sans font-bold'> TourPal </span>
-					</a>
+					</NavLink>
 					<span className='block mx-2 text-3xl bg-gray-100 p-2 rounded-lg md:hidden' onClick={handleMenu}>
-						{/* <i className='menu bx bx-menu w-6 h-6' onClick="Menu(this)"></i> */}
-						{/* <box-icon name='menu' className='bx bx-menu w-6 h-6' ></box-icon> */}
 						{isMenuOpen ? <CloseOutlined /> : <MenuOutlined />}
 					</span>
 				</div>
@@ -71,35 +97,72 @@ const Navbar = () => {
 				md:space-x-8 md:static md:w-auto ${isMenuOpen ? 'top-[80px] opacity-100' : 'top-[-400px] opacity-0 md:opacity-100'}
 				bg-white md:bg-transparent`}>
 					<li className='md:my-0'>
-						<a href='#home' className={`font-medium duration-500 hover:text-[#f15d30]
-						${activeLink === 'home' ? 'text-[#f15d30]' : 'text-gray-900'}`}
-						onClick={() => handleActiveLink('home')}> Home</a>
+						 <NavLink 
+							to="/" 
+							end
+							className={`font-medium duration-500 hover:text-[#f15d30] ${
+								activeLink === 'home' ? 'text-[#f15d30]' : 'text-gray-900'
+							  }`}
+							onClick={() => setActiveLink('home')}
+						>
+							Home
+						</NavLink>
 					</li>
 					<li className='my-6 md:my-0'>
-						<a href='#destinations' className={`font-medium duration-500 hover:text-[#f15d30]
-						${activeLink === 'destinations' ? 'text-[#f15d30]' : 'text-gray-900'}`}
-						onClick={() => handleActiveLink('destinations')}> Destinations</a>
+					<NavLink 
+						to="/#destinations" 
+						className={`font-medium duration-500 hover:text-[#f15d30] ${
+							activeLink === 'destinations' ? 'text-[#f15d30]' : 'text-gray-900'
+						}`}
+						onClick={() => setActiveLink('destinations')}
+					>
+						Destinations
+					</NavLink>
 					</li>
 					<li className='my-6 md:my-0'>
-						<a href='/viewGuides' className={`font-medium duration-500 hover:text-[#f15d30]
-						${activeLink === 'bookGuide' ? 'text-[#f15d30]' : 'text-gray-900'}`}
-						onClick={() => handleActiveLink('bookGuide')}> Book A Guide </a>
+						<NavLink
+							to="/viewGuides" 
+							className={`font-medium duration-500 hover:text-[#f15d30] ${
+								activeLink === 'bookGuide' ? 'text-[#f15d30]' : 'text-gray-900'
+							  }`}
+							onClick={() => setActiveLink('bookGuide')}						
+						>
+							Book A Guide
+						</NavLink>
 					</li>
 					<li className='my-6 md:my-0'>
-						<a href='#guide' className={`font-medium duration-500 hover:text-[#f15d30]
-						${activeLink === 'registerGuide' ? 'text-[#f15d30]' : 'text-gray-900'}`}
-						onClick={() => handleActiveLink('registerGuide')}> Register as Guide </a>
+						<Link 
+							to="/#guide" 
+							className={`font-medium duration-500 hover:text-[#f15d30] ${
+								activeLink === 'registerGuide' ? 'text-[#f15d30]' : 'text-gray-900'
+							  }`}
+							onClick={() => setActiveLink('registerGuide')}
+						>
+							Register as Guide
+						</Link>
 					</li>
 					<li className='my-6 md:my-0'>
-						<a href='#about' className={`font-medium duration-500 hover:text-[#f15d30]
-						${activeLink === 'about' ? 'text-[#f15d30]' : 'text-gray-900'}`}
-						onClick={() => handleActiveLink('about')}> About </a>
+						<Link 
+							to="/#about" 
+							className={`font-medium duration-500 hover:text-[#f15d30] ${
+								activeLink === 'about' ? 'text-[#f15d30]' : 'text-gray-900'
+							  }`}
+							onClick={() => setActiveLink('about')}
+						>
+							About
+						</Link>
 					</li>
 					{isUser === "2"? (
 					<li className='my-6 md:my-0'>
-						<a href={`profile/${userId}`} className={`font-medium duration-500 hover:text-[#f15d30]
-						${activeLink === 'profile' ? 'text-[#f15d30]' : 'text-gray-900'}`}
-						onClick={() => handleActiveLink('profile')}> Profile </a>
+						<NavLink 
+						to={`/profile/${userId}`} 	
+						className={`font-medium duration-500 hover:text-[#f15d30] ${
+							activeLink === 'profile' ? 'text-[#f15d30]' : 'text-gray-900'
+						  }`}
+						onClick={() => setActiveLink('profile')}
+						>
+						Profile
+						</NavLink>
 					</li>
 					):(
 						null
@@ -112,7 +175,7 @@ const Navbar = () => {
 								text-center hover:bg-[#f15d30] hover:drop-shadow-md transition cursor-pointer duration-300 ease-in-out
 								${isMenuOpen ? 'ms:opacity-100' : 'opacity-0'} block md:hidden`}
 						>
-							{localStorage.getItem("is_user") === "2" ? "Logout" : "Login"}
+							{isUser === "2" ? "Logout" : "Login"}
 							</button>
 					</div>
 				</ul>
@@ -125,7 +188,7 @@ const Navbar = () => {
 					className='text-white bg-[#f15d30] cursor-pointer font-medium rounded-lg px-6 py-3 text-center hover:bg-[#f15d30]
 					hover:scale-101 hover:drop-shadow-md transition duration-300 ease-in-out'
 				>
-					{localStorage.getItem("is_user") === "2" ? "Logout" : "Login"}
+					{isUser === "2" ? "Logout" : "Login"}
 
 				</button>
 				</a>

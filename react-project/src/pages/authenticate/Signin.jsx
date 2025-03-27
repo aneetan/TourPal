@@ -1,9 +1,8 @@
 import { Button,Form,Input, Typography } from "antd";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { useNavigate } from "react-router";
 import { authenticateGuide, authenticateUser } from "../../utils/user.utils";
-import { showError, showSuccess } from "../../utils/toastify.utils";
+import { showError } from "../../utils/toastify.utils";
 const { Text, Link } = Typography;
 import Logo from '../../assets/images/logo-name.png'
 
