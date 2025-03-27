@@ -27,6 +27,9 @@ import ChangePwForm from './components/ChangePwForm';
 import PasswordForm from './components/PasswordForm';
 import UserProfile from './pages/user/UserProfile';
 import ChangePwUser from './components/user/ChangePwUser';
+import ForgotPw from './pages/authenticate/ForgotPw';
+import OtpForm from './pages/authenticate/OtpForm';
+import NewPassword from './pages/authenticate/NewPassword';
   
 
 function App() {
@@ -70,6 +73,9 @@ function App() {
 
           <Route path='/login' element={<Signin/>}/>
           <Route path='/register' element={<Signup/>}/>
+          <Route path='/forgotPw' element={<ForgotPw/>}/>
+          <Route path='/otp/:id' element={<OtpForm/>}/>
+          <Route path='/changePw/:id' element={<NewPassword/>}/>
           <Route path='/registerGuides' element={<RegisterGuides/>}/>
         </Routes>
 

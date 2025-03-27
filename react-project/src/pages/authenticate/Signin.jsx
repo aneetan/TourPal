@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { authenticateGuide, authenticateUser } from "../../utils/user.utils";
 import { showError, showSuccess } from "../../utils/toastify.utils";
 const { Text, Link } = Typography;
+import Logo from '../../assets/images/logo.png'
 
 const Signin = () => {
   const [isFocused, setIsFocused] = useState(false);
@@ -64,16 +65,13 @@ const Signin = () => {
                   href="/#"
                   className="mx-auto inline-block max-w-[160px]"
                 >
-                  Logo here
-                  {/* <img
-                    src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-primary.svg"
+                  <img
+                    src={Logo}
                     alt="logo"
-                  /> */}
+                    className="w-20"
+                  />
+                  
                 </a>
-              </div>
-
-              <div className="text-red-500 pt-3 text-[0.8rem]">
-                {errorMsg}
               </div>
 
               <Form onFinish={handleUserLogin}>
@@ -116,7 +114,7 @@ const Signin = () => {
                 </Form.Item>
 
                 <a
-                href="/#"
+                href="/forgotPw"
                 style={{textDecoration:"underline"}}
                 className="mb-2 float-right inline-block text-[0.8rem]"
               >
@@ -156,7 +154,7 @@ const Signin = () => {
               
               <p className="text-base text-body-color dark:text-dark-6">
                 <span className="pr-2">Not a member yet?</span>
-                <Link href="/register"  target="_blank" style={{textDecoration:"underline", fontFamily:"Poppins", fontSize:"16px"}}>
+                <Link href="/register" style={{textDecoration:"underline", fontFamily:"Poppins", fontSize:"16px"}}>
                   SignUp 
                 </Link>
               </p>

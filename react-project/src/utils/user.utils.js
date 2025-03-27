@@ -74,11 +74,26 @@ export const authenticateUser = async (email, password) => {
     return response.data[0];
 }
 
+export const findUserByEmail = async (email) => {
+    const response= await axios.get(`http://localhost:3000/users/?email=${email}`)
+    if (response.data.length === 0) {
+        return null;
+      }
+    return response.data[0];
+}
+
 export const authenticateGuide = async(email, password) => {
     const response = await axios.get(`http://localhost:3000/guides/?personalDetails.email=${email}&personalDetails.password=${password}`);
      
     return response.data[0] || null;
 }
+
+export const findGuideByEmail = async(email) => {
+    const response = await axios.get(`http://localhost:3000/guides/?personalDetails.email=${email}`);
+     
+    return response.data[0] || null;
+}
+
 
 export const addMessages = async(data) => {
     await axios.post("http://localhost:3000/messages", data)
