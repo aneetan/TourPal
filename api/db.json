@@ -26,9 +26,9 @@
     {
       "id": "375f",
       "personalDetails": {
-        "name": "Pratik Bhattarai",
-        "email": "pb@gmail.com",
-        "password": "Pratik@118",
+        "name": "Nischal Tamang",
+        "email": "ram@gmail.com",
+        "password": "Nischal@123",
         "phone": "9845766734"
       },
       "professionalInfo": {
@@ -46,7 +46,7 @@
     {
       "id": "375e",
       "personalDetails": {
-        "name": "Guide2",
+        "name": "Guide",
         "email": "guide@gmail.com",
         "password": "Guide@123",
         "phone": "9843411801"
@@ -92,36 +92,36 @@
   "messages": [
     {
       "id": "4253",
-      "destination": "Malai Tha xaina",
+      "destination": "Pokhara",
       "date": "2025-03-30T18:15:00.000Z",
-      "message": "please organize the accomodation",
+      "message": "Please organize the accomodation",
       "guideId": "375f",
-      "user": "Pratik Bhattarai",
-      "userId": "6afe"
+      "user": "Binita Neupane",
+      "userId": "b476"
     },
     {
       "id": "0aac",
       "destination": "Kalinchowk",
       "date": "2025-03-27T18:15:00.000Z",
-      "message": "Kata hideko bijuli balera",
+      "message": "I have the request to manage the tour details and contact me asap",
       "guideId": "375f",
-      "user": "Pratik Bhattarai",
-      "userId": "6afe"
+      "user": "Binita Neupane",
+      "userId": "b476"
     },
     {
       "id": "02b5",
-      "destination": "Home",
+      "destination": "Mustang",
       "date": "2025-03-27T18:15:00.000Z",
-      "message": "My ssweet home.",
+      "message": "Please Provide me itinary",
       "guideId": "375f",
       "user": "Anita Neupane",
       "userId": "5e64"
     },
     {
       "id": "1a53",
-      "destination": "Syangja",
+      "destination": "Shivapuri",
       "date": "2025-04-01T18:15:00.000Z",
-      "message": "I don't know",
+      "message": "You can change the date as you are flexible!",
       "guideId": "375f",
       "user": "Anita Neupane",
       "userId": "5e64"
@@ -133,12 +133,12 @@
       "rating": 5,
       "message": "Always recommned!! He was very nice and cute",
       "guideId": "375f",
-      "user": "Pratik Bhattarai"
+      "user": "Binita Neupane"
     },
     {
       "id": "fa5e",
       "rating": 5,
-      "message": "Thank you for choosing us! Your feedback helps us improve. Please share your experience by leaving a review: ",
+      "message": "Very kind and nice person to get by! Please share your experience by leaving a review: ",
       "guideId": "375f",
       "user": "Anita Neupane"
     }

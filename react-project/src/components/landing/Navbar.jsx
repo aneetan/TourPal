@@ -17,7 +17,7 @@ const Navbar = () => {
 		const path = location.pathname;
 		const hash = location.hash;
 	
-		// if (path === '/' && !hash) return 'home';
+		if (path === '/' && !hash) return 'home';
 		if (hash === '#destinations') return 'destinations';
 		if (path === '/viewGuides') return 'bookGuide';
 		if (hash === '#guide') return 'registerGuide';
