@@ -90,7 +90,7 @@ const PersonalDetails = ({onFinish, initialValues} ) => {
                 </div>
                 <div className='w-full md:w-1/2 px-4 md:px-8'>
                     <Form.Item
-                    name="password"
+                    name="password2"
                     label="Confirm Password"
                     labelCol={{ span: 24 }}
                     wrapperCol={{ span: 24 }}
@@ -111,6 +111,7 @@ const PersonalDetails = ({onFinish, initialValues} ) => {
                     ]}
                     >
                     <Input.Password
+                    name='password'
                     style={{padding:"10px", outline:"none"}}
                     placeholder="Confirm password"
                     />

@@ -23,7 +23,6 @@ const SendBookingRequest = () => {
         try{
             const formData = {
                 ...values,
-                guideId: id,
                 user: localStorage.getItem('username'),
                 userId: localStorage.getItem('userId'),
             }

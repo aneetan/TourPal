@@ -3,7 +3,7 @@
     {
       "id": "5e64",
       "name": "Anita Neupane",
-      "email": "anita@gmail.com",
+      "email": "anita1@gmail.com",
       "number": "9845766731",
       "password": "Anita@123"
     },
@@ -15,34 +15,14 @@
       "password": "Binita@123"
     },
     {
-      "id": "0952",
-      "name": "demo",
-      "email": "demo@gmail.com",
-      "number": "9843411801",
-      "password": "Demo@123"
+      "id": "8d66",
+      "name": "Sonu Thapa",
+      "email": "user@gmail.com",
+      "number": "9869084390",
+      "password": "Sonu@123"
     }
   ],
   "guides": [
-    {
-      "id": "375f",
-      "personalDetails": {
-        "name": "Nischal Tamang",
-        "email": "ram@gmail.com",
-        "password": "Nischal@123",
-        "phone": "9845766734"
-      },
-      "professionalInfo": {
-        "Bio": "Passionate local guide specializing in cultural heritage tours and adventurous treks, dedicated to creating unforgettable experiences.",
-        "speciality": "Cultural & Historical",
-        "experience": "5+",
-        "languages": [
-          "English",
-          "Spanish",
-          "French"
-        ],
-        "pricing": "1000"
-      }
-    },
     {
       "id": "375e",
       "personalDetails": {
@@ -60,6 +40,25 @@
           "French"
         ],
         "pricing": "600"
+      }
+    },
+    {
+      "id": "97c4",
+      "personalDetails": {
+        "name": "Saurab Shrestha",
+        "email": "saurab@gmail.com",
+        "password": "Saurab@123",
+        "phone": "9869084390"
+      },
+      "professionalInfo": {
+        "Bio": "This is the bio for Saurab",
+        "speciality": "Cultural & Historical",
+        "experience": "2-3",
+        "languages": [
+          "English",
+          "Spanish"
+        ],
+        "pricing": "300"
       }
     }
   ],
@@ -95,7 +94,6 @@
       "destination": "Pokhara",
       "date": "2025-03-30T18:15:00.000Z",
       "message": "Please organize the accomodation",
-      "guideId": "375f",
       "user": "Binita Neupane",
       "userId": "b476"
     },
@@ -104,7 +102,6 @@
       "destination": "Kalinchowk",
       "date": "2025-03-27T18:15:00.000Z",
       "message": "I have the request to manage the tour details and contact me asap",
-      "guideId": "375f",
       "user": "Binita Neupane",
       "userId": "b476"
     },
@@ -113,7 +110,6 @@
       "destination": "Mustang",
       "date": "2025-03-27T18:15:00.000Z",
       "message": "Please Provide me itinary",
-      "guideId": "375f",
       "user": "Anita Neupane",
       "userId": "5e64"
     },
@@ -122,7 +118,22 @@
       "destination": "Shivapuri",
       "date": "2025-04-01T18:15:00.000Z",
       "message": "You can change the date as you are flexible!",
-      "guideId": "375f",
+      "user": "Anita Neupane",
+      "userId": "5e64"
+    },
+    {
+      "id": "19ad",
+      "destination": "Laltipur",
+      "date": "2025-04-01T18:15:00.000Z",
+      "message": "I need a professional guidance",
+      "user": "User",
+      "userId": "8d66"
+    },
+    {
+      "id": "31df",
+      "destination": "Lukla Airport",
+      "date": "2025-03-28T18:15:00.000Z",
+      "message": "Whta",
       "user": "Anita Neupane",
       "userId": "5e64"
     }
@@ -132,14 +143,24 @@
       "id": "d7d6",
       "rating": 5,
       "message": "Always recommned!! He was very nice and cute",
-      "guideId": "375f",
       "user": "Binita Neupane"
     },
     {
       "id": "fa5e",
       "rating": 5,
       "message": "Very kind and nice person to get by! Please share your experience by leaving a review: ",
-      "guideId": "375f",
+      "user": "Anita Neupane"
+    },
+    {
+      "id": "89fa",
+      "rating": 1,
+      "message": "Not so good",
+      "user": "User"
+    },
+    {
+      "id": "93b1",
+      "rating": 3,
+      "message": "Hello",
       "user": "Anita Neupane"
     }
   ]
