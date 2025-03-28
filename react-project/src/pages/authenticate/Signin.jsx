@@ -5,10 +5,18 @@ import { authenticateGuide, authenticateUser } from "../../utils/user.utils";
 import { showError } from "../../utils/toastify.utils";
 const { Text, Link } = Typography;
 import Logo from '../../assets/images/logo-name.png'
+import AuthContext from "../../context/user.context";
 
 const Signin = () => {
   const [isFocused, setIsFocused] = useState(false);
   const navigate = useNavigate();
+
+
+  const admin = {
+    email: "admin@gmail.com",
+    password: "admin",
+    name: "Admin"
+  }
 
 
   const handleUserLogin = async(values) => {
@@ -17,30 +25,36 @@ const Signin = () => {
     const guideResponse = await authenticateGuide(email, password);
 
 
-    if(values.email === "admin@gmail.com" && values.password === "admin"){
+    if(values.email === admin.email && values.password === admin.password){
+      localStorage.setItem("username", admin.name)
+      localStorage.setItem("email", admin.email)
+      localStorage.setItem("isAuthenticated", true)
       localStorage.setItem("is_user", 1)
       navigate("/admin/dashboard")
       return
     } else if (userResponse){
       if(userResponse.email === values.email && userResponse.password === values.password){
-        localStorage.setItem("is_user", 2)
         localStorage.setItem("username", userResponse.name)
         localStorage.setItem("userId", userResponse.id)
         localStorage.setItem("email", userResponse.email)
+        localStorage.setItem("isAuthenticated", true)
+        localStorage.setItem("is_user", 2)
         navigate("/")
         return
       }
     } else if (guideResponse) {
       if(guideResponse.personalDetails.email === values.email && guideResponse.personalDetails.password === values.password){
-        localStorage.setItem("is_user", 3)
         localStorage.setItem("username", guideResponse.personalDetails.name)
         localStorage.setItem("guideId", guideResponse.id)
         localStorage.setItem("email", guideResponse.personalDetails.email)
+        localStorage.setItem("isAuthenticated", true)
+        localStorage.setItem("is_user", 3)
         navigate("/guide/dashboard")
         return
       }
     } else {
       showError("Incorrect Username or Password")
+      localStorage.setItem("isAuthenticated", false)
       localStorage.setItem("is_user", 0)
     }
   }

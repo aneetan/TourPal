@@ -39,6 +39,7 @@ const MenuList = () => {
             label: "Logout",
             onClick: () => {
                 localStorage.setItem("is_user", 0)
+			    localStorage.setItem("isAuthenticated", false)
                 navigate('/login'); 
             },
         },

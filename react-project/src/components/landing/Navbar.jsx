@@ -17,7 +17,7 @@ const Navbar = () => {
 		const path = location.pathname;
 		const hash = location.hash;
 	
-		if (path === '/' && !hash) return 'home';
+		// if (path === '/' && !hash) return 'home';
 		if (hash === '#destinations') return 'destinations';
 		if (path === '/viewGuides') return 'bookGuide';
 		if (hash === '#guide') return 'registerGuide';
@@ -39,9 +39,11 @@ const Navbar = () => {
 	 const isHomeActive = () => {
 		return location.pathname === '/' && !location.hash;
 	  };
+	  
 	const handleLogin = () => {
 		if (localStorage.getItem("is_user") === "2" ){
 			localStorage.setItem("is_user", 0)
+			localStorage.setItem("isAuthenticated", false)
 			navigate('/')
 			return
 		}
