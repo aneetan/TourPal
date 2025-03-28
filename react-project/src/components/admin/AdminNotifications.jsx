@@ -1,31 +1,31 @@
 import React from 'react'
-import Notifications from '../../admin/header/Notifications';
+import Notifications from './header/Notifications';
 
-const GuideNotifications = () => {
+const AdminNotifications = () => {
     const notification = [
         {
             id: 1,
-            text: "New Booking Request:",
+            text: "New Guide Registration:",
             img:"https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg",
             time: "a few moments ago",
             user: "Anita Neupane",
-            content: "requested a new tour booking request. Check your schedule now!"
+            content: "has applied to become a tour guide. Review and approve their profile now!"
         },
         {
             id: 2,
-            text: "Tour Reminder: ",
+            text: "Location Added:",
             img:"https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg",
             time: "a day ago",
-            user: "Reminder:",
-            content: "You have a scheduled tour with tomorrow. Get ready for an amazing journey!"
+            user: "Pashupatinath",
+            content: "a new tourist location has been successfully added to the system"
         },
         {
             id: 3,
             text: "Booking Alert:",
             img:"https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/14235/production/_100058428_mediaitem100058424.jpg",
             time: "2 days ago",
-            user: "Hari",
-            content: "requested a new tour booking request. Review and approve the booking now!"
+            user: "Shyam",
+            content: "has applied to become a tour guide. Review and approve their profile now!"
         },
     ];
   return (
@@ -35,4 +35,4 @@ const GuideNotifications = () => {
   )
 }
 
-export default GuideNotifications
+export default AdminNotifications

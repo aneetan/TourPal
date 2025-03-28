@@ -30,8 +30,10 @@ const UserEditForm = () => {
         updateUser(id, updateData)
         .then(() => {
             showSuccess("User Updated Successfully")
+            localStorage.setItem("email",updateData.email)
             navigate('/')
         })
+
     } catch(e) {
         console.log(e)
     }

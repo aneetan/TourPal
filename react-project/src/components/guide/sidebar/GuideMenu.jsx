@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Menu } from 'antd';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { AreaChartOutlined, EnvironmentOutlined, FileOutlined, FileProtectOutlined, LogoutOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
@@ -29,6 +29,7 @@ const GuideMenu = () => {
             label: "Logout",
             onClick: () => {
                 localStorage.setItem("is_user", 0)
+			    localStorage.setItem("isAuthenticated", false)
                 navigate('/login'); 
             },
         },

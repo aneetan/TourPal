@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import {MapContainer, Marker, Popup, TileLayer, useMap} from "react-leaflet"
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet"
 import osmProviders from '../../components/map/osm-providers'
 import cities from "../../components/map/cities.json"
 import useGeoLocation from '../../hooks/useGeoLocation'
@@ -7,10 +7,11 @@ import { useNavigate } from 'react-router'
 import L from "leaflet"
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-routing-machine';
+import { getAllPlaces } from '../../utils/user.utils'
 
 //icon for added geolocations
 const MarkerIcon = new L.Icon({
-    iconUrl: "https://images.ctfassets.net/3prze68gbwl1/assetglossary-17su9wok1ui0z7w/c4c4bdcdf0d0f86447d3efc450d1d081/map-marker.png",
+    iconUrl: "https://images.icon-icons.com/2642/PNG/512/google_map_location_logo_icon_159350.png",
     iconSize: [35, 45],
     iconAnchor: [17, 46],
     popupAnchor: [3, -46],
@@ -26,7 +27,7 @@ const UserLocationIcon = new L.Icon({
 
 //location flyover to user location
 const FlyToLocation = ({ location, zoomLevel }) => {
-    const map = useMap(); // useMap helps to access the map instance
+    const map = useMap();
 
     useEffect(() => {
         if (location.loaded && !location.error) {
@@ -41,9 +42,8 @@ const FlyToLocation = ({ location, zoomLevel }) => {
     return null; 
 };
 
-// Haversine formula to calculate distance between two coordinates
 const calculateDistance = (lat1, lon1, lat2, lon2) => {
-    const R = 6371; // Radius of the Earth in km
+    const R = 6371;
     const dLat = (lat2 - lat1) * (Math.PI / 180);
     const dLon = (lon2 - lon1) * (Math.PI / 180);
     const a =
@@ -55,11 +55,11 @@ const calculateDistance = (lat1, lon1, lat2, lon2) => {
     return R * c; 
 };
 
-
 const CustomMap = () => {    
-    const [focus, setFocus] = useState({lat:27.64256108005826, lng: 85.32555398598879})
+    const [focus, setFocus] = useState({lat: 27.64256108005826, lng: 85.32555398598879})
     const [nearbyLocations, setNearbyLocations] = useState([]);
     const [selectedLocations, setSelectedLocations] = useState(null);
+    const [places, setPlaces] = useState([]);
 
     const ZOOM_LEVEL = 13;
     const mapRef = useRef();
@@ -67,34 +67,50 @@ const CustomMap = () => {
     const location = useGeoLocation();
     const navigate = useNavigate();
 
-    // Filter nearby locations within a radius (e.g., 10 km)
+    // Load all places on component mount
     useEffect(() => {
-        if (location.loaded && !location.error) {
+        getAllPlaces().then((response) => {
+            setPlaces(response);
+        });
+    }, []);
+
+    // Filter nearby locations when location or places change
+    useEffect(() => {
+        if (location.loaded && !location.error && places.length > 0) {
             const userLat = location.coordinates.lat;
             const userLon = location.coordinates.lon;
             const radius = 10; // km
 
-            const nearby = cities.filter(city => {
-                const distance = calculateDistance(userLat, userLon, city.lat, city.lon);
+            const nearby = places.filter(place => {
+                // Make sure place has valid coordinates
+                if (!place.latitude || !place.longitude) return false;
+                
+                const distance = calculateDistance(
+                    userLat, 
+                    userLon, 
+                    parseFloat(place.latitude), 
+                    parseFloat(place.longitude)
+                );
                 return distance <= radius;
             });
 
             setNearbyLocations(nearby);
         }
-    }, [location]);
+    }, [location, places]);
 
-     // Add routing between user location and nearby locations
-     useEffect(() => {
+    // Add routing between user location and selected location
+    useEffect(() => {
         if (location.loaded && !location.error && selectedLocations && mapRef.current) {
             const userLatLng = L.latLng(location.coordinates.lat, location.coordinates.lon);
-            const selectedLatLng = L.latLng(selectedLocations.lat, selectedLocations.lon);
+            const selectedLatLng = L.latLng(
+                parseFloat(selectedLocations.latitude), 
+                parseFloat(selectedLocations.longitude)
+            );
 
-            // Clear previous routing control
             if (routingControlRef.current) {
                 routingControlRef.current.remove();
             }
 
-            // Add routing for the selected location
             routingControlRef.current = L.Routing.control({
                 waypoints: [userLatLng, selectedLatLng],
                 show: true, 
@@ -104,60 +120,61 @@ const CustomMap = () => {
                 fitSelectedRoutes: true,
                 createMarker: () => null,
             }).addTo(mapRef.current);
-
         }
     }, [location, selectedLocations]);
 
-    //Book Guide button function
-    const handleBookGuide = (city) => {
-        navigate("/seeMore")
+    const handleBookGuide = (id) => {
+        navigate(`/seeMore/${id}`);
     }
 
     return (
-        <>
-            <div className='row'> 
-                <div className='col text-center'>
-                    <div className='col'>
-                        <MapContainer center= {focus} zoom={ZOOM_LEVEL} ref={mapRef}
-                            whenCreated={(mapInstance) => (mapRef.current = mapInstance)}
-                        >
-                            <TileLayer url={osmProviders.maptiler.url} attribution={osmProviders.maptiler.attribution}/>
+        <div className='row'> 
+            <div className='col text-center'>
+                <div className='col'>
+                    <MapContainer center={focus} zoom={ZOOM_LEVEL} ref={mapRef}
+                        whenCreated={(mapInstance) => (mapRef.current = mapInstance)}
+                    >
+                        <TileLayer url={osmProviders.maptiler.url} attribution={osmProviders.maptiler.attribution}/>
 
-                            {(location.loaded) && !(location.error) &&(
-                                <Marker
-                                    position={[location.coordinates.lat, location.coordinates.lon]}
-                                    icon={UserLocationIcon}
-                                >
-                                </Marker>
-                            )}
+                        {location.loaded && !location.error && (
+                            <Marker
+                                position={[location.coordinates.lat, location.coordinates.lon]}
+                                icon={UserLocationIcon}
+                            >
+                                <Popup>Your Location</Popup>
+                            </Marker>
+                        )}
 
-                            <FlyToLocation location={location} zoomLevel={ZOOM_LEVEL}/>
-                            
-                            {nearbyLocations.map((city, index) => (
-                                <Marker position={[city.lat, city.lon]}
-                                    icon={MarkerIcon}
-                                    key={index}
-                                    eventHandlers={{
-                                        click: () => setSelectedLocations(city),
-                                    }}
-                                >
-                                    <Popup>
-                                        <b> {city.Place}</b>
-                                        <br/>
-                                        {selectedLocations && selectedLocations.Place === city.Place &&(
-                                            <button onClick={() => handleBookGuide(city)}
-                                            className='m-1 p-1 underline cursor-pointer'
-                                            > See More </button>
-                                        )}
-                                        
-                                    </Popup>
-                                </Marker>
-                            ))}
-                        </MapContainer>
-                    </div>
+                        <FlyToLocation location={location} zoomLevel={ZOOM_LEVEL}/>
+                        
+                        {nearbyLocations.map((place, index) => (
+                            <Marker 
+                                position={[
+                                    parseFloat(place.latitude), 
+                                    parseFloat(place.longitude)
+                                ]}
+                                icon={MarkerIcon}
+                                key={index}
+                                eventHandlers={{
+                                    click: () => setSelectedLocations(place),
+                                }}
+                            >
+                                <Popup>
+                                    <b>{place.name}</b>
+                                    <br/>
+                                    <button 
+                                        onClick={() => handleBookGuide(place.id)}
+                                        className='m-1 p-1 underline cursor-pointer'
+                                    > 
+                                        See More 
+                                    </button>
+                                </Popup>
+                            </Marker>
+                        ))}
+                    </MapContainer>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

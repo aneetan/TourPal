@@ -116,7 +116,7 @@ const ProfessionalInfo = ({onFinish, initialValues}) => {
                 <div className='w-full md:w-1/2 px-4 md:px-8'>
                     <Form.Item
                     name="pricing"
-                    label="Pricing (Hourly)"
+                    label="Pricing Hourly (in NRs.)"
                     labelCol={{ span: 24 }}
                     wrapperCol={{ span: 24 }}
                     rules={[

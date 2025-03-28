@@ -19,7 +19,6 @@ const AddReviewForm = () => {
         try{
             const formData = {
                 ...values,
-                guideId: id,
                 user: localStorage.getItem('username')
             }
             await addReview(formData);

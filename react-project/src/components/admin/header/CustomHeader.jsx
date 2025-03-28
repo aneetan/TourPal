@@ -1,30 +1,10 @@
 import React from 'react'
-import { Layout, Button, Space, Avatar, Dropdown } from 'antd';
-import { BellOutlined, LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
-import Notifications from './Notifications'
+import { Layout, Button, Space, Avatar} from 'antd';
+import { MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined } from '@ant-design/icons';
+import AdminNotifications from '../AdminNotifications';
 const { Header } = Layout;
 
 const CustomHeader = ({ collapsed, toggleSidebar }) => {
-  const items = [
-    {
-      key: '1',
-      icon: <UserOutlined/>,
-      label: 'Profile',
-    },
-    {
-      key: '2',
-      icon: <SettingOutlined />,
-      label: 'Settings',
-    },
-    {
-      type: 'divider',
-    },
-    {
-      key: '3',
-      icon: <LogoutOutlined />,
-      label: 'Logout',
-    },
-  ];
 
   return (
     <Header style={{ 
@@ -46,13 +26,11 @@ const CustomHeader = ({ collapsed, toggleSidebar }) => {
         }}
       />
       <Space style={{ marginRight: '3rem' }}>
-        <Notifications/>
-        <Dropdown menu={{ items }} placement="bottomRight">
-          <Space style={{ cursor: 'pointer' }}>
+        <AdminNotifications/>
+        <Space style={{ cursor: 'pointer' }}>
             <Avatar icon={<UserOutlined />} />
             <span>Admin</span>
           </Space>
-        </Dropdown>
       </Space>
     </Header>
   ) 
