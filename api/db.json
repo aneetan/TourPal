@@ -90,77 +90,52 @@
   ],
   "messages": [
     {
-      "id": "4253",
-      "destination": "Pokhara",
-      "date": "2025-03-30T18:15:00.000Z",
-      "message": "Please organize the accomodation",
-      "user": "Binita Neupane",
-      "userId": "b476"
-    },
-    {
-      "id": "0aac",
-      "destination": "Kalinchowk",
+      "id": "7d0c",
+      "destination": "ghar",
       "date": "2025-03-27T18:15:00.000Z",
-      "message": "I have the request to manage the tour details and contact me asap",
-      "user": "Binita Neupane",
-      "userId": "b476"
-    },
-    {
-      "id": "02b5",
-      "destination": "Mustang",
-      "date": "2025-03-27T18:15:00.000Z",
-      "message": "Please Provide me itinary",
+      "message": "Mujhe ghar jana hai",
+      "guide": "375e",
+      "guideName": "Guide",
+      "status": "pending",
       "user": "Anita Neupane",
       "userId": "5e64"
     },
     {
-      "id": "1a53",
-      "destination": "Shivapuri",
-      "date": "2025-04-01T18:15:00.000Z",
-      "message": "You can change the date as you are flexible!",
+      "id": "7d0f",
+      "destination": "ghar",
+      "date": "2025-03-27T18:15:00.000Z",
+      "message": "Mujhe ghar jana hai",
+      "guide": "97c4",
+      "guideName": "Saurab Shrestha",
+      "status": "approved",
       "user": "Anita Neupane",
       "userId": "5e64"
     },
     {
-      "id": "19ad",
-      "destination": "Laltipur",
-      "date": "2025-04-01T18:15:00.000Z",
-      "message": "I need a professional guidance",
-      "user": "User",
-      "userId": "8d66"
-    },
-    {
-      "id": "31df",
-      "destination": "Lukla Airport",
-      "date": "2025-03-28T18:15:00.000Z",
-      "message": "Whta",
+      "id": "7d0e",
+      "destination": "ghar",
+      "date": "2025-03-27T18:15:00.000Z",
+      "message": "Mujhe ghar jana hai",
+      "guide": "97c4",
+      "guideName": "Saurab Shrestha",
+      "status": "declined",
       "user": "Anita Neupane",
       "userId": "5e64"
     }
   ],
   "reviews": [
     {
-      "id": "d7d6",
-      "rating": 5,
-      "message": "Always recommned!! He was very nice and cute",
-      "user": "Binita Neupane"
-    },
-    {
-      "id": "fa5e",
-      "rating": 5,
-      "message": "Very kind and nice person to get by! Please share your experience by leaving a review: ",
+      "id": "ca1c",
+      "rating": 4,
+      "message": "Demo",
+      "guide": "97c4",
       "user": "Anita Neupane"
     },
     {
-      "id": "89fa",
-      "rating": 1,
-      "message": "Not so good",
-      "user": "User"
-    },
-    {
-      "id": "93b1",
+      "id": "ca12",
       "rating": 3,
-      "message": "Hello",
+      "message": "Demo",
+      "guide": "375e",
       "user": "Anita Neupane"
     }
   ]

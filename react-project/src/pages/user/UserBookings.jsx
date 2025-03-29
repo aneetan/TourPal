@@ -103,20 +103,20 @@ const UserBookings = () => {
                     {activeSection === 'accepted'? (
                         <div className="flex flex-wrap gap-4">
                         {approvedData.map((booking, index) => (
-                          <BookingsCard key={index} booking={booking} status='approved' />
+                          <BookingsCard key={index} booking={booking} status='approved' guide={booking.guideName} />
                         ))}
                       </div>
                     ) : (
                       activeSection === 'pending'? (
                         <div className="flex flex-wrap gap-4">
                          {pendingData.map((booking, index) => (
-                          <BookingsCard key={index} booking={booking} status='pending' />
+                          <BookingsCard key={index} booking={booking} status='pending' guide={booking.guideName} />
                         ))}
                         </div>
                       ):(
                         <div className="flex flex-wrap gap-4">
                         {declinedData.map((booking, index) => (
-                          <BookingsCard key={index} booking={booking} status='declined' />
+                          <BookingsCard key={index} booking={booking} status='declined' guide={booking.guideName} />
                         ))}
                       </div>
                       ) 

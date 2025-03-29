@@ -27,6 +27,7 @@ const SendBookingRequest = () => {
             const formData = {
                 ...values,
                 guide: guideData.id,
+                guideName: guideData.personalDetails?.name,
                 status: "pending",
                 user: localStorage.getItem('username'),
                 userId: localStorage.getItem('userId'),

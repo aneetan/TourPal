@@ -35,6 +35,7 @@ import NoAccessPage from './pages/NoAccessPage';
 import PageNotFound from './pages/PageNotFound';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsAndConditions from './pages/TermsAndConditions';
+import ViewBookings from './pages/admin/ViewBookings';
 
 function App() {
   return (
@@ -68,6 +69,7 @@ function App() {
               <Route path='/admin/users' element={<UserSection/>}/>
               <Route path='/admin/guides' element={<AdminGuideSection/>}/>
               <Route path='/admin/places' element={<AdminPlacesSection/>}/>
+              <Route path='/admin/bookings' element={<ViewBookings/>}/>
               <Route path='/admin/places/add' element={<AddPlacesAdmin/>}/>
               <Route path='/admin/editPlace/:id' element={<AddPlacesAdmin/>}/>
               <Route path='/admin/guideProfile/:id' element={<GuideProfile/>}/>
