@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import GuideCard from '../../components/cards/GuideCard';
-import { Button, Input } from 'antd';
-import { FilterOutlined, SearchOutlined } from '@ant-design/icons';
-import Search from 'antd/es/input/Search';
-import RequestPop from './SendBookingRequest';
-import useFetch from '../../hooks/useFetch';
-import { useParams } from 'react-router';
+import { Input } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+import { getAllGuides } from '../../utils/user.utils';
 
 const GuideSection = () => {
     const [searchTerm, setSearchTerm] = useState('');
-    const {data, loading, error} = useFetch(`http://localhost:3000/guides`);
+    const [data, setData] = useState([])
+
+    useEffect(()=> {
+        getAllGuides().then ((response) => {
+              setData(
+                response.filter(
+                  (guide) => guide.status === "approved"
+                )
+              )
+            })
+    }, [data])
 
     const guideData = (data || []).map((guide)=> ({
       id: guide.id,

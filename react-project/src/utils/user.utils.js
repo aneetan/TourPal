@@ -135,28 +135,3 @@ export const getAllReviews = () => {
     })
 }
 
-export const updateBookingStatus = async(data, id, status) => {
-    try{
-        const updateData = {
-            status: status,
-            updatedAt: new Date().toISOString()
-        };
-
-        const response = await axios.patch(
-        `http://localhost:3000/bookings/${bookingId}`,
-        updateData,
-        {
-            params: { guideId }, // Optional: include guideId for validation
-            headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}` // If using auth
-            }
-        }
-        );
-    
-        return response.data;
-    } catch(e){
-        console.error('Error updating booking status:', e);
-    }
-}
-

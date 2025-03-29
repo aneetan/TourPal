@@ -30,7 +30,11 @@ const RegisterGuides = () => {
     }
 
     const submitDocuments= () => {
-        axios.post("http://localhost:3000/guides", data)
+        const formValue = {
+            ...data,
+            status: "pending"
+        }
+        axios.post("http://localhost:3000/guides", formValue)
         .then(function (response) {
             navigate('/login')
         })

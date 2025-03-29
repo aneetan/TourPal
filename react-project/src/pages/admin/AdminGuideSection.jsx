@@ -38,17 +38,8 @@ const AdminGuideSection = () => {
       getAllGuides().then((response) => {
         setData(response)
       })
-    }, [])
-
-     const flattenedData = data.map((guide)=>({
-      id: guide.id,
-      email: guide.personalDetails.email,
-      name: guide.personalDetails.name,
-      phone: guide.personalDetails.phone,
-      speciality: guide.professionalInfo.speciality,
-      experience: guide.professionalInfo.experience,
-    }))
-  
+    }, [data])
+      
     const columns = [
         {
           title: 'Name',
@@ -88,7 +79,26 @@ const AdminGuideSection = () => {
           render: () => <a className='underline' href="https://www.alexholidays.com/tours/images/credentials/Tourist-Guide-Alex--2016-2018.jpg"> View Document </a>,
           responsive: ['md'],
         },
-    
+        {
+          title: 'Status',
+          dataIndex: "status",
+          key: 'status',
+          render: (_, record) => (
+              <Tag
+                color={
+                  record.status === 'pending' ? 'blue' : 
+                  record.status === 'approved' ? 'green' : 
+                  'red'
+                }
+                style={{
+                  fontWeight: 500,
+                  textTransform: 'capitalize'
+                }}
+            >
+                {record.status}
+            </Tag>
+          ),
+        },
         {
           title: 'Action',
           key: 'action',

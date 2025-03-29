@@ -40,26 +40,50 @@
           "French"
         ],
         "pricing": "600"
-      }
-    },
+      },
+      "status": "approved"
+    }, 
     {
-      "id": "97c4",
+      "id": "b529",
       "personalDetails": {
-        "name": "Saurab Shrestha",
-        "email": "saurab@gmail.com",
-        "password": "Saurab@123",
-        "phone": "9869084390"
+        "name": "yo Guide ho",
+        "email": "guide1@gmail.com",
+        "password": "Guide@123",
+        "password2": "Guide@123",
+        "phone": "9812345678"
       },
       "professionalInfo": {
-        "Bio": "This is the bio for Saurab",
-        "speciality": "Cultural & Historical",
+        "Bio": "Bio",
+        "speciality": "City & Lifestyle",
         "experience": "2-3",
         "languages": [
-          "English",
-          "Spanish"
+          "Spanish",
+          "French"
         ],
-        "pricing": "300"
-      }
+        "pricing": "600"
+      },
+      "status": "declined"
+    },
+    {
+      "id": "b528",
+      "personalDetails": {
+        "name": "Guide ho",
+        "email": "guide2@gmail.com",
+        "password": "Guide@123",
+        "password2": "Guide@123",
+        "phone": "9812345678"
+      },
+      "professionalInfo": {
+        "Bio": "Bio",
+        "speciality": "City & Lifestyle",
+        "experience": "2-3",
+        "languages": [
+          "Spanish",
+          "French"
+        ],
+        "pricing": "600"
+      },
+      "status": "pending"
     }
   ],
   "places": [

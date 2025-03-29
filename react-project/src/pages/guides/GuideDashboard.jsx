@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Row, Col, Typography, Space, Button, Modal, Descriptions } from 'antd';
-import CustomData from '../../components/admin/dashboard/CustomData';
+import { Row, Col, Typography, Space, Button, Modal, Descriptions } from 'antd';
 import CustomTable from '../../components/CustomTable';
-import useFetch from '../../hooks/useFetch';
-import { UnderlineOutlined } from '@ant-design/icons';
 import CustomModal from '../../components/CustomModal';
 import CustomGuideData from '../../components/guide/CustomGuideData';
 import dayjs from 'dayjs';
-import { getAllMessages, updateBookingStatus, updateMessage } from '../../utils/user.utils';
-import { showErrorToast, showSucessToast } from '../../../../../React/react-training/src/toastify/toastify.utils';
+import { getAllMessages, updateMessage } from '../../utils/user.utils';
 import { showSuccess } from '../../utils/toastify.utils';
 
 const { Title, Paragraph } = Typography;
@@ -57,7 +53,6 @@ const GuideDashboard = () => {
     }
 
   };
-
 
   const handleModalOk = () => {
     setIsModalOpen(false);

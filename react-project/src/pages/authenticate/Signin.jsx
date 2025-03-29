@@ -2,7 +2,7 @@ import { Button,Form,Input, Typography } from "antd";
 import React, {useState } from "react";
 import { useNavigate } from "react-router";
 import { authenticateGuide, authenticateUser } from "../../utils/user.utils";
-import { showError } from "../../utils/toastify.utils";
+import { showError, showInfo } from "../../utils/toastify.utils";
 const { Text, Link } = Typography;
 import Logo from '../../assets/images/logo-name.png'
 import AuthContext from "../../context/user.context";
@@ -44,13 +44,19 @@ const Signin = () => {
       }
     } else if (guideResponse) {
       if(guideResponse.personalDetails.email === values.email && guideResponse.personalDetails.password === values.password){
-        localStorage.setItem("username", guideResponse.personalDetails.name)
-        localStorage.setItem("guideId", guideResponse.id)
-        localStorage.setItem("email", guideResponse.personalDetails.email)
-        localStorage.setItem("isAuthenticated", true)
-        localStorage.setItem("is_user", 3)
-        navigate("/guide/dashboard")
-        return
+        if(guideResponse.status === "approved"){
+          localStorage.setItem("username", guideResponse.personalDetails.name)
+          localStorage.setItem("guideId", guideResponse.id)
+          localStorage.setItem("email", guideResponse.personalDetails.email)
+          localStorage.setItem("isAuthenticated", true)
+          localStorage.setItem("is_user", 3)
+          navigate("/guide/dashboard")
+          return
+        } else if(guideResponse.status === "declined"){
+          showInfo("Sorry! your registration has been declined by admin!")
+        } else{
+          showInfo("You registration is on pending! Check your email for status")
+        } 
       }
     } else {
       showError("Incorrect Username or Password")
