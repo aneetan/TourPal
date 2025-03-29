@@ -2,9 +2,9 @@ import { AimOutlined, CalendarOutlined, MailOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import React from 'react';
 
-const BookingsCard = ({ booking, status = "accepted" }) => {
+const BookingsCard = ({ booking, status}) => {
   const { destination, date, message, user, img } = booking;
-  const isAccepted = status === 'accepted';
+  const isAccepted = status === 'approved';
   const isPending = status === 'pending';
 
   return (

@@ -17,7 +17,7 @@ const GuideProfile = () => {
   let params = useParams();
   const isAdmin = currentPath.includes('admin/guideProfile')
   const isGuide = currentPath.includes('guide/profile')
-
+  const guide = localStorage.getItem("guideId");
   const [activeSection, setActiveSection] = useState('details');
 
   const {data, loading, error} = useFetch(`http://localhost:3000/guides/${params.id}`) 
@@ -25,7 +25,9 @@ const GuideProfile = () => {
 
   useEffect(()=> {
     getAllReviews().then((response )=> {
-      setReviews(response)
+      const filtered = response.filter(review => review.guide === params.id);
+      setReviews(filtered)
+
     })
   }, [reviews])
   
@@ -44,8 +46,6 @@ const GuideProfile = () => {
   const handleEditGuide= () => {
     navigate(`/guide/edit/${params.id}`)
   }
-
-  console.log(reviews)
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">

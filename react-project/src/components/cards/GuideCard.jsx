@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router';
 import useFetch from '../../hooks/useFetch';
 import { showInfo } from '../../utils/toastify.utils';
 
-const GuideCard = ({name, rating=4, bio, languages, experience, speciality}) => {
+const GuideCard = ({id, name, rating=4, bio, languages, experience, speciality}) => {
     const stars = Array(5).fill(0);
     const navigate = useNavigate();
     const {data, error, loading} = useFetch("http://localhost:3000/guides");
@@ -18,7 +18,7 @@ const GuideCard = ({name, rating=4, bio, languages, experience, speciality}) => 
             showInfo("You need to login first!")
             navigate('/login')
         } else {
-            navigate(`/bookGuides/${guideData[0].id}`)
+            navigate(`/bookGuides/${id}`)
         }
     }
 
@@ -27,7 +27,7 @@ const GuideCard = ({name, rating=4, bio, languages, experience, speciality}) => 
             showInfo("You need to login first!")
             navigate('/login')
         } else {
-            navigate(`/guideProfile/${guideData[0].id}`)
+            navigate(`/guideProfile/${id}`)
         }
     }
 

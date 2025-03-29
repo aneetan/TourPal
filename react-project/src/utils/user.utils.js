@@ -65,6 +65,10 @@ export const updateGuide = async (id, data) => {
     await axios.patch(`http://localhost:3000/guides/${id}`, data)
 }
 
+export const updateMessage = async (id, data) => {
+    await axios.patch(`http://localhost:3000/messages/${id}`, data)
+}
+
 // ------------------------- Authenticate ------------------------------
 export const authenticateUser = async (email, password) => {
     const response= await axios.get(`http://localhost:3000/users/?email=${email}&password=${password}`)
@@ -129,5 +133,30 @@ export const getAllReviews = () => {
             reject(error)
         })
     })
+}
+
+export const updateBookingStatus = async(data, id, status) => {
+    try{
+        const updateData = {
+            status: status,
+            updatedAt: new Date().toISOString()
+        };
+
+        const response = await axios.patch(
+        `http://localhost:3000/bookings/${bookingId}`,
+        updateData,
+        {
+            params: { guideId }, // Optional: include guideId for validation
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}` // If using auth
+            }
+        }
+        );
+    
+        return response.data;
+    } catch(e){
+        console.error('Error updating booking status:', e);
+    }
 }
 

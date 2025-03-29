@@ -5,68 +5,58 @@ import BookingsCard from '../../components/cards/BookingsCard';
 
 const UserBookings = () => {
     const [activeSection, setActiveSection] = useState('pending');
-    const [bookingData, setBookingData] = useState([])
+    const [pendingData, setPendingData] = useState([])
+    const [approvedData, setApprovedData] = useState([])
+    const [declinedData, setDeclinedData] = useState([])
+
+     const [userId, setUserId] = useState()
     
-    useEffect(()=> {
-        const fetchBookings = async () => {
-            try {
-                const response = await getAllMessages();
-                setBookingData(response);
-            } catch (err) {
-                console.error('Failed to fetch bookings:', err);
-            } 
-        };
+    useEffect(() => {
+        const storedGuideId = localStorage.getItem("userId");
+        setUserId(storedGuideId);
+    }, []);
+    
+     useEffect(()=> {
+          try {
+              getAllMessages().then((response) => {
+              setPendingData(
+                  response.filter(
+                      (message) => message.userId === userId && message.status === "pending"
+                  )
+                  )
+              })
+          } catch (err) {
+              console.error('Failed to fetch bookings:', err);
+          } 
+      } , [pendingData])
 
-        fetchBookings();
-    }, [])
-
-    const declinedData = [
-        {
-        img:'https://static.vecteezy.com/system/resources/thumbnails/035/591/149/small_2x/ai-generated-nepali-ethnic-village-girl-generate-ai-photo.jpg',
-        destination: 'Egypt',
-        date: '2024-02-25',
-        message: 'I need a final minute rush for your trip. ',
-        user: 'Guide John'
-        },
-        {
-        img:"https://i.pinimg.com/736x/93/4c/56/934c56967384dd345890ccf90e5534ca.jpg",
-        destination: 'Mardi Trek',
-        date: '2025-12-25',
-        message: 'Please provide me the itenary if possible!',
-        user: 'Guide Mike'
-        },
-        {
-        img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUXaqAPWqkiEqlZ1e0WyGQig_9nOAuSPvvMw&s",
-        destination: 'Ilam',
-        date: '2025-02-25',
-        message: 'Contact me on my details ',
-        user: 'Guide Sarah'
-        }
-    ];
-
-    const acceptedData = [
-      {
-      img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFCQ3hPrSXu-liinfLoDJ0SQsx02a87rbdAb8jpqx_PoPEMk-DAUNT5Q7AfztN3nCjxyM&usqp=CAU',
-      destination: 'Sarangkot',
-      date: '2025-04-25',
-      message: 'Hello! I’m interested in booking a travel package with a local guide. Can you provide more details?',
-      user: 'Guide 1'
-      },
-      {
-      img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPnNklmHa5DpkGUODLGfaNnZwTIvo95RlkJg&s",
-      destination: 'Mardi Trek',
-      date: '2025-12-25',
-      message: 'Please provide me the itenary if possible!',
-      user: 'Guide 2'
-      },
-      {
-      img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiiKF_cyqoIDz00ckOBxHq8A7A4f7BWTmHnxYPQZ0UoDp2SZVGixJbh7EQ06B6RnHkA6Q&usqp=CAU",
-      destination: 'Ilam',
-      date: '2025-02-25',
-      message: 'Hi! Can you arrange transportation and a guided tour? Let me know the available options. ',
-      user: 'Guide 1'
-      }
-  ];
+      useEffect(()=> {
+        try {
+            getAllMessages().then((response) => {
+            setApprovedData(
+                response.filter(
+                    (message) => message.userId === userId && message.status === "approved"
+                )
+                )
+            })
+        } catch (err) {
+            console.error('Failed to fetch bookings:', err);
+        } 
+    } , [approvedData])
+    
+      useEffect(()=> {
+          try {
+              getAllMessages().then((response) => {
+              setDeclinedData(
+                  response.filter(
+                      (message) => message.userId === userId && message.status === "declined"
+                  )
+                  )
+              })
+          } catch (err) {
+              console.error('Failed to fetch bookings:', err);
+          } 
+      } , [declinedData])
     
     
   return (
@@ -112,18 +102,16 @@ const UserBookings = () => {
 
                     {activeSection === 'accepted'? (
                         <div className="flex flex-wrap gap-4">
-                        {acceptedData.map((booking, index) => (
-                          <BookingsCard key={index} booking={booking} status='accepted' />
+                        {approvedData.map((booking, index) => (
+                          <BookingsCard key={index} booking={booking} status='approved' />
                         ))}
                       </div>
                     ) : (
                       activeSection === 'pending'? (
                         <div className="flex flex-wrap gap-4">
-                          {bookingData
-                            .filter((booking) => booking.user === localStorage.getItem("username"))
-                            .map((booking, index) => (
-                              <BookingsCard key={index} booking={booking} status="pending" />
-                            ))}
+                         {pendingData.map((booking, index) => (
+                          <BookingsCard key={index} booking={booking} status='pending' />
+                        ))}
                         </div>
                       ):(
                         <div className="flex flex-wrap gap-4">

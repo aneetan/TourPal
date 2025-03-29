@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Row, Col, Typography, Space, Button, Modal, Descriptions } from 'antd';
 import CustomData from '../../components/admin/dashboard/CustomData';
 import CustomTable from '../../components/CustomTable';
@@ -7,17 +7,37 @@ import { UnderlineOutlined } from '@ant-design/icons';
 import CustomModal from '../../components/CustomModal';
 import CustomGuideData from '../../components/guide/CustomGuideData';
 import dayjs from 'dayjs';
+import { getAllMessages, updateBookingStatus, updateMessage } from '../../utils/user.utils';
+import { showErrorToast, showSucessToast } from '../../../../../React/react-training/src/toastify/toastify.utils';
+import { showSuccess } from '../../utils/toastify.utils';
 
 const { Title, Paragraph } = Typography;
 
 const GuideDashboard = () => {
-  const {data, error, loading} = useFetch("http://localhost:3000/messages");
   const [isApproveOpen, setIsApproveOpen] = useState(false);
   const [isDeclineOpen, setIsDeclineOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [load, setLoad] = useState(false)
   const [user, setUser] = useState(null)
   const [userId, setUserId] = useState()
+  const [guideId, setGuideId] = useState()
+  const [messageId, setMessageId] = useState(null);
+  const [filteredMessage, setFilteredMessage] = useState([])
+
+  useEffect(() => {
+    const storedGuideId = localStorage.getItem("guideId");
+    setGuideId(storedGuideId);
+  }, []);
+
+  useEffect(()=> {
+    getAllMessages().then ((response) => {
+      setFilteredMessage(
+        response.filter(
+          (message) => message.guide === guideId && message.status === "pending"
+        )
+      )
+    })
+  }, [guideId])
 
   const showModal = async(name) => {
     setIsModalOpen(true);
@@ -47,23 +67,69 @@ const GuideDashboard = () => {
     setIsModalOpen(false);
   };
 
-  const showApproveModal = () => {
+  const showApproveModal = (id) => {
+    setMessageId(id)
     setIsApproveOpen(true);
   };
 
-  const showDeclineModal = () => {
+  const showDeclineModal = (id) => {
+    setMessageId(id)
     setIsDeclineOpen(true);
   };
-  const handleOk = () => {
-    setIsApproveOpen(false);
-    setIsDeclineOpen(false);
+
+  const handleApprove = async() => {
+     try{
+            const updateData = {
+              status: "approved"
+            }
+        
+            updateMessage(messageId, updateData)
+            .then(() => {
+                showSuccess("User Approved Successfully")
+                getAllMessages().then((response)=> {
+                 const filteredData =  response.filter(
+                    (message) => message.guide === guideId && message.status === "pending"
+                  );
+                  setFilteredMessage(filteredData)
+                })
+            })
+
+            
+    
+        } catch(e) {
+            console.log(e)
+        }
+      showApproveModal(false)
   };
+
+  const handleDecline = async() => {
+    try{
+      const updateData = {
+        status: "declined"
+      }
+  
+      updateMessage(messageId, updateData)
+      .then(() => {
+          showSuccess("User Declined Successfully")
+          getAllMessages().then((response)=> {
+            const filteredData =  response.filter(
+               (message) => message.guide === guideId && message.status === "pending"
+             );
+             setFilteredMessage(filteredData)
+           })
+      })
+
+  } catch(e) {
+      console.log(e)
+  }
+  showDeclineModal(false)
+  };
+
   const handleCancel = () => {
     setIsApproveOpen(false);
     setIsDeclineOpen(false);
   };
 
-  const msgData = data || []
 
 
   const columns = [
@@ -122,22 +188,22 @@ const GuideDashboard = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="small">
-          <Button color='primary' onClick={showApproveModal} variant='solid'>Approve</Button>
+          <Button color='primary' onClick={() => showApproveModal(record.id)} variant='solid'>Approve</Button>
           <CustomModal
             title="Are you sure to approve the user request?"
             content=""
             text="Approve"
             isOpen={isApproveOpen}
-            handleOk={handleOk}
+            handleOk={handleApprove}
             handleCancel={handleCancel}
           />
-          <Button color='danger' onClick={showDeclineModal} variant="solid">Decline</Button>
+          <Button color='danger' onClick={() => showDeclineModal(record.id)} variant="solid">Decline</Button>
           <CustomModal
             title="Are you sure to decline the user request?"
             content="This action cannot be undone"
             text="Decline"
             isOpen={isDeclineOpen}
-            handleOk={handleOk}
+            handleOk={handleDecline}
             handleCancel={handleCancel}
           />
         </Space>
@@ -156,8 +222,8 @@ const GuideDashboard = () => {
       
       <Row style={{ marginTop: 16 }}>
         <Col span={24}>
-          <h2 className='font-semibold py-2'> Recent Booking Requests</h2>
-          <CustomTable tableData={msgData} columns={columns}/>
+          <h2 className='font-semibold py-2'> Pending Booking Requests</h2>
+          <CustomTable tableData={filteredMessage} columns={columns}/>
         </Col>
       </Row>
     </div>
