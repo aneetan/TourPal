@@ -63,6 +63,7 @@ const EditGuideProfile = () => {
 
         updateGuide(id, updatedData)
         .then(() => {
+            localStorage.setItem("email",updatedData.personalDetails.email)
             navigate(`/guide/profile/${id}`)
         })
     } catch(e){

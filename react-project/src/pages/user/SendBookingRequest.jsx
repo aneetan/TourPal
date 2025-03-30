@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { addMessages } from '../../utils/user.utils';
 import { showSuccess } from '../../utils/toastify.utils';
+import useFetch from '../../hooks/useFetch';
 dayjs.extend(customParseFormat);
 
 const { TextArea } = Input;
@@ -12,18 +13,22 @@ const { TextArea } = Input;
 const SendBookingRequest = () => {
     const dateFormat = 'YYYY-MM-DD';
     const [form] = Form.useForm();
-    const [loading, setLoading] = useState(false);
+    const [load, setLoad] = useState(false);
     const navigate = useNavigate();
     let currentDate = new Date().toJSON().slice(0, 10);
     let {id} = useParams();
+    const {data, loading, error} = useFetch(`http://localhost:3000/guides/${id}`);
+    const guideData = data || []
 
     const onFinish = async(values) => {
-        setLoading(true);
+        setLoad(true);
 
         try{
             const formData = {
                 ...values,
-                guideId: id,
+                guide: guideData.id,
+                guideName: guideData.personalDetails?.name,
+                status: "pending",
                 user: localStorage.getItem('username'),
                 userId: localStorage.getItem('userId'),
             }
@@ -35,7 +40,7 @@ const SendBookingRequest = () => {
         } catch(error){
             console.log("Error submitting form", error)
         } finally {
-            setLoading(false)
+            setLoad(false)
         }
         
     };
@@ -87,7 +92,7 @@ const SendBookingRequest = () => {
                 <Button 
                     type="primary" 
                     htmlType="submit" 
-                    loading={loading}
+                    load={load}
                     block
                     style={{backgroundColor:"#F15D30"}}
                     className="bg-amber-500 transiiton hover:opacity-90 hover:scale-[1.004]"

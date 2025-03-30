@@ -1,15 +1,22 @@
 import { Button,Form,Input, Typography } from "antd";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { useNavigate } from "react-router";
 import { authenticateGuide, authenticateUser } from "../../utils/user.utils";
-import { showError, showSuccess } from "../../utils/toastify.utils";
+import { showError, showInfo } from "../../utils/toastify.utils";
 const { Text, Link } = Typography;
+import Logo from '../../assets/images/logo-name.png'
+import AuthContext from "../../context/user.context";
 
 const Signin = () => {
   const [isFocused, setIsFocused] = useState(false);
   const navigate = useNavigate();
-  const [errorMsg, setErrorMsg] = useState([""])
+
+
+  const admin = {
+    email: "admin@gmail.com",
+    password: "admin",
+    name: "Admin"
+  }
 
 
   const handleUserLogin = async(values) => {
@@ -18,30 +25,42 @@ const Signin = () => {
     const guideResponse = await authenticateGuide(email, password);
 
 
-    if(values.email === "admin@gmail.com" && values.password === "admin"){
+    if(values.email === admin.email && values.password === admin.password){
+      localStorage.setItem("username", admin.name)
+      localStorage.setItem("email", admin.email)
+      localStorage.setItem("isAuthenticated", true)
       localStorage.setItem("is_user", 1)
       navigate("/admin/dashboard")
       return
     } else if (userResponse){
       if(userResponse.email === values.email && userResponse.password === values.password){
-        localStorage.setItem("is_user", 2)
         localStorage.setItem("username", userResponse.name)
         localStorage.setItem("userId", userResponse.id)
         localStorage.setItem("email", userResponse.email)
+        localStorage.setItem("isAuthenticated", true)
+        localStorage.setItem("is_user", 2)
         navigate("/")
         return
       }
     } else if (guideResponse) {
       if(guideResponse.personalDetails.email === values.email && guideResponse.personalDetails.password === values.password){
-        localStorage.setItem("is_user", 3)
-        localStorage.setItem("username", guideResponse.personalDetails.name)
-        localStorage.setItem("guideId", guideResponse.id)
-        localStorage.setItem("email", guideResponse.personalDetails.email)
-        navigate("/guide/dashboard")
-        return
+        if(guideResponse.status === "approved"){
+          localStorage.setItem("username", guideResponse.personalDetails.name)
+          localStorage.setItem("guideId", guideResponse.id)
+          localStorage.setItem("email", guideResponse.personalDetails.email)
+          localStorage.setItem("isAuthenticated", true)
+          localStorage.setItem("is_user", 3)
+          navigate("/guide/dashboard")
+          return
+        } else if(guideResponse.status === "declined"){
+          showInfo("Sorry! your registration has been declined by admin!")
+        } else{
+          showInfo("You registration is on pending! Check your email for status")
+        } 
       }
     } else {
       showError("Incorrect Username or Password")
+      localStorage.setItem("isAuthenticated", false)
       localStorage.setItem("is_user", 0)
     }
   }
@@ -58,23 +77,25 @@ const Signin = () => {
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
-            <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white px-10 py-16 text-center dark:bg-dark-2 sm:px-12 md:px-[60px]">
+            <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white px-10 text-center dark:bg-dark-2 sm:px-12 md:px-[60px]">
               <div className="text-center">
                 <a
                   href="/#"
-                  className="mx-auto inline-block max-w-[160px]"
+                  className="mx-auto inline-block "
                 >
-                  Logo here
-                  {/* <img
-                    src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-primary.svg"
+                  <img
+                    src={Logo}
                     alt="logo"
-                  /> */}
+                    className="w-[140px]"
+                  />
+                  
                 </a>
               </div>
+              <h2 className="text-dark text-2xl font-semibold dark:text-white">
+                  Welcome Back!
+              </h2>
 
-              <div className="text-red-500 pt-3 text-[0.8rem]">
-                {errorMsg}
-              </div>
+              
 
               <Form onFinish={handleUserLogin}>
                 <Form.Item
@@ -87,7 +108,7 @@ const Signin = () => {
                   ]}
                 >
                   <Input
-                    style={{marginTop:"4rem",padding:"10px", outline: "none"}}
+                    style={{marginTop:"1rem",padding:"10px", outline: "none"}}
                     placeholder="Enter Email"
                     onFocus={(e) => e.target.style.border = "1px solid #f15d30"}
                     onBlur={(e) => e.target.style.border = "1px solid #E7E7E7"}
@@ -116,7 +137,7 @@ const Signin = () => {
                 </Form.Item>
 
                 <a
-                href="/#"
+                href="/forgotPw"
                 style={{textDecoration:"underline"}}
                 className="mb-2 float-right inline-block text-[0.8rem]"
               >
@@ -154,9 +175,9 @@ const Signin = () => {
                 </div>
               </div>
               
-              <p className="text-base text-body-color dark:text-dark-6">
+              <p className="text-base text-body-color dark:text-dark-6 mb-6">
                 <span className="pr-2">Not a member yet?</span>
-                <Link href="/register"  target="_blank" style={{textDecoration:"underline", fontFamily:"Poppins", fontSize:"16px"}}>
+                <Link href="/register" style={{textDecoration:"underline", fontFamily:"Poppins", fontSize:"16px"}}>
                   SignUp 
                 </Link>
               </p>

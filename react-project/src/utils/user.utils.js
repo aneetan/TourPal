@@ -65,9 +65,21 @@ export const updateGuide = async (id, data) => {
     await axios.patch(`http://localhost:3000/guides/${id}`, data)
 }
 
+export const updateMessage = async (id, data) => {
+    await axios.patch(`http://localhost:3000/messages/${id}`, data)
+}
+
 // ------------------------- Authenticate ------------------------------
 export const authenticateUser = async (email, password) => {
     const response= await axios.get(`http://localhost:3000/users/?email=${email}&password=${password}`)
+    if (response.data.length === 0) {
+        return null;
+      }
+    return response.data[0];
+}
+
+export const findUserByEmail = async (email) => {
+    const response= await axios.get(`http://localhost:3000/users/?email=${email}`)
     if (response.data.length === 0) {
         return null;
       }
@@ -79,6 +91,13 @@ export const authenticateGuide = async(email, password) => {
      
     return response.data[0] || null;
 }
+
+export const findGuideByEmail = async(email) => {
+    const response = await axios.get(`http://localhost:3000/guides/?personalDetails.email=${email}`);
+     
+    return response.data[0] || null;
+}
+
 
 export const addMessages = async(data) => {
     await axios.post("http://localhost:3000/messages", data)

@@ -1,10 +1,11 @@
-import { AimOutlined, CalendarOutlined, MailOutlined } from '@ant-design/icons';
+import { AimOutlined, CalendarOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import React from 'react';
 
-const BookingsCard = ({ booking, status = "accepted" }) => {
+const BookingsCard = ({ booking, status, guide}) => {
   const { destination, date, message, user, img } = booking;
-  const isAccepted = status === 'accepted';
+  const isAccepted = status === 'approved';
+  const isPending = status === 'pending';
 
   return (
     <div className="mt-6 w-full sm:w-[50%] lg:w-[70%] xl:w-[100%] rounded-2xl shadow-lg bg-[#FFEBD6] hover:shadow-xl transition-shadow duration-300">
@@ -22,12 +23,22 @@ const BookingsCard = ({ booking, status = "accepted" }) => {
               </div>
               <div>
                 <h3 className="font-medium text-xs sm:text-sm">{user}</h3>
+
               </div>
             </div>
           </div>
           
           {/* Booking Details */}
           <div className="space-y-2 sm:space-y-3">
+            {/* Destination */}
+            <div className="flex items-start gap-2">
+              <UserOutlined className="w-3 h-3 sm:w-4 sm:h-4 text-primary/70 mt-0.5 flex-shrink-0" />
+              <div>
+                <span className="text-xs sm:text-sm font-medium">Guide</span>
+                <p className="text-xs sm:text-sm line-clamp-1">{guide}</p>
+              </div>
+            </div>
+
             {/* Destination */}
             <div className="flex items-start gap-2">
               <AimOutlined className="w-3 h-3 sm:w-4 sm:h-4 text-primary/70 mt-0.5 flex-shrink-0" />
@@ -58,9 +69,11 @@ const BookingsCard = ({ booking, status = "accepted" }) => {
 
             {/* Status */}
             <div 
-              className={`text-xs sm:text-sm font-semibold ${isAccepted ? 'text-green-600' : 'text-red-600'}`}
+              className={`text-xs sm:text-sm font-semibold
+                ${isAccepted ? 'text-green-600' : (isPending ? 'text-blue-400' : 'text-red-600')}
+               `}
             >
-              Status: {isAccepted ? 'Accepted' : 'Declined'}
+              Status: {isAccepted ? 'Accepted' :  (isPending? 'Pending' : 'Declined')}
             </div>
           </div>
         </div>

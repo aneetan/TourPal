@@ -6,43 +6,43 @@ import { getAllMessages } from '../../utils/user.utils';
 const Bookings = () => {
     const [activeSection, setActiveSection] = useState('accepted');
     const [bookingData, setBookingData] = useState([])
+    const [declinedData, setDeclinedData] = useState([])
+    const [guideId, setGuideId] = useState()
+
+    useEffect(() => {
+        const storedGuideId = localStorage.getItem("guideId");
+        setGuideId(storedGuideId);
+    }, []);
+    
     
     useEffect(()=> {
-        const fetchBookings = async () => {
-            try {
-                const response = await getAllMessages();
-                setBookingData(response);
-            } catch (err) {
-                console.error('Failed to fetch bookings:', err);
-            } 
-        };
+        try {
+            getAllMessages().then((response) => {
+            setBookingData(
+                response.filter(
+                    (message) => message.guide === guideId && message.status === "approved"
+                )
+                )
+            })
+        } catch (err) {
+            console.error('Failed to fetch bookings:', err);
+        } 
+    } , [bookingData])
 
-        fetchBookings();
-    }, [])
+    useEffect(()=> {
+        try {
+            getAllMessages().then((response) => {
+            setDeclinedData(
+                response.filter(
+                    (message) => message.guide === guideId && message.status === "declined"
+                )
+                )
+            })
+        } catch (err) {
+            console.error('Failed to fetch bookings:', err);
+        } 
+    } , [declinedData])
 
-    const declinedData = [
-        {
-        img:'https://static.vecteezy.com/system/resources/thumbnails/035/591/149/small_2x/ai-generated-nepali-ethnic-village-girl-generate-ai-photo.jpg',
-        destination: 'Egypt',
-        date: '2024-02-25',
-        message: 'I need a final minute rush for your trip. ',
-        user: 'Monalisa'
-        },
-        {
-        img:"https://i.pinimg.com/736x/93/4c/56/934c56967384dd345890ccf90e5534ca.jpg",
-        destination: 'Mardi Trek',
-        date: '2025-12-25',
-        message: 'Please provide me the itenary if possible!',
-        user: 'Ram Bahadur'
-        },
-        {
-        img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUXaqAPWqkiEqlZ1e0WyGQig_9nOAuSPvvMw&s",
-        destination: 'Ilam',
-        date: '2025-02-25',
-        message: 'Contact me on my details ',
-        user: 'Fulmaya'
-        }
-    ];
     
     
   return (

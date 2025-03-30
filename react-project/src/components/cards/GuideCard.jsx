@@ -4,8 +4,9 @@ import { SendOutlined } from '@ant-design/icons';
 import { CalendarOutlined, StarFilled, ZhihuOutlined } from "@ant-design/icons"
 import { useNavigate, useParams } from 'react-router';
 import useFetch from '../../hooks/useFetch';
+import { showInfo } from '../../utils/toastify.utils';
 
-const GuideCard = ({name, rating=2, reviews=123, bio, languages, experience, speciality}) => {
+const GuideCard = ({id, name, rating=4, bio, languages, experience, speciality}) => {
     const stars = Array(5).fill(0);
     const navigate = useNavigate();
     const {data, error, loading} = useFetch("http://localhost:3000/guides");
@@ -13,11 +14,21 @@ const GuideCard = ({name, rating=2, reviews=123, bio, languages, experience, spe
     const guideData = data || []
 
     const handleBookUser = () => {
-        navigate(`/bookGuides/${guideData[0].id}`)
+        if(localStorage.getItem("is_user") === "0"){
+            showInfo("You need to login first!")
+            navigate('/login')
+        } else {
+            navigate(`/bookGuides/${id}`)
+        }
     }
 
     const handleGuideProfile = () => {
-        navigate(`/guideProfile/${guideData[0].id}`)
+        if(localStorage.getItem("is_user") === "0"){
+            showInfo("You need to login first!")
+            navigate('/login')
+        } else {
+            navigate(`/guideProfile/${id}`)
+        }
     }
 
   return (
@@ -40,7 +51,7 @@ const GuideCard = ({name, rating=2, reviews=123, bio, languages, experience, spe
             <div className="flex flex-col sm:flex-row sm:items-center justify-between">
                 <div>
                 <h3 className="text-lg font-semibold text-gray-900">{name}</h3>
-                <p className="text-sm text-gray-500">126 reviews</p>
+                <p className="text-sm text-gray-500">4 reviews</p>
                 <div className="flex items-center gap-1 mt-2 sm:mt-0">
                 
                 {stars.map((_, index) => (
@@ -73,7 +84,7 @@ const GuideCard = ({name, rating=2, reviews=123, bio, languages, experience, spe
 
             <div className="flex items-center text-sm text-gray-600">
             <CalendarOutlined className="h-4 w-4 mr-1 text-gray-500" />
-            <span>{experience}</span>
+            <span>{experience} years</span>
             </div>
             
         </div>

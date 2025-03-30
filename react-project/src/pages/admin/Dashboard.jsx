@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Row, Col, Typography, Space, Button } from 'antd';
 import CustomData from '../../components/admin/dashboard/CustomData';
 import CustomTable from '../../components/CustomTable';
 import useFetch from '../../hooks/useFetch';
 import { UnderlineOutlined } from '@ant-design/icons';
 import CustomModal from '../../components/CustomModal';
+import { getAllGuides, updateGuide } from '../../utils/user.utils';
+import { showSuccess } from '../../utils/toastify.utils';
 
 const { Title, Paragraph } = Typography;
 
@@ -12,24 +14,78 @@ const Dashboard = () => {
   const {data, error, loading} = useFetch("http://localhost:3000/guides");
   const [isApproveOpen, setIsApproveOpen] = useState(false);
   const [isDeclineOpen, setIsDeclineOpen] = useState(false);
+  const [guideData, setGuideData] =  useState([])
+  const [guideId, setGuideId] = useState(null)
 
-  const showApproveModal = () => {
-    setIsApproveOpen(true);
-  };
+  useEffect(()=> {
+      getAllGuides().then ((response) => {
+        setGuideData(
+          response.filter(
+            (message) => message.status === "pending"
+          )
+        )
+      })
+    }, [guideData])
 
-  const showDeclineModal = () => {
-    setIsDeclineOpen(true);
-  };
-  const handleOk = () => {
-    setIsApproveOpen(false);
-    setIsDeclineOpen(false);
-  };
+    const showApproveModal = (id) => {
+      setGuideId(id)
+      setIsApproveOpen(true);
+    };
+  
+    const showDeclineModal = (id) => {
+      setGuideId(id)
+      setIsDeclineOpen(true);
+    };
+
+  const handleApprove = async() => {
+       try{
+              const updateData = {
+                status: "approved"
+              }
+          
+              updateGuide(guideId, updateData)
+              .then(() => {
+                setIsApproveOpen(false)
+                  showSuccess("User Approved Successfully")
+                  getAllGuides().then((response)=> {
+                   const filteredData =  response.filter(
+                      (message) => message.status === "pending"
+                    );
+                    setGuideData(filteredData)
+                  })
+              })
+          } catch(e) {
+              console.log(e)
+          }
+    };
+  
+    const handleDecline = async() => {
+      try{
+        const updateData = {
+          status: "declined"
+        }
+    
+        updateGuide(guideId, updateData)
+        .then(() => {
+            setIsDeclineOpen(false)
+            showSuccess("User Declined Successfully")
+            getAllGuides().then((response)=> {
+              const filteredData =  response.filter(
+                 (message) => message.status === "pending"
+               );
+               setGuideData(filteredData)
+             })
+        })
+  
+    } catch(e) {
+        console.log(e)
+    }
+    };
+
   const handleCancel = () => {
     setIsApproveOpen(false);
     setIsDeclineOpen(false);
   };
-
-  const guideData = data || []
 
   const flattenedData = guideData.map((guide)=>({
     id: guide.id,
@@ -84,22 +140,22 @@ const Dashboard = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="small">
-          <Button color='primary' onClick={showApproveModal} variant='solid'>Approve</Button>
+          <Button color='primary' onClick={() => showApproveModal(record.id)} variant='solid'>Approve</Button>
           <CustomModal
             title="Are you sure to approve the user as guide?"
             content="This user will get access to the guide section"
             text="Approve"
             isOpen={isApproveOpen}
-            handleOk={handleOk}
+            handleOk={handleApprove}
             handleCancel={handleCancel}
           />
-          <Button color='danger' onClick={showDeclineModal} variant="solid">Decline</Button>
+          <Button color='danger' onClick={() => showDeclineModal(record.id)} variant="solid">Decline</Button>
           <CustomModal
             title="Are you sure to decline the user as guide?"
             content="This action cannot be undone"
             text="Decline"
             isOpen={isDeclineOpen}
-            handleOk={handleOk}
+            handleOk={handleDecline}
             handleCancel={handleCancel}
           />
         </Space>

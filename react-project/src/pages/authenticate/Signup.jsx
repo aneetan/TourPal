@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import { Button,Form,Input, Typography, Tooltip  } from "antd";
 import { useNavigate } from 'react-router';
-import Password from 'antd/es/input/Password';
+import Logo from '../../assets/images/logo-name.png'
 const { Text, Link } = Typography;
 
 const Signup = () => {
@@ -18,7 +18,14 @@ const Signup = () => {
 
     const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-    const handleRegister = () => {
+    const handleRegister = (values) => {
+        const{name, email, number, password} = values
+        setUser({
+            name: name,
+            email: email,
+            number: number,
+            password: password
+        })
         axios.post(`http://localhost:3000/users`, user)
         .then(function (response) {
             navigate('/login');
@@ -51,19 +58,23 @@ const Signup = () => {
             <div className="container mx-auto" style={{zIndex:5}}>
                 <div className="-mx-4 flex flex-wrap">
                     <div className="w-full px-4">
-                        <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white px-10 py-16 text-center dark:bg-dark-2 sm:px-12 md:px-[60px]">
+                        <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white px-10 text-center dark:bg-dark-2 sm:px-12 md:px-[60px]">
                         <div className="text-center">
                             <a
-                            href="/#"
-                            className="mx-auto inline-block max-w-[160px]"
+                                href="/#"
+                                className="mx-auto inline-block "
                             >
-                            Logo here
-                            {/* <img
-                                src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-primary.svg"
+                                <img
+                                src={Logo}
                                 alt="logo"
-                            /> */}
+                                className="w-[140px]"
+                                />
+                                
                             </a>
                         </div>
+                        <h2 className="text-dark text-2xl font-semibold dark:text-white">
+                            Register here!
+                        </h2>
 
                         <Form onFinish={handleRegister}>
                             <Form.Item
@@ -76,7 +87,7 @@ const Signup = () => {
                                 ]}
                             >
                                 <Input
-                                style={{marginTop:"4rem",padding:"10px", outline: "none"}}
+                                style={{marginTop:"1rem",padding:"10px", outline: "none"}}
                                 name="name"
                                 placeholder="Enter Your Name"
                                 onChange={handleInputChange}
@@ -170,7 +181,7 @@ const Signup = () => {
                             </Form.Item>
 
                             <Form.Item
-                            name="password"
+                            name="password2"
                             dependencies={['password']}
                             rules={[
                                 {
@@ -194,19 +205,18 @@ const Signup = () => {
                             <Input.Password
                             style={{padding:"10px", outline:"none", border:"none"}}
                             placeholder="Confirm password"
+                            name='password'
                             onFocus={() => setIsFormFocused(true)} 
                             onBlur={() => setIsFormFocused(false)}
                             onChange={handleInputChange}
                             />
                             </Form.Item>
 
-                             
-
                             <div className="float-left mb-3 items-start">
                                     <div className="text-sm">
                                         <label for="terms" className="font-light text-[0.8rem] float-left text-gray-600">
                                             By proceeding, you agree to our
-                                            <a className="font-medium text-primary-600 ml-1 hover:underline dark:text-primary-500" href="#">
+                                            <a className="font-medium text-primary-600 ml-1 hover:underline dark:text-primary-500" href="/terms">
                                                 Terms and Conditions
                                             </a>
                                         </label>
@@ -231,7 +241,7 @@ const Signup = () => {
                             <hr className="w-[30%] h-px mx-4 my-8 bg-gray-200 border-0 dark:bg-gray-400"/>
                         </div>
                         
-                        <div className="-mx-2 mb-12 flex justify-between">
+                        <div className="-mx-2 mb-8 flex justify-between">
                             <div className="w-full px-2">
                             <a
                                 href="/#"
@@ -245,9 +255,9 @@ const Signup = () => {
                             </div>
                         </div>
 
-                        <p className="text-base text-body-color">
+                        <p className="text-base text-body-color mb-8">
                             <span className="pr-2">Already Registered?</span>
-                            <Link href="/login"  target="_blank" style={{textDecoration:"underline", fontFamily:"Poppins", fontSize:"16px"}}>
+                            <Link href="/login" style={{textDecoration:"underline", fontFamily:"Poppins", fontSize:"16px"}}>
                             Login
                             </Link>
                         </p>

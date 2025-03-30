@@ -3,43 +3,30 @@
     {
       "id": "5e64",
       "name": "Anita Neupane",
-      "email": "anita@gmail.com",
+      "email": "anita1@gmail.com",
       "number": "9845766731",
-      "password": "anita@123"
+      "password": "Anita@123"
     },
     {
-      "id": "6afe",
-      "name": "Pratik Bhattarai",
-      "email": "pratik@gmail.com",
-      "number": "9812345678",
-      "password": "Pratik@123"
+      "id": "b476",
+      "name": "Binita Neupane",
+      "email": "binita@gmail.com",
+      "number": "9869084390",
+      "password": "Binita@123"
+    },
+    {
+      "id": "8d66",
+      "name": "Sonu Thapa",
+      "email": "user@gmail.com",
+      "number": "9869084390",
+      "password": "Sonu@123"
     }
   ],
   "guides": [
     {
-      "id": "375f",
-      "personalDetails": {
-        "name": "Pratik Bhattarai",
-        "email": "pb@gmail.com",
-        "password": "Pratik@118",
-        "phone": "9845766734"
-      },
-      "professionalInfo": {
-        "Bio": "Passionate local guide specializing in cultural heritage tours and adventurous treks, dedicated to creating unforgettable experiences.",
-        "speciality": "Cultural & Historical",
-        "experience": "5+",
-        "languages": [
-          "English",
-          "Spanish",
-          "French"
-        ],
-        "pricing": "1000"
-      }
-    },
-    {
       "id": "375e",
       "personalDetails": {
-        "name": "Guide2",
+        "name": "Guide",
         "email": "guide@gmail.com",
         "password": "Guide@123",
         "phone": "9843411801"
@@ -53,7 +40,50 @@
           "French"
         ],
         "pricing": "600"
-      }
+      },
+      "status": "approved"
+    }, 
+    {
+      "id": "b529",
+      "personalDetails": {
+        "name": "yo Guide ho",
+        "email": "guide1@gmail.com",
+        "password": "Guide@123",
+        "password2": "Guide@123",
+        "phone": "9812345678"
+      },
+      "professionalInfo": {
+        "Bio": "Bio",
+        "speciality": "City & Lifestyle",
+        "experience": "2-3",
+        "languages": [
+          "Spanish",
+          "French"
+        ],
+        "pricing": "600"
+      },
+      "status": "declined"
+    },
+    {
+      "id": "b528",
+      "personalDetails": {
+        "name": "Guide ho",
+        "email": "guide2@gmail.com",
+        "password": "Guide@123",
+        "password2": "Guide@123",
+        "phone": "9812345678"
+      },
+      "professionalInfo": {
+        "Bio": "Bio",
+        "speciality": "City & Lifestyle",
+        "experience": "2-3",
+        "languages": [
+          "Spanish",
+          "French"
+        ],
+        "pricing": "600"
+      },
+      "status": "pending"
     }
   ],
   "places": [
@@ -61,7 +91,7 @@
       "id": "a428",
       "name": "Garden of Dreams",
       "category": "Nature",
-      "description": "A place where you can feel peace amidst of crowded city\n- Traqui city\n- Peace",
+      "description": "A place where you can feel peace amidst of crowded city\n- Traquil city\n- Peace",
       "latitude": 27.71220369320509,
       "longitude": 85.31184440419062
     },
@@ -84,55 +114,52 @@
   ],
   "messages": [
     {
-      "id": "4253",
-      "destination": "Malai Tha xaina",
-      "date": "2025-03-30T18:15:00.000Z",
-      "message": "please organize the accomodation",
-      "guideId": "375f",
-      "user": "Pratik Bhattarai",
-      "userId": "6afe"
-    },
-    {
-      "id": "0aac",
-      "destination": "Kalinchowk",
+      "id": "7d0c",
+      "destination": "ghar",
       "date": "2025-03-27T18:15:00.000Z",
-      "message": "Kata hideko bijuli balera",
-      "guideId": "375f",
-      "user": "Pratik Bhattarai",
-      "userId": "6afe"
-    },
-    {
-      "id": "02b5",
-      "destination": "Home",
-      "date": "2025-03-27T18:15:00.000Z",
-      "message": "My ssweet home.",
-      "guideId": "375f",
+      "message": "Mujhe ghar jana hai",
+      "guide": "375e",
+      "guideName": "Guide",
+      "status": "pending",
       "user": "Anita Neupane",
       "userId": "5e64"
     },
     {
-      "id": "1a53",
-      "destination": "Syangja",
-      "date": "2025-04-01T18:15:00.000Z",
-      "message": "I don't know",
-      "guideId": "375f",
+      "id": "7d0f",
+      "destination": "ghar",
+      "date": "2025-03-27T18:15:00.000Z",
+      "message": "Mujhe ghar jana hai",
+      "guide": "97c4",
+      "guideName": "Saurab Shrestha",
+      "status": "approved",
+      "user": "Anita Neupane",
+      "userId": "5e64"
+    },
+    {
+      "id": "7d0e",
+      "destination": "ghar",
+      "date": "2025-03-27T18:15:00.000Z",
+      "message": "Mujhe ghar jana hai",
+      "guide": "97c4",
+      "guideName": "Saurab Shrestha",
+      "status": "declined",
       "user": "Anita Neupane",
       "userId": "5e64"
     }
   ],
   "reviews": [
     {
-      "id": "d7d6",
-      "rating": 5,
-      "message": "Always recommned!! He was very nice and cute",
-      "guideId": "375f",
-      "user": "Pratik Bhattarai"
+      "id": "ca1c",
+      "rating": 4,
+      "message": "Demo",
+      "guide": "97c4",
+      "user": "Anita Neupane"
     },
     {
-      "id": "fa5e",
-      "rating": 5,
-      "message": "Thank you for choosing us! Your feedback helps us improve. Please share your experience by leaving a review: ",
-      "guideId": "375f",
+      "id": "ca12",
+      "rating": 3,
+      "message": "Demo",
+      "guide": "375e",
       "user": "Anita Neupane"
     }
   ]
